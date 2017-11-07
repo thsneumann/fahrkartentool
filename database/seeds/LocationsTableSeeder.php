@@ -10,16 +10,8 @@ class LocationsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker\Generator $faker)
+    public function run()
     {
-        /* for ($i = 0; $i < 20; $i++) {
-            $location = new Location();
-            $location->name = $faker->city;
-            $location->latitude = $faker->latitude;
-            $location->longitude = $faker->longitude;
-            $location->save();
-        } */
-
         $cities = json_decode(Storage::disk('public')->get('cities.json'));
         foreach ($cities as $city) {
             preg_match('/(\d+\.\d+) (\d+\.\d+)/', $city->coord, $latLng);

@@ -12,7 +12,7 @@ class TicketsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker\Generator $faker)
+    public function run(\Faker\Generator $faker)
     {
         // Go through all the files in the image/seed folder and create dummy database entries
         $files = Storage::disk('public')->files('image/seed');

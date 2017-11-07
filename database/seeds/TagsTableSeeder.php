@@ -10,7 +10,7 @@ class TagsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker\Generator $faker)
+    public function run(\Faker\Generator $faker)
     {
         $max = 100;
         for ($i = 0; $i < $max; $i++) {
