@@ -62,4 +62,19 @@ class LocationsController extends Controller
     {
         //
     }
+
+    //////////////////////////////////
+
+    public function outgoing($id)
+    {
+        $location = Location::findOrFail($id);
+        $outgoing = [];
+        $tickets = $location->pointOfDepartureFor;
+       
+        foreach ($tickets as $ticket) {
+            $outgoing[] = [$ticket->destination->latitude, $ticket->destination->longitude];
+        }
+
+        return $outgoing;
+    }
 }

@@ -23,20 +23,40 @@
     }).addTo(fullMap);
 
     // Get locations data and populate map with markers
-    jQuery.getJSON('/api/locations/', function (response) {
-        response.forEach(function(location) {
-            console.log(location);
+    var locations = [];
+    var connectingLines = [];
+    jQuery.getJSON('/api/locations/', function (locations) {
+        locations.forEach(function(location) {
+            // console.log(location);
             var marker = L.marker([location.latitude, location.longitude]).addTo(fullMap);
             marker.bindPopup('<b>' + location.name + '</b>');
+            marker.locationId = location.id;
+            marker.on('click', function() {
+                // Load outgoing connections
+                jQuery.getJSON('/api/locations/' + marker.locationId + '/outgoing', function (connections) {
+                    // Remove connecting lines on map
+                    connectingLines.forEach(function (line) {
+                        line.remove();
+                    });
+                    connectingLines = [];
+
+                    connections.forEach(function (connection) {
+                        console.log(connection);
+                        connectingLines.push(L.polyline([marker.getLatLng(), connection]).addTo(fullMap));
+                    }); 
+                });
+            });
         });
     });
 
+    {{--
     // Draw connections between points --> refactor later
-    var connections = JSON.parse('{!! json_encode($connections) !!}');
+    /* var connections = JSON.parse('{!! json_encode($connections) !!}');
     connections.forEach(function (connection) {
         console.log(connection);
         L.polyline(connection).addTo(fullMap);
-    });
+    }); */
+    --}}
 
 </script>
 

@@ -29,8 +29,9 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 // API
-
+// todo: move to api.php && require login
 Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function () {
     Route::resource('tickets', 'TicketsController');
     Route::resource('locations', 'LocationsController');
+    Route::get('/locations/{location}/outgoing', 'LocationsController@outgoing')->name('locations.outgoing');
 });
