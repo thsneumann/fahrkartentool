@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Ticket;
 use App\Location;
+use App\Tag;
 
 class TicketsTableSeeder extends Seeder
 {
@@ -27,6 +28,8 @@ class TicketsTableSeeder extends Seeder
             $ticket->destination_id = Location::inRandomOrder()->first()->id;
             $ticket->date = $faker->dateTimeBetween('1890', '1925');
             $ticket->save();
+            $tags = Tag::inRandomOrder()->take(rand(1, 4))->get();
+            $ticket->tags()->attach($tags);
         }
     }
 }
