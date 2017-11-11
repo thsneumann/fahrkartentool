@@ -26,7 +26,6 @@ class TicketsTableSeeder extends Seeder
             $ticket->image = $file;
             $ticket->point_of_departure_id = Location::inRandomOrder()->first()->id;
             $ticket->destination_id = Location::inRandomOrder()->first()->id;
-            $ticket->date = $faker->dateTimeBetween('1890', '1925');
             $ticket->save();
             $tags = Tag::inRandomOrder()->take(rand(1, 4))->get();
             $ticket->tags()->attach($tags);
