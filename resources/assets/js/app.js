@@ -7,19 +7,20 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+/* window.Vue = require('vue');
 
 const app = new Vue({
     el: '#app',
     mounted() {
         console.log('Vue is ready.');
     }
-});
+}); */
+
+import RotatingGlobe from './modules/rotating-globe';
+
+const globe = $('#globe');
+if (globe.length) {
+    RotatingGlobe.run();
+    globe.removeClass('zoomed');
+    $('#home-nav').addClass('fade-in');
+}

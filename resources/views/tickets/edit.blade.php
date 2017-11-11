@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h2>Edit ticket</h2>
+    <h2>Ticket bearbeiten</h2>
     <figure class="figure-medium">
         <img src="/storage/{{ $ticket->image }}" alt="{{ $ticket->image }}" class="figure-img">
         <figcaption class="figure-caption text-center">{{ $ticket->signature }}</figcaption>
@@ -16,7 +16,7 @@
                 <input type="hidden" name="_method" value="PUT">
 
                 <div class="form-group">
-                    <label for="point_of_departure">Point of Departure:</label>
+                    <label for="point_of_departure">Abfahrtsort:</label>
                     <select name="point_of_departure_id" id="point_of_departure_id" class="form-control custom-select">
                     @foreach ($locations as $location)
                         <option value="{{ $location->id }}" {{ $location->id == $ticket->point_of_departure_id ? 'selected' : '' }}>{{ $location->name }}</option>
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="destination">Destination:</label>
+                    <label for="destination">Zielort:</label>
                     <select name="destination_id" id="destination_id" class="form-control custom-select">
                     @foreach ($locations as $location)
                         <option value="{{ $location->id }}" {{ $location->id == $ticket->destination_id ? 'selected' : '' }}>{{ $location->name }}</option>
@@ -34,8 +34,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" value="@if ($ticket->date) {{ $ticket->date->format('Y-m-d') }} @endif" class="form-control">
+                    <label for="description">Beschreibung:</label>
+                    <textarea id="description" name="description" class="form-control"></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>

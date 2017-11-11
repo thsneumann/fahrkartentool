@@ -8,9 +8,10 @@
             <th scope="col">#</th>
             <th scope="col">Signatur</th>
             <th scope="col">Bild</th>
+            <th scope="col">bearbeitet?</th>
             <th scope="col">Abfahrtsort</th>
             <th scope="col">Ziel</th>
-            <th scope="col">Datum</th>
+            <th scope="col">Beschreibung</th>
             <th scope="col">Tags</th>
             <th scope="col">Aktionen</th>
         </thead>
@@ -19,7 +20,18 @@
                 <tr>
                     <th scope="row">{{ $ticket->id }}</th>
                     <td>{{ $ticket->signature }}</td>
-                    <td><img src="/storage/{{ $ticket->image }}" alt="{{ $ticket->signature }}" class="img-thumbnail"></td>
+                    <td>
+                        <a href="/storage/{{ $ticket->image }}" data-fancybox data-caption="{{ $ticket->signature }}">
+                            <img src="/storage/{{ $ticket->image }}" alt="{{ $ticket->signature }}" class="img-thumbnail">
+                        </a>
+                    </td>
+                    <td>
+                        @if ($ticket->edit_count > 0)
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        @else
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        @endif
+                    </td>
                     <td>
                         @if ($ticket->pointOfDeparture)
                             <a href="{{ route('locations.edit', ['id' => $ticket->point_of_departure_id]) }}">{{ $ticket->pointOfDeparture->name }}</a>
@@ -31,8 +43,8 @@
                         @endif        
                     </td>
                     <td>
-                        @if ($ticket->date)
-                            {{ $ticket->date->format('d / m / Y') }}</td>
+                        @if ($ticket->description)
+                            {{ $ticket->description }}</td>
                         @endif
                     <td>
                         <ul>

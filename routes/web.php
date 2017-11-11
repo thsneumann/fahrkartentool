@@ -11,25 +11,32 @@
 |
 */
 
-// APP
+// HOME
 
-Route::get('/map', 'MapController@index')->name('map.index');
 Route::get('/', function() {
-    return redirect(route('map.index'));
+    return view('home');
+})->name('home');
+
+// GAME
+
+Route::group(['prefix' => 'game'], function () {
+    Route::get('/', 'GameController@index')->name('game.index');
+    Route::get('/edit', 'GameController@edit')->name('game.edit');
 });
 
-// ADMIN
+// EXPLORE
 
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin.index');
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'explorer'], function () {
+    Route::get('/', function () {
+        return view('explorer.index');
+    })->name('explorer.index');
+    Route::get('/map', 'MapController@index')->name('map.index');
     Route::resource('tickets', 'TicketsController');
     Route::resource('locations', 'LocationsController');
 });
 
 // API
-// todo: move to api.php && require login
+// TODO: move to api.php && require login
 Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function () {
     Route::resource('tickets', 'TicketsController');
     Route::resource('locations', 'LocationsController');

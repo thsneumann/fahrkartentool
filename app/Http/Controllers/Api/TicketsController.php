@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Controller;
 use App\Ticket;
 
@@ -13,8 +14,24 @@ class TicketsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $tickets = Ticket::all();
+
+        if ($request['format'] == 'csv') {
+            $output='';
+            foreach ($tickets as $row) {
+                $output.=  implode(",", $row->toArray()) . PHP_EOL;
+            }
+            $headers = array(
+                'Content-Type' => 'text/csv',
+                'Content-Disposition' => 'attachment; filename="all_tickets_export.csv"',
+            );
+              
+            // return Response::make(rtrim($output, "\n"), 200, $headers);
+            return Response::make($output, 200, $headers);
+        }
+
         return Ticket::all();
     }
 

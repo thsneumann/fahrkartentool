@@ -7,10 +7,6 @@ use App\Location;
 
 class Ticket extends Model
 {
-    protected $casts = [
-        'date' => 'date'
-    ];
-
     public function pointOfDeparture()
     {
         return $this->belongsTo(Location::class, 'point_of_departure_id');

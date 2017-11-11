@@ -75,7 +75,8 @@ class TicketsController extends Controller
     {
         $ticket->point_of_departure_id = $request['point_of_departure_id'];
         $ticket->destination_id = $request['destination_id'];
-        $ticket->date = $request['date'];
+        $ticket->description = $request['description'];
+        $ticket->edit_count += 1;
         $ticket->save();
 
         return redirect(route('tickets.index'));
