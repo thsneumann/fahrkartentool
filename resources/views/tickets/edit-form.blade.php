@@ -33,7 +33,7 @@
                 <textarea id="description" name="description" class="form-control"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Speichern</button>
         </form>
     </div>
 </div>
