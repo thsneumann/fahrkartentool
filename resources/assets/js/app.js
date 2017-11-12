@@ -12,5 +12,3 @@ const app = new Vue({
         console.log('Vue is ready.');
     }
 });
-
-$('#home-nav').addClass('fade-in');

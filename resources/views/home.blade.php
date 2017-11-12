@@ -3,6 +3,16 @@
 @section('nav')
 @endsection
 
+@section('styles')
+
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
+
+@endsection
+
 @section('scripts')
 
 <script src="//d3js.org/d3.v3.min.js"></script>

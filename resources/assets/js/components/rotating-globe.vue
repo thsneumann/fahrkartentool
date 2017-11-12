@@ -36,7 +36,7 @@ export default {
         .projection(projection)
         .context(context);
 
-      d3.json("/json/world-110m.json", function(error, topo) {
+      d3.json("/json/world-110m.json", (error, topo) => {
         if (error) throw error;
 
         var land = topojson.feature(topo, topo.objects.land),
@@ -90,20 +90,22 @@ export default {
           context.strokeStyle = "#000";
           context.stroke();
         });
+
+        this.startAnimation();
       });
 
       d3.select(self.frameElement).style("height", height + "px");
     },
 
-    zoomOut() {
-      this.$el.classList.remove('zoomed');
+    startAnimation() {
+      this.$el.classList.remove("zoomed");
+      $("#home-nav").addClass("fade-in");
     }
   },
 
   mounted() {
     console.log("rotating globe mounted");
     this.makeGlobe();
-    this.zoomOut();
   }
 };
 </script>

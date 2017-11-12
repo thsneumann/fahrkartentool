@@ -36,7 +36,7 @@ img {
   justify-content: center;
   width: 100%;
   align-items: center;
-  transition: transform 1s;
+  transition: transform 1.5s;
 
   &.zoomed {
       transform: scale(10);
