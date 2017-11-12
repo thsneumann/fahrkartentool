@@ -12,6 +12,7 @@ class LocationsTableSeeder extends Seeder
      */
     public function run()
     {
+        /*
         $cities = json_decode(Storage::disk('public')->get('cities.json'));
         foreach ($cities as $city) {
             preg_match('/(\d+\.\d+) (\d+\.\d+)/', $city->coord, $latLng);
@@ -22,11 +23,12 @@ class LocationsTableSeeder extends Seeder
             $location->longitude = $latLng[1];
             $location->save();
         }
+        */
 
-        /* $location = new Location();
+        $location = new Location();
         $location->name = 'Berlin';
         $location->latitude = 52.52;
         $location->longitude = 13.40;
-        $location->save(); */
+        $location->save();
     }
 }

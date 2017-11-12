@@ -26,19 +26,15 @@ Route::group(['prefix' => 'game'], function () {
 
 // EXPLORE
 
-Route::group(['prefix' => 'explorer'], function () {
-    Route::get('/', function () {
-        return view('explorer.index');
-    })->name('explorer.index');
-    Route::get('/map', 'MapController@index')->name('map.index');
-    Route::resource('tickets', 'TicketsController');
-    Route::resource('locations', 'LocationsController');
-});
+Route::get('/map', 'MapController@index')->name('map.index');
+Route::resource('tickets', 'TicketsController');
+Route::resource('locations', 'LocationsController');
+Route::get('locations/{location}/popup', 'LocationsController@showPopup')->name('locations.popup');
 
 // API
 // TODO: move to api.php && require login
 Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function () {
     Route::resource('tickets', 'TicketsController');
     Route::resource('locations', 'LocationsController');
-    Route::get('/locations/{location}/outgoing', 'LocationsController@outgoing')->name('locations.outgoing');
+    Route::get('locations/{location}/outgoing', 'LocationsController@outgoing')->name('locations.outgoing');
 });

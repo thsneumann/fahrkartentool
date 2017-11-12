@@ -9,6 +9,31 @@ use App\Ticket;
 
 class TicketsController extends Controller
 {
+    private function toCSV($table)
+    {
+        $output='';
+        foreach ($table as $row) {
+            $output.=  implode(",", $row->toArray()) . PHP_EOL;
+        }
+        $headers = array(
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="all_tickets_export.csv"',
+        );
+          
+        return Response::make($output, 200, $headers);
+    }
+
+    private function filter($request)
+    {
+        $query = Ticket::query();
+        $filters = explode(',', $request->input('filter'));
+        foreach ($filters as $filter) {
+            list($criteria, $value) = explode(':', $filter);
+            $query->where($criteria, $value);
+        }
+        return $query->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,17 +44,11 @@ class TicketsController extends Controller
         $tickets = Ticket::all();
 
         if ($request['format'] == 'csv') {
-            $output='';
-            foreach ($tickets as $row) {
-                $output.=  implode(",", $row->toArray()) . PHP_EOL;
-            }
-            $headers = array(
-                'Content-Type' => 'text/csv',
-                'Content-Disposition' => 'attachment; filename="all_tickets_export.csv"',
-            );
-              
-            // return Response::make(rtrim($output, "\n"), 200, $headers);
-            return Response::make($output, 200, $headers);
+            return $this->toCSV($tickets);
+        }
+
+        if ($request->has('filter')) {
+            return $this->filter($request);
         }
 
         return Ticket::all();

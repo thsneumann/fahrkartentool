@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Location;
+use App\Ticket;
 
 class LocationsController extends Controller
 {
@@ -24,7 +25,8 @@ class LocationsController extends Controller
      */
     public function create()
     {
-        return view('locations.create', ['location' => Location::first()]);
+        // return view('locations.create', ['location' => Location::first()]);
+        return view('locations.create');
     }
 
     /**
@@ -95,5 +97,13 @@ class LocationsController extends Controller
         Location::destroy($id);
         
         return redirect(route('locations.index'));
+    }
+
+    public function showPopup($id)
+    {
+        $location = Location::findOrFail($id);
+        $podTickets = Ticket::where('point_of_departure_id', $id)->get();
+        $destTickets = Ticket::where('destination_id', $id)->get();
+        return view('locations.popup', compact('location', 'podTickets', 'destTickets'));
     }
 }
