@@ -16,7 +16,18 @@ class TicketsTableSeeder extends Seeder
     public function run()
     {
         // Go through all the files in the image/seed folder and create dummy database entries
-        $files = Storage::disk('public')->files('image/seed');
+        // $files = Storage::disk('public')->files('image/seed');
+
+        $dir = opendir('public/img/tickets');
+        $files = [];
+        while ($file = readdir($dir)) {
+            if ($file == '.' || $file == '..') {
+                continue;
+            }
+        
+            $files[] = $file;
+        }
+        closedir($dir);
 
         foreach ($files as $file) {
             $pathinfo = pathinfo($file);
