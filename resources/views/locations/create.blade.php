@@ -5,8 +5,6 @@
 <div class="container-fluid">
     <h2>Ort hinzufügen</h2>
 
-    <div id="#map"></div>
-
     <div class="row">
         <div class="col-md-4">
             <form method="POST" action="{{ route('locations.store') }}">
@@ -22,7 +20,6 @@
     <hr>
 
     @include('partials.back-button')
-
 </div>
 
 @endsection

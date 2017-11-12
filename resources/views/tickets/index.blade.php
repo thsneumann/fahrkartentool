@@ -21,9 +21,7 @@
                     <th scope="row">{{ $ticket->id }}</th>
                     <td>{{ $ticket->signature }}</td>
                     <td>
-                        <a href="/storage/{{ $ticket->image }}" data-fancybox data-caption="{{ $ticket->signature }}">
-                            <img src="/storage/{{ $ticket->image }}" alt="{{ $ticket->signature }}" class="img-thumbnail">
-                        </a>
+                        @include('partials.ticket-thumb', ['ticket' => $ticket])
                     </td>
                     <td>
                         @if ($ticket->edit_count > 0)

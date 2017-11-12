@@ -5,8 +5,8 @@
 <div class="container">
     <h2>Ticket bearbeiten</h2>
     <figure class="figure-medium">
-        <img src="/storage/{{ $ticket->image }}" alt="{{ $ticket->image }}" class="figure-img">
-        <figcaption class="figure-caption text-center">{{ $ticket->signature }}</figcaption>
+        @include('partials.ticket-thumb', ['ticket' => $ticket])
+        <figcaption class="figure-caption">{{ $ticket->signature }}</figcaption>
     </figure>
 
     <div class="row">
