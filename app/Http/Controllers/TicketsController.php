@@ -79,6 +79,8 @@ class TicketsController extends Controller
         $ticket->edit_count += 1;
         $ticket->save();
 
+        if ($request['redirect'] === 'back') return back();
+
         return redirect(route('tickets.index'));
     }
 
