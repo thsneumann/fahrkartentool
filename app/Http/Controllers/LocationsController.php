@@ -15,7 +15,7 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        return view('locations.index', ['locations' => Location::all()]);
+        return view('locations.index', ['locations' => Location::paginate(20)]);
     }
 
     /**
@@ -42,6 +42,10 @@ class LocationsController extends Controller
         $location->latitude = $request['latitude'];
         $location->longitude = $request['longitude'];
         $location->save();
+
+        if ($request['redirect']) {
+            return redirect(route($request['redirect']));
+        }
 
         return redirect(route('locations.index'));
     }

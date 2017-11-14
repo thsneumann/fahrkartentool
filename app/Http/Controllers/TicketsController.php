@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ticket;
 use App\Location;
+use App\Tag;
 
 class TicketsController extends Controller
 {
@@ -15,7 +16,7 @@ class TicketsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('tickets.index')->with('tickets', Ticket::all());
+        return view('tickets.index')->with('tickets', Ticket::paginate(20));
     }
 
     /**
@@ -60,7 +61,8 @@ class TicketsController extends Controller
     {
         return view('tickets.edit', [
             'ticket' => Ticket::findOrFail($id),
-            'locations' => Location::all()
+            'locations' => Location::orderBy('name')->get(),
+            'tags' => Tag::orderBy('name')->get()
         ]);
     }
 
@@ -79,7 +81,9 @@ class TicketsController extends Controller
         $ticket->edit_count += 1;
         $ticket->save();
 
-        if ($request['redirect'] === 'back') return back();
+        if ($request['redirect'] == 'back') {
+            return back();
+        }
 
         return redirect(route('tickets.index'));
     }

@@ -9,6 +9,7 @@
         <div class="col-md-4">
             <form method="POST" action="{{ route('locations.store') }}">
                 {{ csrf_field() }}
+                <input type="hidden" name="redirect" value="{{ $redirect or '' }}">
 
                 <location-picker></location-picker>
 
