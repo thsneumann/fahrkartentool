@@ -7,6 +7,7 @@ img {
 }
 
 #explorer-map {
+  margin-top: -2rem;
   width: 100%;
   height: 100vh;
 }
@@ -17,16 +18,12 @@ img {
 }
 
 .figure-medium {
+  max-width: 600px;
+
   img {
-    max-width: 400px;
+    width: 100%;
   }
 }
-
-.img-thumbnail {
-  max-width: 150px;
-}
-
-// HOME SCREEN
 
 #globe {
   overflow: hidden;
@@ -39,25 +36,57 @@ img {
   transition: transform 1.5s;
 
   &.zoomed {
-      transform: scale(10);
+    transform: scale(10);
   }
 }
 
 #home-nav {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 2s ease-out 0.5s;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 2s ease-out 0.5s;
 
-    &.fade-in {
-        opacity: 1;
-    }
+  &.fade-in {
+    opacity: 1;
+  }
+}
+
+.site-content {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.page-home {
+  overflow: hidden;
+
+  .site-content {
+    padding: 0;
+  }
+}
+
+.tickets-table {
+  .img-thumbnail {
+    max-width: 10rem;
+  }
+}
+
+.pagination {
+  justify-content: center;
+
+  li {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.navbar-nav {
+  flex-grow: 1;
 }
 
 // INCLUDES

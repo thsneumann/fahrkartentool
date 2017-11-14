@@ -1,16 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.master', ['body_class' => 'page-home'])
 
 @section('nav')
-@endsection
-
-@section('styles')
-
-<style>
-    body {
-        overflow: hidden;
-    }
-</style>
-
 @endsection
 
 @section('scripts')
@@ -25,7 +15,7 @@
 <rotating-globe></rotating-globe>
 
 <nav id="home-nav">
-    <a href="{{ route('map.index') }}" role="button" class="btn btn-lg btn-primary mr-3">Anschauen</a>
+    <a href="{{ route('map.index') }}" role="button" class="btn btn-lg btn-primary mr-3">Erkunden</a>
     <a href="{{ route('game.index') }}" role="button" class="btn btn-lg btn-primary">Taggen</a>
 </nav>
 
