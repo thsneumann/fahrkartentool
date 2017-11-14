@@ -4,7 +4,9 @@
     <div class="form-group">
         <label for="name">Name:</label>
         <div class="d-flex align-items-center">
-            <input type="text" id="name" name="name" v-model="input" class="form-control mr-2">
+            <input type="text" id="name" name="name" class="form-control mr-2"
+            v-model="input" 
+            @keydown.enter.prevent="updateMap">
             <a href="#" @click.prevent="updateMap">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
             </a>
@@ -19,7 +21,7 @@
 </template>
 
 <script>
-import config from "../config";
+import config from '../config';
 
 export default {
   props: {
@@ -30,8 +32,8 @@ export default {
   data() {
     return {
       location: {
-          latitude: config.mapCenter.lat,
-          longitude: config.mapCenter.lng
+        latitude: config.mapCenter.lat,
+        longitude: config.mapCenter.lng
       },
       map: null,
       marker: null,
@@ -40,17 +42,17 @@ export default {
   },
   methods: {
     initMap() {
-      this.map = L.map("location-picker-map").setView(
+      this.map = L.map('location-picker-map').setView(
         [this.location.latitude, this.location.longitude],
         7
       );
       L.tileLayer(
-        "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
+        'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
         {
           attribution:
             'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
           maxZoom: 18,
-          id: "mapbox.streets",
+          id: 'mapbox.streets',
           accessToken: config.leafletAccessToken
         }
       ).addTo(this.map);
@@ -61,7 +63,7 @@ export default {
         this.location.latitude,
         this.location.longitude
       ]).addTo(this.map);
-      this.marker.bindPopup("<b>" + this.location.name + "</b>");
+      this.marker.bindPopup('<b>' + this.location.name + '</b>');
     },
 
     updateMap() {
@@ -71,7 +73,7 @@ export default {
         const newLocation = response.data[0];
         const latLng = { lat: newLocation.lat, lng: newLocation.lon };
         this.marker.setLatLng(latLng);
-        this.marker.setPopupContent("<b>" + this.input + "</b>");
+        this.marker.setPopupContent('<b>' + this.input + '</b>');
         this.map.panTo(latLng);
 
         this.location.latitude = latLng.lat;
@@ -82,8 +84,8 @@ export default {
 
   created() {
     if (this.defaultLocation) {
-        this.location = this.defaultLocation;
-        this.input = this.defaultLocation.name;
+      this.location = this.defaultLocation;
+      this.input = this.defaultLocation.name;
     }
   },
 
