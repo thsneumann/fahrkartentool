@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container-fluid">
-    <table class="table">
+    <table class="table tickets-table">
         <thead>
             <th scope="col">#</th>
             <th scope="col">Signatur</th>
@@ -45,9 +45,11 @@
                             {{ $ticket->description }}</td>
                         @endif
                     <td>
-                        <ul>
+                        <ul class="list-inline">
                             @foreach ($ticket->tags as $tag)
-                                <li><a href="#">{{ $tag->name }}</a></li>
+                                <li class="list-inline-item">
+                                    <a href="{{ route('tags.edit', ['id' => $tag->id]) }}">{{ $tag->name }}</a>{{ !$loop->last ? ', ' : '' }}
+                                </li>
                             @endforeach
                         </ul>
                     </td>
@@ -67,6 +69,9 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $tickets->links() }}
+
 </div>
     
 </body>

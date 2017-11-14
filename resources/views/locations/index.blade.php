@@ -3,10 +3,12 @@
 @section('content')
 
 <div class="container-fluid">
-    <a href="{{ route('locations.create') }}" role="button" class="btn btn-primary mb-3">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        Ort hinzufügen
-    </a>
+    <div class="form-group">
+        <a href="{{ route('locations.create') }}" role="button" class="btn btn-primary mb-3">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Ort hinzufügen
+        </a>
+    </div>
 
     <table class="table">
         <thead>
@@ -39,6 +41,7 @@
             @endforeach
         </tbody>
     </table>
+    {{ $locations->links() }}
 </div>
     
 </body>
