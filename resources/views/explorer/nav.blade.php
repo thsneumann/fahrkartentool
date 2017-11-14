@@ -14,6 +14,12 @@
       <li class="nav-item {{ Route::currentRouteNamed('locations.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('locations.index') }}">Orte</a>
       </li>
+      <li class="nav-item {{ Route::currentRouteNamed('tags.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('tags.index') }}">Tags</a>
+      </li>
+      <li class="nav-item {{ Route::currentRouteNamed('game.index') ? 'active' : '' }} ml-auto">
+        <a class="nav-link" href="{{ route('game.index') }}">Zum Spiel</a>
+      </li>
     </ul>
   </div>
 </nav>

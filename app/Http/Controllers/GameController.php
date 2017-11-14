@@ -13,12 +13,17 @@ class GameController extends Controller
         return view('game.index');
     }
 
-    public function edit()
+    public function tagging()
     {
         $ticket = Ticket::where('edit_count', 0)->first();
-        return view('game.edit', [
+        return view('game.tagging', [
             'ticket' => $ticket,
-            'locations' => Location::all()
+            'locations' => Location::orderBy('name')->get()
         ]);
+    }
+
+    public function addLocation()
+    {
+        return view('locations.create', ['redirect' => 'game.tagging']);
     }
 }

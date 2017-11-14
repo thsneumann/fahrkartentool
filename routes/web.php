@@ -13,7 +13,7 @@
 
 // HOME
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('home');
 })->name('home');
 
@@ -21,7 +21,8 @@ Route::get('/', function() {
 
 Route::group(['prefix' => 'game'], function () {
     Route::get('/', 'GameController@index')->name('game.index');
-    Route::get('/edit', 'GameController@edit')->name('game.edit');
+    Route::get('/tagging', 'GameController@tagging')->name('game.tagging');
+    Route::get('/add-location', 'GameController@addLocation')->name('game.add-location');
 });
 
 // EXPLORE
@@ -30,6 +31,7 @@ Route::get('/map', 'MapController@index')->name('map.index');
 Route::resource('tickets', 'TicketsController');
 Route::resource('locations', 'LocationsController');
 Route::get('locations/{location}/popup', 'LocationsController@showPopup')->name('locations.popup');
+Route::resource('tags', 'TagsController');
 
 // API
 // TODO: move to api.php && require login

@@ -19,15 +19,16 @@ crossorigin=""/>
     <link rel="stylesheet" href="/css/app.css">
   </head>
 
-  <body>
+  <body class="{{ $body_class or '' }}">
 
     <div id="app">
       @section('nav')
-        @include('layouts.nav')
+        @include('explorer.nav')
       @show
 
-      @yield('content')
-
+      <main class="site-content">
+        @yield('content')
+      </main>
     </div>
 
     <!-- VENDOR JS LIBRARIES -->
