@@ -11,7 +11,12 @@
         <form method="POST" action="{{ route('tickets.update', ['id' => $ticket->id]) }}">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="redirect" value="{{ $redirect or '' }}">
+            @if (isset($redirect))
+                <input type="hidden" name="redirect" value="{{ $redirect }}">
+            @endif
+            @if (isset($points))
+                <input type="hidden" name="points" value="{{ $points }}">
+            @endif
 
             <div class="form-group">
                 <label for="description">Beschreibung:</label>

@@ -14,8 +14,8 @@
 // HOME
 
 Route::get('/', function () {
-    return view('home');
-})->name('home');
+    return view('index');
+})->name('index');
 
 // GAME
 
@@ -40,3 +40,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
     Route::resource('locations', 'LocationsController');
     Route::get('locations/{location}/outgoing', 'LocationsController@outgoing')->name('locations.outgoing');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

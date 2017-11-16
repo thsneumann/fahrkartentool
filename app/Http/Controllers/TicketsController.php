@@ -60,9 +60,9 @@ class TicketsController extends Controller
     public function edit($id)
     {
         return view('tickets.edit', [
-            'ticket' => Ticket::findOrFail($id),
-            'locations' => Location::orderBy('name')->get(),
-            'tags' => Tag::orderBy('name')->get()
+        'ticket' => Ticket::findOrFail($id),
+        'locations' => Location::orderBy('name')->get(),
+        'tags' => Tag::orderBy('name')->get()
         ]);
     }
 
@@ -79,6 +79,18 @@ class TicketsController extends Controller
         $ticket->destination_id = $request['destination_id'];
         $ticket->description = $request['description'];
         $ticket->edit_count += 1;
+
+        if ($request->has('points')) {
+            $points = $request['points'];
+            session()->put('points', $points + 1);
+            // save points for logged in user
+            if (auth()->check()) {
+                $user = auth()->user();
+                $user->points = $points + 1;
+                $user->save();
+            }
+        }
+    
         $ticket->save();
 
         if ($request['redirect'] == 'back') {

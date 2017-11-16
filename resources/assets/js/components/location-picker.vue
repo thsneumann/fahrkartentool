@@ -6,8 +6,8 @@
         <div class="d-flex align-items-center">
             <input type="text" id="name" name="name" class="form-control mr-2"
             v-model="input" 
-            @keydown.enter.prevent="updateMap">
-            <a href="#" @click.prevent="updateMap">
+            @keydown.enter="updateMap">
+            <a href="#" @click="updateMap">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
             </a>
         </div>
@@ -66,7 +66,9 @@ export default {
       this.marker.bindPopup('<b>' + this.location.name + '</b>');
     },
 
-    updateMap() {
+    updateMap(event) {
+      event.preventDefault();
+
       axios.get(config.geocoderUrl + this.input).then(response => {
         if (response.data.length === 0) return;
 

@@ -40463,6 +40463,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -40486,20 +40488,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     initMap: function initMap() {
-      this.map = L.map("location-picker-map").setView([this.location.latitude, this.location.longitude], 7);
-      L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+      this.map = L.map('location-picker-map').setView([this.location.latitude, this.location.longitude], 7);
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
-        id: "mapbox.streets",
+        id: 'mapbox.streets',
         accessToken: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].leafletAccessToken
       }).addTo(this.map);
     },
     addMarker: function addMarker() {
       this.marker = L.marker([this.location.latitude, this.location.longitude]).addTo(this.map);
-      this.marker.bindPopup("<b>" + this.location.name + "</b>");
+      this.marker.bindPopup('<b>' + this.location.name + '</b>');
     },
-    updateMap: function updateMap() {
+    updateMap: function updateMap(event) {
       var _this = this;
+
+      event.preventDefault();
 
       axios.get(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].geocoderUrl + this.input).then(function (response) {
         if (response.data.length === 0) return;
@@ -40507,7 +40511,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var newLocation = response.data[0];
         var latLng = { lat: newLocation.lat, lng: newLocation.lon };
         _this.marker.setLatLng(latLng);
-        _this.marker.setPopupContent("<b>" + _this.input + "</b>");
+        _this.marker.setPopupContent('<b>' + _this.input + '</b>');
         _this.map.panTo(latLng);
 
         _this.location.latitude = latLng.lat;
@@ -40579,6 +40583,15 @@ var render = function() {
           attrs: { type: "text", id: "name", name: "name" },
           domProps: { value: _vm.input },
           on: {
+            keydown: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key)
+              ) {
+                return null
+              }
+              _vm.updateMap($event)
+            },
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -40588,24 +40601,12 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c(
-          "a",
-          {
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.updateMap($event)
-              }
-            }
-          },
-          [
-            _c("i", {
-              staticClass: "fa fa-refresh",
-              attrs: { "aria-hidden": "true" }
-            })
-          ]
-        )
+        _c("a", { attrs: { href: "#" }, on: { click: _vm.updateMap } }, [
+          _c("i", {
+            staticClass: "fa fa-refresh",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
       ]),
       _vm._v(" "),
       _c("input", {

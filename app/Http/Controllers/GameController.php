@@ -10,15 +10,25 @@ class GameController extends Controller
 {
     public function index()
     {
-        return view('game.index');
+        $points = session()->get('points');
+        
+        if ($points > 0) {
+            return $this->tagging();
+        }
+        
+        return view('game.welcome');
     }
 
     public function tagging()
     {
         $ticket = Ticket::where('edit_count', 0)->first();
+
+        $points = session()->get('points', 0);
+
         return view('game.tagging', [
             'ticket' => $ticket,
-            'locations' => Location::orderBy('name')->get()
+            'locations' => Location::orderBy('name')->get(),
+            'points' => $points
         ]);
     }
 
