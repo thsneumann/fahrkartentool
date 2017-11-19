@@ -40,7 +40,7 @@ class GameController extends Controller
 
     public function highscore()
     {
-        $users = User::orderBy('points', 'desc')->get();
+        $users = User::where('points', '>', 0)->orderBy('points', 'desc')->get();
         return view('game.highscore', ['users' => $users]);
     }
 }
