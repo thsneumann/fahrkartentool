@@ -16,6 +16,8 @@
             <th scope="col">Name</th>
             <th scope="col">Breitengrad</th>
             <th scope="col">Längengrad</th>
+            <th scope="col">Tickets mit diesem Abfahrort</th>
+            <th scope="col">Tickets mit diesem Zielort</th>
             <th scope="col">Aktionen</th>
         </thead>
         <tbody>
@@ -25,6 +27,8 @@
                     <td>{{ $location->name }}</td>
                     <td>{{ $location->latitude }}</td>
                     <td>{{ $location->longitude }}</td>
+                    <td>{{ count($location->pointOfDepartureFor) }}</td>
+                    <td>{{ count($location->destinationFor) }}</td>
                     <td class="d-flex">
                         <a href="{{ route('locations.edit', ['id' => $location->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
