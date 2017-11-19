@@ -14,11 +14,25 @@
     @endif
     --}}
     <ul class="navbar-nav">
+      @if (Auth::check())
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('logout') }}">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            Ausloggen
+          </a>
+        </li> 
+      @endif
       <li class="nav-item {{ Route::currentRouteNamed('game.highscore') }}">
-        <a class="nav-link" href="{{ route('game.highscore') }}">Bestenliste</a>
+        <a class="nav-link" href="{{ route('game.highscore') }}">
+          <i class="fa fa-trophy" aria-hidden="true"></i>
+          Bestenliste
+        </a>
       </li>
       <li class="nav-item {{ Route::currentRouteNamed('game.index') ? 'active' : '' }} ml-auto">
-        <a class="nav-link" href="{{ route('map.index') }}">Zum Explorer</a>
+        <a class="nav-link" href="{{ route('map.index') }}">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          Zum Explorer
+        </a>
       </li>
     </ul>
   </div>
