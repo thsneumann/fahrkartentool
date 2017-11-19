@@ -12,7 +12,7 @@
             <th scope="col">Abfahrtsort</th>
             <th scope="col">Ziel</th>
             <th scope="col">Beschreibung</th>
-            <th scope="col">Tags</th>
+            {{-- <th scope="col">Tags</th> --}}
             <th scope="col">Aktionen</th>
         </thead>
         <tbody>
@@ -42,9 +42,10 @@
                     </td>
                     <td>
                         @if ($ticket->description)
-                            {{ $ticket->description }}</td>
+                            {{ $ticket->description }}
                         @endif
-                    <td>
+                    </td>
+                    {{-- <td>
                         <ul class="list-inline">
                             @foreach ($ticket->tags as $tag)
                                 <li class="list-inline-item">
@@ -52,7 +53,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                    </td>
+                    </td> --}}
                     <td class="d-flex">
                         <a href="{{ route('tickets.edit', ['id' => $ticket->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
