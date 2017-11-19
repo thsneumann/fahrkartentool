@@ -4,6 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+    {{-- 
     @if (isset($points))
       @if ($points > 0)
         <li class="navbar-text">
@@ -11,7 +12,11 @@
         </li>
       @endif
     @endif
+    --}}
     <ul class="navbar-nav">
+      <li class="nav-item {{ Route::currentRouteNamed('game.highscore') }}">
+        <a class="nav-link" href="{{ route('game.highscore') }}">Bestenliste</a>
+      </li>
       <li class="nav-item {{ Route::currentRouteNamed('game.index') ? 'active' : '' }} ml-auto">
         <a class="nav-link" href="{{ route('map.index') }}">Zum Explorer</a>
       </li>

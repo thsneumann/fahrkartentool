@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ticket;
 use App\Location;
+use App\User;
 
 class GameController extends Controller
 {
@@ -35,5 +36,11 @@ class GameController extends Controller
     public function addLocation()
     {
         return view('locations.create', ['redirect' => 'game.tagging']);
+    }
+
+    public function highscore()
+    {
+        $users = User::orderBy('points', 'desc')->get();
+        return view('game.highscore', ['users' => $users]);
     }
 }
