@@ -21,7 +21,7 @@
         <h2>Vielen Dank!</h2>
 
         @if (Auth::check())
-            <p>Du hast jetzt {{ $points }} Punkte.</p>
+            <p>Du hast jetzt {{ session()->get('points') }} Punkte.</p>
         @else
             <p>Du hast schon {{ $points }} Punkte.<br>
                 <a href="{{ route('register') }}">Erstelle ein Profil, um deinen Punktestand zu speichern.</a><br>
