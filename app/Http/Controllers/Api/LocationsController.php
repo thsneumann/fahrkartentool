@@ -26,7 +26,13 @@ class LocationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $location = new Location();
+        $location->name = $request['name'];
+        $location->latitude = $request['latitude'];
+        $location->longitude = $request['longitude'];
+        $location->save();
+        
+        return $location;
     }
 
     /**

@@ -40443,6 +40443,27 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(10);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -40470,25 +40491,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    defaultLocation: {
-      type: Object
+    field: {
+      type: String,
+      required: true
+    },
+    locations: {
+      type: Array,
+      required: true
+    },
+    defaultLocationId: {
+      type: Number
     }
   },
+
   data: function data() {
     return {
+      myLocations: [],
       location: {
+        name: 'Berlin',
         latitude: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].mapCenter.lat,
         longitude: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].mapCenter.lng
       },
       map: null,
       marker: null,
-      input: null
+      input: null,
+      isPickerVisible: false,
+      hasEnteredNewLocation: false,
+      selected: 0
     };
   },
 
+
   methods: {
     initMap: function initMap() {
-      this.map = L.map('location-picker-map').setView([this.location.latitude, this.location.longitude], 7);
+      this.map = L.map(this.field + '_map').setView([this.location.latitude, this.location.longitude], 7);
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
@@ -40514,46 +40550,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.marker.setPopupContent('<b>' + _this.input + '</b>');
         _this.map.panTo(latLng);
 
+        _this.location.name = _this.input;
         _this.location.latitude = latLng.lat;
         _this.location.longitude = latLng.lng;
+
+        _this.hasEnteredNewLocation = true;
       });
+    },
+    applyChanges: function applyChanges() {
+      var _this2 = this;
+
+      axios.post('/api/locations', {
+        name: this.location.name,
+        latitude: this.location.latitude,
+        longitude: this.location.longitude
+      }).then(function (response) {
+        console.log(response.data.id);
+        var newLocation = response.data;
+        _this2.myLocations.push(newLocation);
+        _this2.selected = newLocation.id;
+        _this2.isPickerVisible = false;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    toggle: function toggle() {
+      this.isPickerVisible = !this.isPickerVisible;
     }
   },
 
   created: function created() {
-    if (this.defaultLocation) {
-      this.location = this.defaultLocation;
-      this.input = this.defaultLocation.name;
-    }
+    var _myLocations;
+
+    (_myLocations = this.myLocations).splice.apply(_myLocations, [0].concat(_toConsumableArray(this.locations)));
+    this.selected = this.defaultLocationId;
   },
   mounted: function mounted() {
     this.initMap();
     this.addMarker();
-
-    /*
-     var nameInput = document.getElementById("name");
-    nameInput.addEventListener("keypress", function(event) {
-      if (event.keyCode !== 13) return;
-       updateMap();
-      event.preventDefault();
-      return false;
-    });
-     function updateMap() {
-      var input = document.getElementById("name").value;
-      var url =
-        "http://open.mapquestapi.com/nominatim/v1/search.php?key=GnlgEeqqbhpwGfztQOiVmwwolGEnV5AX&format=json&q=";
-      $.getJSON(url + input, function(results) {
-        console.log(results);
-        if (results === undefined) return;
-         var newLocation = results[0];
-        var latLng = { lat: newLocation.lat, lng: newLocation.lon };
-        marker.setLatLng(latLng);
-        marker.setPopupContent("<b>" + input + "</b>");
-        editorMap.panTo(latLng);
-         document.getElementById("latitude").value = latLng.lat;
-        document.getElementById("longitude").value = latLng.lng;
-      });
-    } */
   }
 });
 
@@ -40566,76 +40600,153 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "vue-location-picker" }, [
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "name" } }, [_vm._v("Name:")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "d-flex align-items-center" }, [
-        _c("input", {
+    _c("div", { staticClass: "form-group d-flex" }, [
+      _c(
+        "select",
+        {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.input,
-              expression: "input"
+              value: _vm.selected,
+              expression: "selected"
             }
           ],
-          staticClass: "form-control mr-2",
-          attrs: { type: "text", id: "name", name: "name" },
-          domProps: { value: _vm.input },
+          staticClass: "form-control custom-select mr-3",
+          attrs: { name: _vm.field, id: _vm.field },
           on: {
-            keydown: function($event) {
-              if (
-                !("button" in $event) &&
-                _vm._k($event.keyCode, "enter", 13, $event.key)
-              ) {
-                return null
-              }
-              _vm.updateMap($event)
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.input = $event.target.value
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.selected = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
             }
           }
-        }),
-        _vm._v(" "),
-        _c("a", { attrs: { href: "#" }, on: { click: _vm.updateMap } }, [
-          _c("i", {
-            staticClass: "fa fa-refresh",
-            attrs: { "aria-hidden": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "0" } }, [_vm._v("Ort auswählen")]),
+          _vm._v(" "),
+          _vm._l(_vm.myLocations, function(location) {
+            return _c("option", { domProps: { value: location.id } }, [
+              _vm._v(_vm._s(location.name))
+            ])
           })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "hidden",
-          id: "latitude",
-          name: "latitude",
-          readonly: ""
-        },
-        domProps: { value: _vm.location.latitude }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "hidden",
-          id: "longitude",
-          name: "longitude",
-          readonly: ""
-        },
-        domProps: { value: _vm.location.longitude }
-      })
+        ],
+        2
+      )
     ]),
     _vm._v(" "),
-    _c("div", {
-      staticClass: "map form-group",
-      attrs: { id: "location-picker-map" }
-    })
+    _c("div", { staticClass: "form-group" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary mb-3",
+          attrs: { href: "#", role: "button" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.toggle($event)
+            }
+          }
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-plus",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v("\n        Ort hinzufügen\n      ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "picker", class: { "is-visible": _vm.isPickerVisible } },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "d-flex align-items-center" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.input,
+                  expression: "input"
+                }
+              ],
+              staticClass: "form-control mr-2",
+              attrs: { type: "text", id: "name", name: "name" },
+              domProps: { value: _vm.input },
+              on: {
+                keydown: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key)
+                  ) {
+                    return null
+                  }
+                  _vm.updateMap($event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.input = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "mr-2",
+                attrs: { href: "#", title: "Aktualisieren" },
+                on: { click: _vm.updateMap }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-refresh",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _vm.hasEnteredNewLocation
+              ? _c(
+                  "a",
+                  {
+                    attrs: { href: "#", title: "Übernehmen" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.applyChanges($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-check",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
+                )
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "map form-group",
+          attrs: { id: _vm.field + "_map" }
+        })
+      ]
+    )
   ])
 }
 var staticRenderFns = []

@@ -25,31 +25,12 @@
 
             <div class="form-group">
                 <label for="point_of_departure">Abfahrtsort:</label>
-                <div class="d-flex">
-                    <select name="point_of_departure_id" id="point_of_departure_id" class="form-control custom-select mr-3">
-                    @foreach ($locations as $location)
-                        <option value="{{ $location->id }}" {{ $location->id == $ticket->point_of_departure_id ? 'selected' : '' }}>{{ $location->name }}</option>
-                    @endforeach
-                    </select>
-                </div>
+                <location-picker field="point_of_departure_id" :locations="{{ json_encode($locations) }}" v-bind:default-location-id="{{ intval($ticket->point_of_departure_id) }}"></location-picker>
             </div>
 
             <div class="form-group">
                 <label for="destination">Zielort:</label>
-                <div class="d-flex">
-                    <select id="destination_id" name="destination_id" class="form-control custom-select mr-3">
-                    @foreach ($locations as $location)
-                        <option value="{{ $location->id }}" {{ $location->id == $ticket->destination_id ? 'selected' : '' }}>{{ $location->name }}</option>
-                    @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <a href="{{ route('game.add-location') }}" role="button" class="btn btn-primary mb-3">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Ort hinzufügen
-                </a>
+                <location-picker field="destination_id" :locations="{{ json_encode($locations) }}" v-bind:default-location-id="{{ intval($ticket->destination_id) }}"></location-picker>
             </div>
 
             {{-- TODO: TAGS SELECT

@@ -119,11 +119,6 @@ ul {
   height: 100vh;
 }
 
-#location-picker-map {
-  width: 600px;
-  height: 400px;
-}
-
 .map-popup h3 {
   font-size: 1.25rem;
   font-weight: bold;
@@ -150,5 +145,21 @@ ul {
   width: auto;
   max-height: 50px;
   display: inline-block;
+}
+
+.vue-location-picker .picker {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 1s;
+  transition: max-height 1s;
+}
+
+.vue-location-picker .picker.is-visible {
+  max-height: 600px;
+}
+
+.vue-location-picker .map {
+  width: 100%;
+  height: 300px;
 }
 

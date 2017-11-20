@@ -1,21 +1,40 @@
 <template>
 
 <div class="vue-location-picker">
+    <div class="form-group d-flex">
+      <select :name="field" :id="field" v-model="selected" class="form-control custom-select mr-3">
+          <option value="0">Ort auswählen</option>
+          <option v-for="location in myLocations" 
+            :value="location.id">{{ location.name }}</option>
+      </select>
+    </div>
+    
+
     <div class="form-group">
-        <label for="name">Name:</label>
+      <a href="#" role="button" class="btn btn-primary mb-3" @click.prevent="toggle">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Ort hinzufügen
+      </a>
+    </div>
+
+    <div class="picker" :class="{ 'is-visible': isPickerVisible }">
+      <div class="form-group">
         <div class="d-flex align-items-center">
             <input type="text" id="name" name="name" class="form-control mr-2"
             v-model="input" 
             @keydown.enter="updateMap">
-            <a href="#" @click="updateMap">
+            <a class="mr-2" href="#" title="Aktualisieren" @click="updateMap">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
             </a>
+            <a href="#" title="Übernehmen" @click.prevent="applyChanges" v-if="hasEnteredNewLocation">
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </a>
         </div>
-        <input type="hidden" id="latitude" name="latitude" :value="location.latitude" class="form-control" readonly>
-        <input type="hidden" id="longitude" name="longitude" :value="location.longitude" class="form-control" readonly>
-    </div>
+      </div>
 
-    <div id="location-picker-map" class="map form-group"></div>
+      <div :id="field + '_map'" class="map form-group"></div>
+    </div>
+    
 </div>
 
 </template>
@@ -25,24 +44,39 @@ import config from '../config';
 
 export default {
   props: {
-    defaultLocation: {
-      type: Object
+    field: {
+      type: String,
+      required: true
+    },
+    locations: {
+      type: Array,
+      required: true
+    },
+    defaultLocationId: {
+      type: Number
     }
   },
+
   data() {
     return {
+      myLocations: [],
       location: {
+        name: 'Berlin',
         latitude: config.mapCenter.lat,
         longitude: config.mapCenter.lng
       },
       map: null,
       marker: null,
-      input: null
+      input: null,
+      isPickerVisible: false,
+      hasEnteredNewLocation: false,
+      selected: 0
     };
   },
+
   methods: {
     initMap() {
-      this.map = L.map('location-picker-map').setView(
+      this.map = L.map(this.field + '_map').setView(
         [this.location.latitude, this.location.longitude],
         7
       );
@@ -78,52 +112,46 @@ export default {
         this.marker.setPopupContent('<b>' + this.input + '</b>');
         this.map.panTo(latLng);
 
+        this.location.name = this.input;
         this.location.latitude = latLng.lat;
         this.location.longitude = latLng.lng;
+
+        this.hasEnteredNewLocation = true;
       });
+    },
+
+    applyChanges() {
+      axios
+        .post('/api/locations', {
+          name: this.location.name,
+          latitude: this.location.latitude,
+          longitude: this.location.longitude
+        })
+        .then(response => {
+          console.log(response.data.id);
+          const newLocation = response.data;
+          this.myLocations.push(newLocation);
+          this.selected = newLocation.id;
+          this.isPickerVisible = false;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
+    toggle() {
+      this.isPickerVisible = !this.isPickerVisible;
     }
   },
 
   created() {
-    if (this.defaultLocation) {
-      this.location = this.defaultLocation;
-      this.input = this.defaultLocation.name;
-    }
+    this.myLocations.splice(0, ...this.locations);
+    this.selected = this.defaultLocationId;
   },
 
   mounted() {
     this.initMap();
     this.addMarker();
-
-    /*
-
-    var nameInput = document.getElementById("name");
-    nameInput.addEventListener("keypress", function(event) {
-      if (event.keyCode !== 13) return;
-
-      updateMap();
-      event.preventDefault();
-      return false;
-    });
-
-    function updateMap() {
-      var input = document.getElementById("name").value;
-      var url =
-        "http://open.mapquestapi.com/nominatim/v1/search.php?key=GnlgEeqqbhpwGfztQOiVmwwolGEnV5AX&format=json&q=";
-      $.getJSON(url + input, function(results) {
-        console.log(results);
-        if (results === undefined) return;
-
-        var newLocation = results[0];
-        var latLng = { lat: newLocation.lat, lng: newLocation.lon };
-        marker.setLatLng(latLng);
-        marker.setPopupContent("<b>" + input + "</b>");
-        editorMap.panTo(latLng);
-
-        document.getElementById("latitude").value = latLng.lat;
-        document.getElementById("longitude").value = latLng.lng;
-      });
-    } */
   }
 };
 </script>

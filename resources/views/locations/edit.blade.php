@@ -11,7 +11,7 @@
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="PUT">
 
-            <location-picker :default-location="{{ json_encode($location) }}"></location-picker>
+            <p>TODO</p>
 
             <button type="submit" class="btn btn-primary">Speichern</button>
         </form>
