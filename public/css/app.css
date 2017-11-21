@@ -147,6 +147,12 @@ ul {
   display: inline-block;
 }
 
+.vue-location-editor .map {
+  width: 600px;
+  min-width: 100%;
+  height: 400px;
+}
+
 .vue-location-picker .picker {
   max-height: 0;
   overflow: hidden;

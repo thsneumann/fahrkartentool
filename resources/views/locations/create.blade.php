@@ -11,7 +11,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="redirect" value="{{ $redirect or '' }}">
 
-                <location-picker></location-picker>
+                <location-editor></location-editor>
 
                 <button type="submit" class="btn btn-primary">Speichern</button>
             </form>

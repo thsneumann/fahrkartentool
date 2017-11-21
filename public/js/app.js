@@ -1073,12 +1073,18 @@ module.exports = Cancel;
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    leafletAccessToken: 'pk.eyJ1IjoidGhzbmV1bWFubiIsImEiOiJjajBiMGNpbnQwMXo0MzJsM3JrMmVvaW9xIn0._JPXczrSxb1MBYdvpc16WQ',
-    geocoderUrl: 'http://open.mapquestapi.com/nominatim/v1/search.php?key=GnlgEeqqbhpwGfztQOiVmwwolGEnV5AX&format=json&q=',
-    mapCenter: {
-        lat: 52.52,
-        lng: 13.4
-    }
+  leafletAccessToken: 'pk.eyJ1IjoidGhzbmV1bWFubiIsImEiOiJjajBiMGNpbnQwMXo0MzJsM3JrMmVvaW9xIn0._JPXczrSxb1MBYdvpc16WQ',
+  geocoderUrl: 'http://open.mapquestapi.com/nominatim/v1/search.php?key=GnlgEeqqbhpwGfztQOiVmwwolGEnV5AX&format=json&q=',
+  defaultLocation: {
+    name: 'Berlin',
+    latitude: 52.52,
+    longitude: 13.4
+  },
+  mapCenter: {
+    // TODO: substitute with defaultLocation
+    lat: 52.52,
+    lng: 13.4
+  }
 });
 
 /***/ }),
@@ -1098,14 +1104,15 @@ __webpack_require__(13);
 window.Vue = __webpack_require__(36);
 
 Vue.component('explorer-map', __webpack_require__(39));
+Vue.component('location-editor', __webpack_require__(53));
 Vue.component('location-picker', __webpack_require__(42));
 Vue.component('rotating-globe', __webpack_require__(45));
 
 var app = new Vue({
-    el: '#app',
-    mounted: function mounted() {
-        console.log('Vue is ready.');
-    }
+  el: '#app',
+  mounted: function mounted() {
+    console.log('Vue is ready.');
+  }
 });
 
 /***/ }),
@@ -40939,6 +40946,255 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(54)
+/* template */
+var __vue_template__ = __webpack_require__(55)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/location-editor.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-33496fea", Component.options)
+  } else {
+    hotAPI.reload("data-v-33496fea", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(10);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    defaultLocation: {
+      type: Object
+    }
+  },
+
+  data: function data() {
+    return {
+      location: {
+        name: null,
+        latitude: null,
+        longitude: null
+      },
+      map: null,
+      marker: null,
+      input: this.defaultLocation && this.defaultLocation.name
+    };
+  },
+
+
+  methods: {
+    initMap: function initMap() {
+      this.map = L.map('vue-location-editor-map').setView([this.location.latitude || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude, this.location.longitude || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude], 7);
+
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].leafletAccessToken
+      }).addTo(this.map);
+    },
+    addMarker: function addMarker() {
+      if (this.location.latitude === null) return;
+
+      this.marker = L.marker([this.location.latitude, this.location.longitude]).addTo(this.map);
+      this.marker.bindPopup('<b>' + this.location.name + '</b>');
+    },
+    updateMap: function updateMap(event) {
+      var _this = this;
+
+      event.preventDefault();
+
+      axios.get(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].geocoderUrl + this.input).then(function (response) {
+        if (response.data.length === 0) return;
+
+        var newLocation = response.data[0];
+        var latLng = { lat: newLocation.lat, lng: newLocation.lon };
+        _this.location.name = _this.input;
+        _this.location.latitude = latLng.lat;
+        _this.location.longitude = latLng.lng;
+
+        if (_this.marker === null) {
+          _this.addMarker();
+        } else {
+          _this.marker.setLatLng(latLng);
+          _this.marker.setPopupContent('<b>' + _this.input + '</b>');
+        }
+        _this.map.panTo(latLng);
+      });
+    }
+  },
+
+  created: function created() {
+    if (this.defaultLocation) {
+      this.location.name = this.defaultLocation.name;
+      this.location.latitude = this.defaultLocation.latitude;
+      this.location.longitude = this.defaultLocation.longitude;
+    }
+  },
+  mounted: function mounted() {
+    this.initMap();
+    this.addMarker();
+  }
+});
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "vue-location-editor" }, [
+    _c("div", { staticClass: "picker" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "d-flex align-items-center" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.input,
+                expression: "input"
+              }
+            ],
+            staticClass: "form-control mr-2",
+            attrs: { type: "text", id: "name", name: "name" },
+            domProps: { value: _vm.location.name, value: _vm.input },
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key)
+                ) {
+                  return null
+                }
+                _vm.updateMap($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.input = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "mr-2",
+              attrs: { href: "#", title: "Aktualisieren" },
+              on: { click: _vm.updateMap }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-refresh",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "map form-group",
+        attrs: { id: "vue-location-editor-map" }
+      })
+    ]),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden", id: "latitude", name: "latitude" },
+      domProps: { value: _vm.location.latitude }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden", id: "longitude", name: "longitude" },
+      domProps: { value: _vm.location.longitude }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-33496fea", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
