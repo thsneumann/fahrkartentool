@@ -9,11 +9,21 @@ use App\Ticket;
 
 class TicketsController extends Controller
 {
-    private function toCSV($table)
+    private function toCSV($tickets)
     {
-        $output='';
-        foreach ($table as $row) {
-            $output.=  implode(",", $row->toArray()) . PHP_EOL;
+        $headings = ['ID', 'Signatur', 'Abfahrtsort', 'Ziel', 'Beschreibung', 'Bearbeitungen', 'Änderungsdatum'];
+        $output = implode(',', $headings) . PHP_EOL;
+        foreach ($tickets as $ticket) {
+            $columns = [
+                $ticket->id,
+                $ticket->signature,
+                $ticket->pointOfDeparture ? $ticket->pointOfDeparture->name : '',
+                $ticket->destination ? $ticket->destination->name : '',
+                $ticket->description,
+                $ticket->edit_count,
+                $ticket->updated_at
+            ];
+            $output.=  implode(',', $columns) . PHP_EOL;
         }
         $headers = array(
             'Content-Type' => 'text/csv',

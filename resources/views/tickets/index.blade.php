@@ -3,6 +3,10 @@
 @section('content')
 
 <div class="container-fluid">
+    <a target="_blank" href="{{ route('api.tickets.index', ['format' => 'csv']) }}" class="btn btn-primary mb-3">
+        CSV-Export
+    </a>
+
     <table class="table tickets-table">
         <thead>
             <th scope="col">#</th>
