@@ -62,8 +62,8 @@ export default {
       myLocations: [],
       location: {
         name: 'Berlin',
-        latitude: config.mapCenter.lat,
-        longitude: config.mapCenter.lng
+        latitude: config.defaultLocation.latitude,
+        longitude: config.defaultLocation.longitude
       },
       map: null,
       marker: null,

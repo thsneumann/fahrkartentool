@@ -1079,11 +1079,6 @@ module.exports = Cancel;
     name: 'Berlin',
     latitude: 52.52,
     longitude: 13.4
-  },
-  mapCenter: {
-    // TODO: substitute with defaultLocation
-    lat: 52.52,
-    lng: 13.4
   }
 });
 
@@ -40307,11 +40302,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     initMap: function initMap() {
-      this.map = L.map("explorer-map").setView([__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].mapCenter.lat, __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].mapCenter.lng], 7);
-      L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+      this.map = L.map('explorer-map').setView([__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude, __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude], 7);
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
-        id: "mapbox.streets",
+        id: 'mapbox.streets',
         accessToken: this.accessToken
       }).addTo(this.map);
     },
@@ -40320,7 +40315,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       response.data.forEach(function (location) {
         var marker = L.marker([location.latitude, location.longitude]).addTo(_this.map);
-        marker.on("click", function () {
+        marker.on('click', function () {
           _this.showLocationInfo(marker, location);
         });
       });
@@ -40332,16 +40327,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           repeat: 10,
           symbol: L.Symbol.dash({
             pixelSize: 5,
-            pathOptions: { color: "#000", weight: 1, opacity: 0.8 }
+            pathOptions: { color: '#000', weight: 1, opacity: 0.8 }
           })
         }, {
-          offset: "16%",
-          repeat: "33%",
+          offset: '16%',
+          repeat: '33%',
           symbol: L.Symbol.marker({
             rotate: true,
             markerOptions: {
               icon: L.icon({
-                iconUrl: "/img/icon_train.png",
+                iconUrl: '/img/icon_train.png',
                 iconAnchor: [20, 12]
               })
             }
@@ -40352,12 +40347,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     showLocationInfo: function showLocationInfo(marker, location) {
       var _this2 = this;
 
-      axios.get("/locations/" + location.id + "/popup").then(function (response) {
+      axios.get('/locations/' + location.id + '/popup').then(function (response) {
         marker.bindPopup(response.data).openPopup();
       }).catch(function (error) {
         console.error(error);
       });
-      axios.get("/api/locations/" + location.id + "/outgoing").then(function (connections) {
+      axios.get('/api/locations/' + location.id + '/outgoing').then(function (connections) {
         _this2.connectingLines.forEach(function (line) {
           line.remove();
         });
@@ -40369,7 +40364,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.initMap();
-    axios.get("/api/locations/").then(this.addMarkers).catch(function (error) {
+    axios.get('/api/locations/').then(this.addMarkers).catch(function (error) {
       console.error(error);
     });
   }
@@ -40516,8 +40511,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       myLocations: [],
       location: {
         name: 'Berlin',
-        latitude: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].mapCenter.lat,
-        longitude: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].mapCenter.lng
+        latitude: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude,
+        longitude: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude
       },
       map: null,
       marker: null,

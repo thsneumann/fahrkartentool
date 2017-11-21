@@ -16,14 +16,17 @@ export default {
 
   methods: {
     initMap() {
-      this.map = L.map("explorer-map").setView([config.mapCenter.lat, config.mapCenter.lng], 7);
+      this.map = L.map('explorer-map').setView(
+        [config.defaultLocation.latitude, config.defaultLocation.longitude],
+        7
+      );
       L.tileLayer(
-        "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
+        'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
         {
           attribution:
             'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
           maxZoom: 18,
-          id: "mapbox.streets",
+          id: 'mapbox.streets',
           accessToken: this.accessToken
         }
       ).addTo(this.map);
@@ -34,7 +37,7 @@ export default {
         var marker = L.marker([location.latitude, location.longitude]).addTo(
           this.map
         );
-        marker.on("click", () => {
+        marker.on('click', () => {
           this.showLocationInfo(marker, location);
         });
       });
@@ -48,17 +51,17 @@ export default {
             repeat: 10,
             symbol: L.Symbol.dash({
               pixelSize: 5,
-              pathOptions: { color: "#000", weight: 1, opacity: 0.8 }
+              pathOptions: { color: '#000', weight: 1, opacity: 0.8 }
             })
           },
           {
-            offset: "16%",
-            repeat: "33%",
+            offset: '16%',
+            repeat: '33%',
             symbol: L.Symbol.marker({
               rotate: true,
               markerOptions: {
                 icon: L.icon({
-                  iconUrl: "/img/icon_train.png",
+                  iconUrl: '/img/icon_train.png',
                   iconAnchor: [20, 12]
                 })
               }
@@ -70,7 +73,7 @@ export default {
 
     showLocationInfo(marker, location) {
       axios
-        .get("/locations/" + location.id + "/popup")
+        .get('/locations/' + location.id + '/popup')
         .then(response => {
           marker.bindPopup(response.data).openPopup();
         })
@@ -78,7 +81,7 @@ export default {
           console.error(error);
         });
       axios
-        .get("/api/locations/" + location.id + "/outgoing")
+        .get('/api/locations/' + location.id + '/outgoing')
         .then(connections => {
           this.connectingLines.forEach(line => {
             line.remove();
@@ -92,7 +95,7 @@ export default {
   mounted() {
     this.initMap();
     axios
-      .get("/api/locations/")
+      .get('/api/locations/')
       .then(this.addMarkers)
       .catch(error => {
         console.error(error);

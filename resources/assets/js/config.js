@@ -7,10 +7,5 @@ export default {
     name: 'Berlin',
     latitude: 52.52,
     longitude: 13.4
-  },
-  mapCenter: {
-    // TODO: substitute with defaultLocation
-    lat: 52.52,
-    lng: 13.4
   }
 };
