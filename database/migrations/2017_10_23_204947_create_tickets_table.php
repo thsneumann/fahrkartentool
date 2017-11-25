@@ -20,6 +20,7 @@ class CreateTicketsTable extends Migration
             $table->integer('point_of_departure_id')->nullable();
             $table->integer('destination_id')->nullable();
             $table->text('description')->nullable();
+            $table->integer('category_id')->nullable();
             $table->integer('edit_count')->default(0);
             $table->timestamps();
         });

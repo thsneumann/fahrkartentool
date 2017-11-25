@@ -28,6 +28,13 @@
         <a class="nav-link" href="{{ route('tags.index') }}">Tags</a>
       </li>
       --}}
+      <li class="nav-item {{ Route::currentRouteNamed('categories.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('tickets.index') }}">
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          Kategorien
+        </a>
+      </li>
+      
       <li class="nav-item {{ Route::currentRouteNamed('game.index') ? 'active' : '' }} ml-auto">
         <a class="nav-link" href="{{ route('game.index') }}">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>

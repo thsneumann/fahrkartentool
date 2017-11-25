@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Location;
+use App\Category;
 
 class Ticket extends Model
 {
@@ -20,5 +21,10 @@ class Ticket extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

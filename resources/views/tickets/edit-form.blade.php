@@ -19,11 +19,6 @@
             @endif
 
             <div class="form-group">
-                <label for="description">Beschreibung:</label>
-                <textarea id="description" name="description" class="form-control"></textarea>
-            </div>
-
-            <div class="form-group">
                 <label for="point_of_departure">Abfahrtsort:</label>
                 <location-picker field="point_of_departure_id" :locations="{{ json_encode($locations) }}" v-bind:default-location-id="{{ intval($ticket->point_of_departure_id) }}"></location-picker>
             </div>
@@ -31,6 +26,21 @@
             <div class="form-group">
                 <label for="destination">Zielort:</label>
                 <location-picker field="destination_id" :locations="{{ json_encode($locations) }}" v-bind:default-location-id="{{ intval($ticket->destination_id) }}"></location-picker>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Beschreibung:</label>
+                <textarea id="description" name="description" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="category_id">Kategorie:</label>
+                <select id="category_id" name="category_id" class="form-control custom-select">
+                    <option value="">Kategorie wählen</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             {{-- TODO: TAGS SELECT

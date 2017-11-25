@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Ticket;
 use App\Location;
 use App\User;
+use App\Category;
 
 class GameController extends Controller
 {
@@ -29,6 +30,7 @@ class GameController extends Controller
         return view('game.tagging', [
             'ticket' => $ticket,
             'locations' => Location::orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get(),
             'points' => $points
         ]);
     }

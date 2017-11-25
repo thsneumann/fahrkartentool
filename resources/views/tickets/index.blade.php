@@ -16,6 +16,7 @@
             <th scope="col">Abfahrtsort</th>
             <th scope="col">Ziel</th>
             <th scope="col">Beschreibung</th>
+            <th scope="col">Kategorie</th>
             {{-- <th scope="col">Tags</th> --}}
             <th scope="col">Aktionen</th>
         </thead>
@@ -47,6 +48,11 @@
                     <td>
                         @if ($ticket->description)
                             {{ $ticket->description }}
+                        @endif
+                    </td>
+                    <td>
+                        @if ($ticket->category)
+                            {{ $ticket->category->name }}
                         @endif
                     </td>
                     {{-- <td>
