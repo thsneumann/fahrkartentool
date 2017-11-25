@@ -3,7 +3,7 @@
 @section('nav')
 @endsection
 
-@section('scripts')
+@section('scripts_before_app')
 
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>

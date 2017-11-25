@@ -2,6 +2,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.EventBus = new Vue();
+
 Vue.component('explorer-map', require('./components/explorer-map.vue'));
 Vue.component('location-editor', require('./components/location-editor.vue'));
 Vue.component('location-picker', require('./components/location-picker.vue'));
@@ -13,3 +15,7 @@ const app = new Vue({
     console.log('Vue is ready.');
   }
 });
+
+window.initMap = () => {
+  EventBus.$emit('google-maps-loaded');
+};

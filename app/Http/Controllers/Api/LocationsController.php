@@ -69,8 +69,6 @@ class LocationsController extends Controller
         //
     }
 
-    //////////////////////////////////
-
     public function outgoing($id)
     {
         $location = Location::findOrFail($id);
@@ -78,9 +76,22 @@ class LocationsController extends Controller
         $tickets = $location->pointOfDepartureFor;
        
         foreach ($tickets as $ticket) {
-            $outgoing[] = [$ticket->destination->latitude, $ticket->destination->longitude];
+            $outgoing[] = ['latitude' => $ticket->destination->latitude, 'longitude' => $ticket->destination->longitude];
         }
 
         return $outgoing;
+    }
+
+    public function incoming($id)
+    {
+        $location = Location::findOrFail($id);
+        $incoming = [];
+        $tickets = $location->destinationFor;
+       
+        foreach ($tickets as $ticket) {
+            $incoming[] = ['latitude' => $ticket->pointOfDeparture->latitude, 'longitude' => $ticket->pointOfDeparture->longitude];
+        }
+
+        return $incoming;
     }
 }

@@ -377,133 +377,6 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(21);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(6);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(6);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -608,6 +481,133 @@ module.exports = function normalizeComponent (
   }
 }
 
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(21);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(6);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(6);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
 /* 4 */
@@ -1087,21 +1087,24 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(48);
+module.exports = __webpack_require__(51);
 
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__(13);
 
 window.Vue = __webpack_require__(36);
 
+window.EventBus = new Vue();
+
 Vue.component('explorer-map', __webpack_require__(39));
-Vue.component('location-editor', __webpack_require__(53));
-Vue.component('location-picker', __webpack_require__(42));
-Vue.component('rotating-globe', __webpack_require__(45));
+Vue.component('location-editor', __webpack_require__(42));
+Vue.component('location-picker', __webpack_require__(45));
+Vue.component('rotating-globe', __webpack_require__(48));
 
 var app = new Vue({
   el: '#app',
@@ -1110,11 +1113,15 @@ var app = new Vue({
   }
 });
 
+window.initMap = function () {
+  EventBus.$emit('google-maps-loaded');
+};
+
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
+"use strict";
 window._ = __webpack_require__(14);
 
 /**
@@ -18243,7 +18250,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(15)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(15)(module)))
 
 /***/ }),
 /* 15 */
@@ -28549,7 +28556,7 @@ module.exports = __webpack_require__(18);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(4);
 var Axios = __webpack_require__(20);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 /**
  * Create an instance of Axios
@@ -28632,7 +28639,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(29);
 var dispatchRequest = __webpack_require__(30);
@@ -29164,7 +29171,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(31);
 var isCancel = __webpack_require__(8);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -39974,7 +39981,7 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(37).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(37).setImmediate))
 
 /***/ }),
 /* 37 */
@@ -40226,14 +40233,14 @@ exports.clearImmediate = clearImmediate;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(5)))
 
 /***/ }),
 /* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(40)
 /* template */
@@ -40283,10 +40290,14 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(57);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 //
 //
 //
 //
+
 
 
 
@@ -40295,78 +40306,96 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       map: null,
       accessToken: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].leafletAccessToken,
-      connectingLines: []
+      connectingLines: null,
+      infowindow: null,
+      lineSymbol: null
     };
   },
 
 
   methods: {
     initMap: function initMap() {
-      this.map = L.map('explorer-map').setView([__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude, __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude], 7);
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets',
-        accessToken: this.accessToken
-      }).addTo(this.map);
+      this.map = new google.maps.Map(this.$el, {
+        styles: __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__["a" /* default */],
+        zoom: 7,
+        center: {
+          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude,
+          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude
+        }
+      });
+
+      axios.get('/api/locations/').then(this.addMarkers).catch(function (error) {
+        console.error(error);
+      });
+
+      this.lineSymbol = {
+        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+      };
     },
-    addMarkers: function addMarkers(response) {
+    addMarkers: function addMarkers(locations) {
       var _this = this;
 
-      response.data.forEach(function (location) {
-        var marker = L.marker([location.latitude, location.longitude]).addTo(_this.map);
-        marker.on('click', function () {
+      locations.data.forEach(function (location) {
+        var marker = new google.maps.Marker({
+          position: { lat: location.latitude, lng: location.longitude },
+          map: _this.map
+        });
+        marker.addListener('click', function () {
           _this.showLocationInfo(marker, location);
         });
       });
-    },
-    drawConnection: function drawConnection(marker, origin, destination) {
-      return L.polylineDecorator([origin, destination], {
-        patterns: [{
-          offset: 0,
-          repeat: 10,
-          symbol: L.Symbol.dash({
-            pixelSize: 5,
-            pathOptions: { color: '#000', weight: 1, opacity: 0.8 }
-          })
-        }, {
-          offset: '16%',
-          repeat: '33%',
-          symbol: L.Symbol.marker({
-            rotate: true,
-            markerOptions: {
-              icon: L.icon({
-                iconUrl: '/img/icon_train.png',
-                iconAnchor: [20, 12]
-              })
-            }
-          })
-        }]
-      }).addTo(this.map);
     },
     showLocationInfo: function showLocationInfo(marker, location) {
       var _this2 = this;
 
       axios.get('/locations/' + location.id + '/popup').then(function (response) {
-        marker.bindPopup(response.data).openPopup();
+        if (_this2.infowindow) _this2.infowindow.close();
+
+        _this2.infowindow = new google.maps.InfoWindow({
+          content: response.data
+        });
+        _this2.infowindow.open(_this2.map, marker);
       }).catch(function (error) {
         console.error(error);
       });
-      axios.get('/api/locations/' + location.id + '/outgoing').then(function (connections) {
-        _this2.connectingLines.forEach(function (line) {
-          line.remove();
+
+      axios.get('/api/locations/' + location.id + '/outgoing').then(function (destinations) {
+        _this2.clearConnectingLines();
+        _this2.connectingLines = destinations.data.map(function (destination) {
+          return _this2.createConnectingLine(location, destination);
         });
-        _this2.connectingLines = connections.data.map(function (connection) {
-          return _this2.drawConnection(marker, marker.getLatLng(), connection);
+      }).then(function () {
+        axios.get('/api/locations/' + location.id + '/incoming').then(function (pointsOfDeparture) {
+          var _connectingLines;
+
+          (_connectingLines = _this2.connectingLines).push.apply(_connectingLines, _toConsumableArray(pointsOfDeparture.data.map(function (pointOfDeparture) {
+            return _this2.createConnectingLine(pointOfDeparture, location);
+          })));
         });
       });
+    },
+    createConnectingLine: function createConnectingLine(location, destination) {
+      return new google.maps.Polyline({
+        path: [{ lat: location.latitude, lng: location.longitude }, { lat: destination.latitude, lng: destination.longitude }],
+        icons: [{
+          icon: this.lineSymbol,
+          offset: '100%'
+        }],
+        map: this.map
+      });
+    },
+    clearConnectingLines: function clearConnectingLines() {
+      if (this.connectingLines === null) {
+        this.connectingLines = [];
+      } else {
+        this.connectingLines.forEach(function (line) {
+          line.setMap(null);
+        });
+      }
     }
   },
   mounted: function mounted() {
-    this.initMap();
-    axios.get('/api/locations/').then(this.addMarkers).catch(function (error) {
-      console.error(error);
-    });
+    EventBus.$on('google-maps-loaded', this.initMap);
   }
 });
 
@@ -40395,11 +40424,256 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(43)
 /* template */
 var __vue_template__ = __webpack_require__(44)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/location-editor.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-33496fea", Component.options)
+  } else {
+    hotAPI.reload("data-v-33496fea", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(10);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    defaultLocation: {
+      type: Object
+    }
+  },
+
+  data: function data() {
+    return {
+      location: {
+        name: null,
+        latitude: null,
+        longitude: null
+      },
+      map: null,
+      marker: null,
+      input: this.defaultLocation && this.defaultLocation.name
+    };
+  },
+
+
+  methods: {
+    initMap: function initMap() {
+      this.map = L.map('vue-location-editor-map').setView([this.location.latitude || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude, this.location.longitude || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude], 7);
+
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].leafletAccessToken
+      }).addTo(this.map);
+    },
+    addMarker: function addMarker() {
+      if (this.location.latitude === null) return;
+
+      this.marker = L.marker([this.location.latitude, this.location.longitude]).addTo(this.map);
+      this.marker.bindPopup('<b>' + this.location.name + '</b>');
+    },
+    updateMap: function updateMap(event) {
+      var _this = this;
+
+      event.preventDefault();
+
+      axios.get(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].geocoderUrl + this.input).then(function (response) {
+        if (response.data.length === 0) return;
+
+        var newLocation = response.data[0];
+        var latLng = { lat: newLocation.lat, lng: newLocation.lon };
+        _this.location.name = _this.input;
+        _this.location.latitude = latLng.lat;
+        _this.location.longitude = latLng.lng;
+
+        if (_this.marker === null) {
+          _this.addMarker();
+        } else {
+          _this.marker.setLatLng(latLng);
+          _this.marker.setPopupContent('<b>' + _this.input + '</b>');
+        }
+        _this.map.panTo(latLng);
+      });
+    }
+  },
+
+  created: function created() {
+    if (this.defaultLocation) {
+      this.location.name = this.defaultLocation.name;
+      this.location.latitude = this.defaultLocation.latitude;
+      this.location.longitude = this.defaultLocation.longitude;
+    }
+  },
+  mounted: function mounted() {
+    this.initMap();
+    this.addMarker();
+  }
+});
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "vue-location-editor" }, [
+    _c("div", { staticClass: "picker" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "d-flex align-items-center" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.input,
+                expression: "input"
+              }
+            ],
+            staticClass: "form-control mr-2",
+            attrs: { type: "text", id: "name", name: "name" },
+            domProps: { value: _vm.location.name, value: _vm.input },
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key)
+                ) {
+                  return null
+                }
+                _vm.updateMap($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.input = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "mr-2",
+              attrs: { href: "#", title: "Aktualisieren" },
+              on: { click: _vm.updateMap }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-refresh",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "map form-group",
+        attrs: { id: "vue-location-editor-map" }
+      })
+    ]),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden", id: "latitude", name: "latitude" },
+      domProps: { value: _vm.location.latitude }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden", id: "longitude", name: "longitude" },
+      domProps: { value: _vm.location.longitude }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-33496fea", module.exports)
+  }
+}
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(46)
+/* template */
+var __vue_template__ = __webpack_require__(47)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -40439,7 +40713,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40594,7 +40868,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 });
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -40762,15 +41036,15 @@ if (false) {
 }
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(46)
+var __vue_script__ = __webpack_require__(49)
 /* template */
-var __vue_template__ = __webpack_require__(47)
+var __vue_template__ = __webpack_require__(50)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -40810,7 +41084,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40917,7 +41191,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -40937,259 +41211,163 @@ if (false) {
 }
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 49 */,
-/* 50 */,
-/* 51 */,
 /* 52 */,
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(54)
-/* template */
-var __vue_template__ = __webpack_require__(55)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/location-editor.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-33496fea", Component.options)
-  } else {
-    hotAPI.reload("data-v-33496fea", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 54 */
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(10);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    defaultLocation: {
-      type: Object
-    }
-  },
-
-  data: function data() {
-    return {
-      location: {
-        name: null,
-        latitude: null,
-        longitude: null
-      },
-      map: null,
-      marker: null,
-      input: this.defaultLocation && this.defaultLocation.name
-    };
-  },
-
-
-  methods: {
-    initMap: function initMap() {
-      this.map = L.map('vue-location-editor-map').setView([this.location.latitude || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude, this.location.longitude || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude], 7);
-
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets',
-        accessToken: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].leafletAccessToken
-      }).addTo(this.map);
-    },
-    addMarker: function addMarker() {
-      if (this.location.latitude === null) return;
-
-      this.marker = L.marker([this.location.latitude, this.location.longitude]).addTo(this.map);
-      this.marker.bindPopup('<b>' + this.location.name + '</b>');
-    },
-    updateMap: function updateMap(event) {
-      var _this = this;
-
-      event.preventDefault();
-
-      axios.get(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].geocoderUrl + this.input).then(function (response) {
-        if (response.data.length === 0) return;
-
-        var newLocation = response.data[0];
-        var latLng = { lat: newLocation.lat, lng: newLocation.lon };
-        _this.location.name = _this.input;
-        _this.location.latitude = latLng.lat;
-        _this.location.longitude = latLng.lng;
-
-        if (_this.marker === null) {
-          _this.addMarker();
-        } else {
-          _this.marker.setLatLng(latLng);
-          _this.marker.setPopupContent('<b>' + _this.input + '</b>');
-        }
-        _this.map.panTo(latLng);
-      });
-    }
-  },
-
-  created: function created() {
-    if (this.defaultLocation) {
-      this.location.name = this.defaultLocation.name;
-      this.location.latitude = this.defaultLocation.latitude;
-      this.location.longitude = this.defaultLocation.longitude;
-    }
-  },
-  mounted: function mounted() {
-    this.initMap();
-    this.addMarker();
-  }
-});
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "vue-location-editor" }, [
-    _c("div", { staticClass: "picker" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.input,
-                expression: "input"
-              }
-            ],
-            staticClass: "form-control mr-2",
-            attrs: { type: "text", id: "name", name: "name" },
-            domProps: { value: _vm.location.name, value: _vm.input },
-            on: {
-              keydown: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key)
-                ) {
-                  return null
-                }
-                _vm.updateMap($event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.input = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "mr-2",
-              attrs: { href: "#", title: "Aktualisieren" },
-              on: { click: _vm.updateMap }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-refresh",
-                attrs: { "aria-hidden": "true" }
-              })
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "map form-group",
-        attrs: { id: "vue-location-editor-map" }
-      })
-    ]),
-    _vm._v(" "),
-    _c("input", {
-      attrs: { type: "hidden", id: "latitude", name: "latitude" },
-      domProps: { value: _vm.location.latitude }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      attrs: { type: "hidden", id: "longitude", name: "longitude" },
-      domProps: { value: _vm.location.longitude }
-    })
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-33496fea", module.exports)
-  }
-}
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  elementType: 'geometry',
+  stylers: [{
+    color: '#ebe3cd'
+  }]
+}, {
+  elementType: 'labels.text.fill',
+  stylers: [{
+    color: '#523735'
+  }]
+}, {
+  elementType: 'labels.text.stroke',
+  stylers: [{
+    color: '#f5f1e6'
+  }]
+}, {
+  featureType: 'administrative',
+  elementType: 'geometry.stroke',
+  stylers: [{
+    color: '#c9b2a6'
+  }]
+}, {
+  featureType: 'administrative.land_parcel',
+  elementType: 'geometry.stroke',
+  stylers: [{
+    color: '#dcd2be'
+  }]
+}, {
+  featureType: 'administrative.land_parcel',
+  elementType: 'labels.text.fill',
+  stylers: [{
+    color: '#ae9e90'
+  }]
+}, {
+  featureType: 'landscape.natural',
+  elementType: 'geometry',
+  stylers: [{
+    color: '#dfd2ae'
+  }]
+}, {
+  featureType: 'poi',
+  elementType: 'geometry',
+  stylers: [{
+    color: '#dfd2ae'
+  }]
+}, {
+  featureType: 'poi',
+  elementType: 'labels.text.fill',
+  stylers: [{
+    color: '#93817c'
+  }]
+}, {
+  featureType: 'poi.park',
+  elementType: 'geometry.fill',
+  stylers: [{
+    color: '#a5b076'
+  }]
+}, {
+  featureType: 'poi.park',
+  elementType: 'labels.text.fill',
+  stylers: [{
+    color: '#447530'
+  }]
+}, {
+  featureType: 'road',
+  elementType: 'geometry',
+  stylers: [{
+    color: '#f5f1e6'
+  }]
+}, {
+  featureType: 'road.arterial',
+  elementType: 'geometry',
+  stylers: [{
+    color: '#fdfcf8'
+  }]
+}, {
+  featureType: 'road.highway',
+  elementType: 'geometry',
+  stylers: [{
+    color: '#f8c967'
+  }]
+}, {
+  featureType: 'road.highway',
+  elementType: 'geometry.stroke',
+  stylers: [{
+    color: '#e9bc62'
+  }]
+}, {
+  featureType: 'road.highway.controlled_access',
+  elementType: 'geometry',
+  stylers: [{
+    color: '#e98d58'
+  }]
+}, {
+  featureType: 'road.highway.controlled_access',
+  elementType: 'geometry.stroke',
+  stylers: [{
+    color: '#db8555'
+  }]
+}, {
+  featureType: 'road.local',
+  elementType: 'labels.text.fill',
+  stylers: [{
+    color: '#806b63'
+  }]
+}, {
+  featureType: 'transit.line',
+  elementType: 'geometry',
+  stylers: [{
+    color: '#dfd2ae'
+  }]
+}, {
+  featureType: 'transit.line',
+  elementType: 'labels.text.fill',
+  stylers: [{
+    color: '#8f7d77'
+  }]
+}, {
+  featureType: 'transit.line',
+  elementType: 'labels.text.stroke',
+  stylers: [{
+    color: '#ebe3cd'
+  }]
+}, {
+  featureType: 'transit.station',
+  elementType: 'geometry',
+  stylers: [{
+    color: '#dfd2ae'
+  }]
+}, {
+  featureType: 'water',
+  elementType: 'geometry.fill',
+  stylers: [{
+    color: '#b9d3c2'
+  }]
+}, {
+  featureType: 'water',
+  elementType: 'labels.text.fill',
+  stylers: [{
+    color: '#92998d'
+  }]
+}]);
 
 /***/ })
 /******/ ]);

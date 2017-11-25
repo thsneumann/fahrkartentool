@@ -41,6 +41,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
     Route::resource('tickets', 'TicketsController');
     Route::resource('locations', 'LocationsController');
     Route::get('locations/{location}/outgoing', 'LocationsController@outgoing')->name('locations.outgoing');
+    Route::get('locations/{location}/incoming', 'LocationsController@incoming')->name('locations.incoming');
 });
 
 Auth::routes();
