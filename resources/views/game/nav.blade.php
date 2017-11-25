@@ -28,10 +28,10 @@
           Bestenliste
         </a>
       </li>
-      <li class="nav-item {{ Route::currentRouteNamed('game.index') ? 'active' : '' }} ml-auto">
+      <li class="nav-item ml-auto">
         <a class="nav-link" href="{{ route('map.index') }}">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          Zum Explorer
+          Erkunden
         </a>
       </li>
     </ul>
