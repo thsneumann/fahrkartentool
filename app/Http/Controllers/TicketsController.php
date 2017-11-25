@@ -96,6 +96,9 @@ class TicketsController extends Controller
     
         $ticket->save();
 
+        // keep track of edited tickets in session
+        session()->push('edited_ticket_ids', $ticket->id);
+
         if ($request['redirect'] == 'back') {
             return back();
         }

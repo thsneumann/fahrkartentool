@@ -11,7 +11,7 @@
         <h2>Auf geht die Reise!</h2>
         <p>Hilf uns, das Bild mit Metadaten anzureichern.<br>
         Notiere im Feld "Beschreibung", was auf dem Ticket zu lesen ist.<br>
-        Trage Abfahrts- und Zielort ein.</p>
+        Trage Abfahrts- und Zielort ein und ordne das Ticket einer Kategorie zu.</p>
     @elseif ($points == 1)
         <h2>Klasse!</h2>
         <p>Du hast dein erstes Ticket bearbeitet. Gratuliere!<br>
@@ -30,7 +30,14 @@
         @endif
     @endif
 
-    @include('tickets.edit-form', ['redirect' => 'back'])
+    @if ($mode == 'check') 
+        <div class="alert alert-info">
+            Hilf uns, die Eingaben anderer Benutzer zu kontrollieren.<br>
+            Ergänze fehlende oder korrigiere falsche Angaben.
+        </div>
+    @endif
+
+    @include('tickets.edit-form', ['mode' => 'mode', 'redirect' => 'back'])
 
     <hr>
 
