@@ -16,7 +16,7 @@
 
 <nav id="home-nav">
     <a href="{{ route('map.index') }}" role="button" class="btn btn-lg btn-primary mr-3">Erkunden</a>
-    <a href="{{ route('game.index') }}" role="button" class="btn btn-lg btn-primary">Taggen</a>
+    <a href="{{ route('game.index') }}" role="button" class="btn btn-lg btn-primary">Spielen</a>
 </nav>
 
 @endsection
