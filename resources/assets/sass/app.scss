@@ -91,6 +91,13 @@ img {
 
 // INCLUDES
 
+// VENDOR
+
+@import 'includes/vendor/bootstrap.min.css';
+@import 'includes/vendor/jquery.fancybox.min.css';
+
+// APP
+
 @import 'includes/base';
 @import 'includes/map';
 @import 'includes/vue-components/location-editor';

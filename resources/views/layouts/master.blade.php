@@ -7,15 +7,7 @@
 
     @yield('styles')
 
-    <!-- VENDOR STYLESHEETS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-crossorigin=""/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css" />
-    
-
-    <!-- APP STYLESHEET -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css"> {{-- TODO: create custom icon font --}}
     <link rel="stylesheet" href="/css/app.css">
   </head>
 
@@ -31,17 +23,9 @@ crossorigin=""/>
       </main>
     </div>
 
-    <!-- VENDOR JS LIBRARIES -->
-    <script src="https://use.fontawesome.com/f1be374268.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.js"></script>
-
     @yield('scripts_before_app')
 
-    <!-- APP JS -->
     <script src="/js/app.js"></script>
-
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8Hv1DiXXRRs2iz9KpSABeoi3jaA0JddM&language=de&callback=initMap">
     </script>
