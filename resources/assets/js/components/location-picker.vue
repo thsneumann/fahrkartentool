@@ -5,7 +5,7 @@
       <select :name="field" :id="field" v-model="selected" class="form-control custom-select mr-3">
           <option value="0">Ort auswählen</option>
           <option v-for="location in myLocations" 
-            :value="location.id">{{ location.name }}</option>
+            :value="location.id" :key="location.id">{{ location.name }}</option>
       </select>
     </div>
     
@@ -41,6 +41,7 @@
 
 <script>
 import config from '../config';
+import gmapsStyles from '../gmaps-styles';
 
 export default {
   props: {
@@ -67,6 +68,7 @@ export default {
       },
       map: null,
       marker: null,
+      infowindow: null,
       input: null,
       isPickerVisible: false,
       hasEnteredNewLocation: false,
@@ -76,28 +78,29 @@ export default {
 
   methods: {
     initMap() {
-      this.map = L.map(this.field + '_map').setView(
-        [this.location.latitude, this.location.longitude],
-        7
-      );
-      L.tileLayer(
-        'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
-        {
-          attribution:
-            'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-          maxZoom: 18,
-          id: 'mapbox.streets',
-          accessToken: config.leafletAccessToken
+      this.map = new google.maps.Map(this.$el.querySelector('.map'), {
+        styles: gmapsStyles,
+        zoom: 7,
+        center: {
+          lat: this.location.latitude,
+          lng: this.location.longitude
         }
-      ).addTo(this.map);
+      });
     },
 
     addMarker() {
-      this.marker = L.marker([
-        this.location.latitude,
-        this.location.longitude
-      ]).addTo(this.map);
-      this.marker.bindPopup('<b>' + this.location.name + '</b>');
+      this.marker = new google.maps.Marker({
+        position: { lat: this.location.latitude, lng: this.location.longitude },
+        map: this.map
+      });
+
+      this.infowindow = new google.maps.InfoWindow({
+        content: '<b>' + this.location.name + '</b>'
+      });
+
+      this.marker.addListener('click', () => {
+        this.infowindow.open(this.map, this.marker);
+      });
     },
 
     updateMap(event) {
@@ -107,9 +110,9 @@ export default {
         if (response.data.length === 0) return;
 
         const newLocation = response.data[0];
-        const latLng = { lat: newLocation.lat, lng: newLocation.lon };
-        this.marker.setLatLng(latLng);
-        this.marker.setPopupContent('<b>' + this.input + '</b>');
+        const latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
+        this.marker.setPosition(latLng);
+        this.infowindow.setContent('<b>' + this.input + '</b>');
         this.map.panTo(latLng);
 
         this.location.name = this.input;
@@ -150,8 +153,10 @@ export default {
   },
 
   mounted() {
-    this.initMap();
-    this.addMarker();
+    EventBus.$on('google-maps-loaded', () => {
+      this.initMap();
+      this.addMarker();
+    });
   }
 };
 </script>

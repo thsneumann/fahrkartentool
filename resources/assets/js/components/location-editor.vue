@@ -24,6 +24,7 @@
 
 <script>
 import config from '../config';
+import gmapsStyles from '../gmaps-styles';
 
 export default {
   props: {
@@ -41,40 +42,38 @@ export default {
       },
       map: null,
       marker: null,
+      infowindow: null,
       input: this.defaultLocation && this.defaultLocation.name
     };
   },
 
   methods: {
     initMap() {
-      this.map = L.map('vue-location-editor-map').setView(
-        [
-          this.location.latitude || config.defaultLocation.latitude,
-          this.location.longitude || config.defaultLocation.longitude
-        ],
-        7
-      );
-
-      L.tileLayer(
-        'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
-        {
-          attribution:
-            'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-          maxZoom: 18,
-          id: 'mapbox.streets',
-          accessToken: config.leafletAccessToken
+      this.map = new google.maps.Map(this.$el.querySelector('.map'), {
+        styles: gmapsStyles,
+        zoom: 7,
+        center: {
+          lat: this.location.latitude || config.defaultLocation.latitude,
+          lng: this.location.longitude || config.defaultLocation.longitude
         }
-      ).addTo(this.map);
+      });
     },
 
     addMarker() {
       if (this.location.latitude === null) return;
 
-      this.marker = L.marker([
-        this.location.latitude,
-        this.location.longitude
-      ]).addTo(this.map);
-      this.marker.bindPopup('<b>' + this.location.name + '</b>');
+      this.marker = new google.maps.Marker({
+        position: { lat: this.location.latitude, lng: this.location.longitude },
+        map: this.map
+      });
+
+      this.infowindow = new google.maps.InfoWindow({
+        content: '<b>' + this.location.name + '</b>'
+      });
+
+      this.marker.addListener('click', () => {
+        this.infowindow.open(this.map, this.marker);
+      });
     },
 
     updateMap(event) {
@@ -84,7 +83,7 @@ export default {
         if (response.data.length === 0) return;
 
         const newLocation = response.data[0];
-        const latLng = { lat: newLocation.lat, lng: newLocation.lon };
+        const latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
         this.location.name = this.input;
         this.location.latitude = latLng.lat;
         this.location.longitude = latLng.lng;
@@ -92,8 +91,8 @@ export default {
         if (this.marker === null) {
           this.addMarker();
         } else {
-          this.marker.setLatLng(latLng);
-          this.marker.setPopupContent('<b>' + this.input + '</b>');
+          this.marker.setPosition(latLng);
+          this.infowindow.setContent('<b>' + this.input + '</b>');
         }
         this.map.panTo(latLng);
       });
@@ -109,8 +108,10 @@ export default {
   },
 
   mounted() {
-    this.initMap();
-    this.addMarker();
+    EventBus.$on('google-maps-loaded', () => {
+      this.initMap();
+      this.addMarker();
+    });
   }
 };
 </script>
