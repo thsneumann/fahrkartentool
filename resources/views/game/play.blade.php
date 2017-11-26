@@ -10,8 +10,9 @@
     @if ($points == 0)
         <h2>Auf geht die Reise!</h2>
         <p>Hilf uns, das Bild mit Metadaten anzureichern.<br>
-        Notiere im Feld "Beschreibung", was auf dem Ticket zu lesen ist.<br>
-        Trage Abfahrts- und Zielort ein und ordne das Ticket einer Kategorie zu.</p>
+         Trage Abfahrts- und Zielort ein.<br>
+         Notiere im Feld "Beschreibung", was auf dem Ticket zu lesen ist.<br>
+         Ordne das Ticket einer Kategorie zu.</p>
     @elseif ($points == 1)
         <h2>Klasse!</h2>
         <p>Du hast dein erstes Ticket bearbeitet. Gratuliere!<br>
