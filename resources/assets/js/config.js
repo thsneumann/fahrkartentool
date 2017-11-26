@@ -7,5 +7,11 @@ export default {
     name: 'Berlin',
     latitude: 52.52,
     longitude: 13.4
+  },
+  technikmuseumLocation: {
+    name: 'Deutsches Technikmuseum',
+    latitude: 52.4987014,
+    longitude: 13.3756959,
+    markerIcon: '/img/marker_technikmuseum.png'
   }
 };

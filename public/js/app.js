@@ -621,6 +621,12 @@ module.exports = defaults;
     name: 'Berlin',
     latitude: 52.52,
     longitude: 13.4
+  },
+  technikmuseumLocation: {
+    name: 'Deutsches Technikmuseum',
+    latitude: 52.4987014,
+    longitude: 13.3756959,
+    markerIcon: '/img/marker_technikmuseum.png'
   }
 });
 
@@ -23324,6 +23330,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   methods: {
     initMap: function initMap() {
+      var _this = this;
+
       this.map = new google.maps.Map(this.$el, {
         styles: __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__["a" /* default */],
         zoom: 7,
@@ -23333,52 +23341,72 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }
       });
 
+      // add location markers
       axios.get('/api/locations/').then(this.addMarkers).catch(function (error) {
         console.error(error);
       });
 
+      // add marker and infowindow for Technikmuseum
+      var marker = new google.maps.Marker({
+        position: {
+          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].technikmuseumLocation.latitude,
+          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].technikmuseumLocation.longitude
+        },
+        map: this.map,
+        icon: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].technikmuseumLocation.markerIcon
+      });
+
+      var infowindow = new google.maps.InfoWindow({
+        content: document.getElementById('technikmuseum-infowindow-content').innerHTML
+      });
+
+      marker.addListener('click', function () {
+        infowindow.open(_this.map, marker);
+      });
+
+      // define arrow symbol
       this.lineSymbol = {
         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
       };
     },
     addMarkers: function addMarkers(locations) {
-      var _this = this;
+      var _this2 = this;
 
       locations.data.forEach(function (location) {
         var marker = new google.maps.Marker({
           position: { lat: location.latitude, lng: location.longitude },
-          map: _this.map
+          map: _this2.map
         });
         marker.addListener('click', function () {
-          _this.showLocationInfo(marker, location);
+          _this2.showLocationInfo(marker, location);
         });
       });
     },
     showLocationInfo: function showLocationInfo(marker, location) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/locations/' + location.id + '/popup').then(function (response) {
-        if (_this2.infowindow) _this2.infowindow.close();
+        if (_this3.infowindow) _this3.infowindow.close();
 
-        _this2.infowindow = new google.maps.InfoWindow({
+        _this3.infowindow = new google.maps.InfoWindow({
           content: response.data
         });
-        _this2.infowindow.open(_this2.map, marker);
+        _this3.infowindow.open(_this3.map, marker);
       }).catch(function (error) {
         console.error(error);
       });
 
       axios.get('/api/locations/' + location.id + '/outgoing').then(function (destinations) {
-        _this2.clearConnectingLines();
-        _this2.connectingLines = destinations.data.map(function (destination) {
-          return _this2.createConnectingLine(location, destination);
+        _this3.clearConnectingLines();
+        _this3.connectingLines = destinations.data.map(function (destination) {
+          return _this3.createConnectingLine(location, destination);
         });
       }).then(function () {
         axios.get('/api/locations/' + location.id + '/incoming').then(function (pointsOfDeparture) {
           var _connectingLines;
 
-          (_connectingLines = _this2.connectingLines).push.apply(_connectingLines, _toConsumableArray(pointsOfDeparture.data.map(function (pointOfDeparture) {
-            return _this2.createConnectingLine(pointOfDeparture, location);
+          (_connectingLines = _this3.connectingLines).push.apply(_connectingLines, _toConsumableArray(pointsOfDeparture.data.map(function (pointOfDeparture) {
+            return _this3.createConnectingLine(pointOfDeparture, location);
           })));
         });
       });
