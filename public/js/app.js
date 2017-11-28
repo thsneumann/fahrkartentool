@@ -34967,6 +34967,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -35111,7 +35112,7 @@ var render = function() {
           _c(
             "a",
             {
-              staticClass: "mr-2",
+              staticClass: "btn btn-primary mr-2",
               attrs: { href: "#", title: "Aktualisieren" },
               on: { click: _vm.updateMap }
             },
@@ -35119,7 +35120,8 @@ var render = function() {
               _c("i", {
                 staticClass: "fa fa-refresh",
                 attrs: { "aria-hidden": "true" }
-              })
+              }),
+              _vm._v("\n                Karte aktualisieren\n            ")
             ]
           )
         ])
@@ -35210,6 +35212,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(5);
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+//
+//
 //
 //
 //
@@ -35493,7 +35497,7 @@ var render = function() {
             _c(
               "a",
               {
-                staticClass: "mr-2",
+                staticClass: "btn btn-primary mr-2",
                 attrs: { href: "#", title: "Aktualisieren" },
                 on: { click: _vm.updateMap }
               },
@@ -35501,7 +35505,8 @@ var render = function() {
                 _c("i", {
                   staticClass: "fa fa-refresh",
                   attrs: { "aria-hidden": "true" }
-                })
+                }),
+                _vm._v("\n                Karte aktualisieren\n            ")
               ]
             ),
             _vm._v(" "),
@@ -35509,6 +35514,7 @@ var render = function() {
               ? _c(
                   "a",
                   {
+                    staticClass: "btn btn-primary",
                     attrs: { href: "#", title: "Übernehmen" },
                     on: {
                       click: function($event) {
@@ -35521,7 +35527,8 @@ var render = function() {
                     _c("i", {
                       staticClass: "fa fa-check",
                       attrs: { "aria-hidden": "true" }
-                    })
+                    }),
+                    _vm._v("\n                Übernehmen\n            ")
                   ]
                 )
               : _vm._e()

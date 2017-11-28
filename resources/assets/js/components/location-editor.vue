@@ -7,8 +7,9 @@
             <input type="text" id="name" name="name" :value="location.name" class="form-control mr-2"
             v-model="input" 
             @keydown.enter="updateMap">
-            <a class="mr-2" href="#" title="Aktualisieren" @click="updateMap">
+            <a class="btn btn-primary mr-2" href="#" title="Aktualisieren" @click="updateMap">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
+                Karte aktualisieren
             </a>
         </div>
       </div>

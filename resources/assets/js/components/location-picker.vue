@@ -23,11 +23,13 @@
             <input type="text" id="name" name="name" class="form-control mr-2"
             v-model="input" 
             @keydown.enter="updateMap">
-            <a class="mr-2" href="#" title="Aktualisieren" @click="updateMap">
+            <a class="btn btn-primary mr-2" href="#" title="Aktualisieren" @click="updateMap">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
+                Karte aktualisieren
             </a>
-            <a href="#" title="Übernehmen" @click.prevent="applyChanges" v-if="hasEnteredNewLocation">
+            <a class="btn btn-primary" href="#" title="Übernehmen" @click.prevent="applyChanges" v-if="hasEnteredNewLocation">
                 <i class="fa fa-check" aria-hidden="true"></i>
+                Übernehmen
             </a>
         </div>
       </div>
