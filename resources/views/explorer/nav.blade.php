@@ -36,7 +36,7 @@
       </li>
       
       <li class="nav-item ml-auto">
-        <a class="nav-link" href="{{ route('game.index') }}">
+        <a class="btn btn-primary" href="{{ route('game.index') }}">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
           Spielen
         </a>

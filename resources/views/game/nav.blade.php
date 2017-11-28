@@ -29,7 +29,7 @@
         </a>
       </li>
       <li class="nav-item ml-auto">
-        <a class="nav-link" href="{{ route('map.index') }}">
+        <a class="btn btn-primary" href="{{ route('map.index') }}">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
           Erkunden
         </a>
