@@ -91,7 +91,8 @@ export default {
     addMarker() {
       this.marker = new google.maps.Marker({
         position: { lat: this.location.latitude, lng: this.location.longitude },
-        map: this.map
+        map: this.map,
+        icon: config.markerIcon
       });
 
       this.infowindow = new google.maps.InfoWindow({

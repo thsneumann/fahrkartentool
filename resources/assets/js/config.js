@@ -13,5 +13,6 @@ export default {
     latitude: 52.4987014,
     longitude: 13.3756959,
     markerIcon: '/img/marker_technikmuseum.png'
-  }
+  },
+  markerIcon: '/img/marker.png'
 };

@@ -65,7 +65,8 @@ export default {
       locations.data.forEach(location => {
         var marker = new google.maps.Marker({
           position: { lat: location.latitude, lng: location.longitude },
-          map: this.map
+          map: this.map,
+          icon: config.markerIcon
         });
         marker.addListener('click', () => {
           this.showLocationInfo(marker, location);
