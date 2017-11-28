@@ -28,7 +28,7 @@ class GameController extends Controller
         $mode = $this->getRandomPlayMode();
 
         if ($mode == 'check') {
-            $edited_ticket_ids = session()->get('edited_ticket_ids');
+            $edited_ticket_ids = session()->get('edited_ticket_ids', []);
             $ticket = Ticket::whereBetween('edit_count', [1, 2])
                 ->whereNotIn('id', $edited_ticket_ids)
                 ->first();
