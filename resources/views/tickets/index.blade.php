@@ -4,6 +4,7 @@
 
 <div class="container-fluid">
     <a target="_blank" href="{{ route('api.tickets.index', ['format' => 'csv']) }}" class="btn btn-primary mb-3">
+        <i class="fa fa-download" aria-hidden="true"></i>
         CSV-Export
     </a>
 
