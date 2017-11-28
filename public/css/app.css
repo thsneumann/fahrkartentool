@@ -11,6 +11,10 @@ img {
   max-width: 100%;
 }
 
+.img-small {
+  height: 150px;
+}
+
 #explorer-map {
   margin-top: -2rem;
   width: 100%;
@@ -121,7 +125,7 @@ ul {
 
 #explorer-map {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 56px);
 }
 
 .map-popup h3 {

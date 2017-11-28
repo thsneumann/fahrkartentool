@@ -35510,28 +35510,27 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm.hasEnteredNewLocation
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { href: "#", title: "Übernehmen" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.applyChanges($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-check",
-                      attrs: { "aria-hidden": "true" }
-                    }),
-                    _vm._v("\n                Übernehmen\n            ")
-                  ]
-                )
-              : _vm._e()
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary",
+                class: { disabled: !_vm.hasEnteredNewLocation },
+                attrs: { href: "#", title: "Übernehmen" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.applyChanges($event)
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-check",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v("\n                Übernehmen\n            ")
+              ]
+            )
           ])
         ]),
         _vm._v(" "),
