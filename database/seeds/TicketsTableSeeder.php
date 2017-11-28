@@ -35,6 +35,7 @@ class TicketsTableSeeder extends Seeder
             $ticket = new Ticket();
             $ticket->signature = $pathinfo['filename'];
             $ticket->image = $file;
+            $ticket->thumb = $ticket->signature . '.jpg';
             // $ticket->point_of_departure_id = Location::inRandomOrder()->first()->id;
             // $ticket->destination_id = Location::inRandomOrder()->first()->id;
             // $ticket->description = $faker->paragraph();

@@ -17,6 +17,7 @@ class CreateTicketsTable extends Migration
             $table->increments('id');
             $table->string('signature');
             $table->string('image');
+            $table->string('thumb');
             $table->integer('point_of_departure_id')->nullable();
             $table->integer('destination_id')->nullable();
             $table->text('description')->nullable();
