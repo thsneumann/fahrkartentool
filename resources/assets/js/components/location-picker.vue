@@ -27,7 +27,7 @@
                 <i class="fa fa-refresh" aria-hidden="true"></i>
                 Karte aktualisieren
             </a>
-            <a class="btn btn-primary" href="#" title="Übernehmen" @click.prevent="applyChanges" v-if="hasEnteredNewLocation">
+            <a class="btn btn-primary" :class="{ disabled: !hasEnteredNewLocation }" href="#" title="Übernehmen" @click.prevent="applyChanges">
                 <i class="fa fa-check" aria-hidden="true"></i>
                 Übernehmen
             </a>
