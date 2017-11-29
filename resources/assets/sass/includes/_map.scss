@@ -1,6 +1,10 @@
+// EXPLORER MAP
+
 #explorer-map {
+  margin-top: -2rem;
   width: 100%;
-  height: calc(100vh - 56px);
+  width: 100%;
+  height: calc(100vh - 112px); // 100vh - (navbar height * 2)
 }
 
 // MAP POPUP

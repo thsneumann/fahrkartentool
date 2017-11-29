@@ -13,7 +13,8 @@ img {
 #explorer-map {
   margin-top: -2rem;
   width: 100%;
-  height: 100vh;
+  width: 100%;
+  height: calc(100vh - 112px); // 100vh - (navbar height * 2)
 }
 
 #editor-map {
@@ -63,7 +64,12 @@ img {
 
 .site-content {
   padding-top: 2rem;
-  padding-bottom: 2rem;
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .page-home {
@@ -72,6 +78,10 @@ img {
   .site-content {
     padding: 0;
   }
+}
+
+.site-footer {
+  margin-top: auto;
 }
 
 .tickets-table {

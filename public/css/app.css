@@ -18,7 +18,8 @@ img {
 #explorer-map {
   margin-top: -2rem;
   width: 100%;
-  height: 100vh;
+  width: 100%;
+  height: calc(100vh - 112px);
 }
 
 #editor-map {
@@ -85,7 +86,17 @@ img {
 
 .site-content {
   padding-top: 2rem;
-  padding-bottom: 2rem;
+}
+
+.page-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
 }
 
 .page-home {
@@ -94,6 +105,10 @@ img {
 
 .page-home .site-content {
   padding: 0;
+}
+
+.site-footer {
+  margin-top: auto;
 }
 
 .tickets-table .img-thumbnail {
@@ -124,8 +139,10 @@ ul {
 }
 
 #explorer-map {
+  margin-top: -2rem;
   width: 100%;
-  height: calc(100vh - 56px);
+  width: 100%;
+  height: calc(100vh - 112px);
 }
 
 .map-popup h3 {

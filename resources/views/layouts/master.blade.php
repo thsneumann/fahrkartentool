@@ -12,15 +12,20 @@
   </head>
 
   <body class="{{ $body_class or '' }}">
-
-    <div id="app">
-      @section('nav')
-        @include('explorer.nav')
-      @show
+    <div id="app" class="page-wrap">
+      <header class="site-header">
+        @section('nav')
+          @include('explorer.nav')
+        @show
+      </header>
 
       <main class="site-content">
         @yield('content')
       </main>
+
+      @section('footer')
+        @include('layouts.footer')
+      @show
     </div>
 
     @yield('scripts_before_app')
