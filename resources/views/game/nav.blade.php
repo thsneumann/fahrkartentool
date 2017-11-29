@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{{ route('index') }}">Fritz</a>
+  <a class="navbar-brand" href="{{ route('index') }}">FRITZ</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -14,6 +14,12 @@
     @endif
     --}}
     <ul class="navbar-nav">
+      <li class="nav-item {{ Route::currentRouteNamed('map.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('map.index') }}">
+          <i class="fa fa-globe" aria-hidden="true"></i>
+          Karte
+        </a>
+      </li>
       @if (Auth::check())
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}">
