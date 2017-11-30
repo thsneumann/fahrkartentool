@@ -11,7 +11,7 @@
 .map-popup {
   max-width: 450px;
   font-family: Arial;
-  font-size: 1rem;
+  font-size: 0.75rem;
   line-height: 1.5;
 
   h3 {
@@ -30,6 +30,7 @@
   margin: 0.5rem -0.25rem;
 
   li {
+    position: relative;
     padding: 0.25rem;
   }
 
@@ -37,5 +38,13 @@
     width: auto;
     max-height: 50px;
     display: inline-block;
+  }
+
+  .btn {
+    position: absolute;
+    left: 0.25rem;
+    bottom: 0.25rem;
+    padding: 0.125rem 0.25rem;
+    font-size: 0.5rem;
   }
 }
