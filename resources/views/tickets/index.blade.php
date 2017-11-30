@@ -19,6 +19,7 @@
             <th scope="col">Beschreibung</th>
             <th scope="col">Kategorie</th>
             <th scope="col">Klasse</th>
+            <th scope="col">Preis</th>
             {{-- <th scope="col">Tags</th> --}}
             <th scope="col">Aktionen</th>
         </thead>
@@ -61,6 +62,10 @@
                         @if ($ticket->vehicleClass)
                             {{ $ticket->vehicleClass->name }}
                         @endif
+                    </td>
+
+                    <td>
+                        {{ $ticket->price }}
                     </td>
                     {{-- <td>
                         <ul class="list-inline">

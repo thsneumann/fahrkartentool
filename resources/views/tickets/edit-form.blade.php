@@ -33,7 +33,9 @@
                 <select id="category_id" name="category_id" class="form-control custom-select">
                     <option value="">Kategorie wählen</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}"
+                        {{ $category->id == $ticket->category_id ? ' selected': '' }}
+                        >{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -43,9 +45,16 @@
                 <select id="vehicle_class_id" name="vehicle_class_id" class="form-control custom-select">
                     <option value="">Klasse wählen</option>
                     @foreach ($vehicleClasses as $vehicleClass)
-                        <option value="{{ $vehicleClass->id }}">{{ $vehicleClass->name }}</option>
+                        <option value="{{ $vehicleClass->id }}"
+                        {{ $vehicleClass->id == $ticket->vehicle_class_id ? ' selected' : '' }}
+                        >{{ $vehicleClass->name }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Preis:</label>
+                <input id="price" name="price" value="{{ $ticket->price }}" class="form-control">
             </div>
 
             <div class="form-group">

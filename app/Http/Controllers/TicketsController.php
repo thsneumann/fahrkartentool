@@ -84,6 +84,7 @@ class TicketsController extends Controller
         $ticket->description = $request['description'];
         $ticket->category_id = $request['category_id'];
         $ticket->vehicle_class_id = $request['vehicle_class_id'];
+        $ticket->price = $request['price'];
         $ticket->edit_count += 1;
 
         if ($request->has('points')) {
