@@ -1259,6 +1259,7 @@ window.EventBus = new Vue();
 Vue.component('explorer-map', __webpack_require__(40));
 Vue.component('location-editor', __webpack_require__(43));
 Vue.component('location-picker', __webpack_require__(46));
+Vue.component('ticket-locations-picker', __webpack_require__(60));
 Vue.component('rotating-globe', __webpack_require__(49));
 
 var app = new Vue({
@@ -35758,6 +35759,477 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ticket-locations-picker.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-62f49b3a", Component.options)
+  } else {
+    hotAPI.reload("data-v-62f49b3a", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(5);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    defaultPointOfDeparture: {
+      type: Object
+    },
+    defaultDestination: {
+      type: Object
+    }
+  },
+
+  data: function data() {
+    return {
+      pointOfDeparture: {
+        name: null,
+        latitude: null,
+        longitude: null,
+        marker: null,
+        infowindow: null
+      },
+      destination: {
+        name: null,
+        latitude: null,
+        longitude: null,
+        marker: null,
+        infowindow: null
+      },
+      lineSymbol: null,
+      connectingLine: null
+    };
+  },
+
+
+  computed: {
+    connection: function connection() {
+      if (this.pointOfDeparture.marker === null || this.destination.marker === null) return null;
+
+      return {
+        from: this.pointOfDeparture,
+        to: this.destination
+      };
+    }
+  },
+
+  methods: {
+    initMap: function initMap() {
+      var center = void 0;
+      if (this.pointOfDeparture.latitude && this.pointOfDeparture.longitude) {
+        center = {
+          lat: this.pointOfDeparture.latitude,
+          lng: this.pointOfDeparture.longitude
+        };
+      } else {
+        center = {
+          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude,
+          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude
+        };
+      }
+
+      this.map = new google.maps.Map(this.$el.querySelector('.map'), {
+        styles: __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__["a" /* default */],
+        zoom: 5,
+        center: center
+      });
+
+      // define arrow symbol
+      this.lineSymbol = {
+        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+      };
+    },
+    addMarker: function addMarker(location) {
+      var _this = this;
+
+      location.marker = new google.maps.Marker({
+        position: { lat: location.latitude, lng: location.longitude },
+        map: this.map,
+        icon: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].markerIcon
+      });
+
+      location.infowindow = new google.maps.InfoWindow({
+        content: '<b>' + location.name + '</b>'
+      });
+
+      location.marker.addListener('click', function () {
+        location.infowindow.open(_this.map, location.marker);
+      });
+    },
+    updateMap: function updateMap(field, event) {
+      var _this2 = this;
+
+      event.preventDefault();
+
+      var location = this[field];
+
+      axios.get(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].geocoderUrl + location.name).then(function (response) {
+        if (response.data.length === 0) return;
+
+        var newLocation = response.data[0];
+        var latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
+
+        location.latitude = latLng.lat;
+        location.longitude = latLng.lng;
+
+        if (location.marker) {
+          location.marker.setPosition(latLng);
+        } else {
+          _this2.addMarker(location);
+        }
+        location.infowindow.setContent('<b>' + location.name + '</b>');
+
+        _this2.updateConnectingLine();
+
+        _this2.map.panTo(latLng);
+      });
+    },
+    updateConnectingLine: function updateConnectingLine() {
+      if (this.connection === null) return;
+
+      if (this.connectingLine) this.connectingLine.setMap(null);
+
+      this.connectingLine = new google.maps.Polyline({
+        path: [{
+          lat: this.connection.from.latitude,
+          lng: this.connection.from.longitude
+        }, {
+          lat: this.connection.to.latitude,
+          lng: this.connection.to.longitude
+        }],
+        icons: [{
+          icon: this.lineSymbol,
+          offset: '100%'
+        }],
+        map: this.map
+      });
+    }
+  },
+
+  created: function created() {
+    if (this.defaultPointOfDeparture) {
+      this.pointOfDeparture.name = this.defaultPointOfDeparture.name;
+      this.pointOfDeparture.latitude = this.defaultPointOfDeparture.latitude;
+      this.pointOfDeparture.longitude = this.defaultPointOfDeparture.longitude;
+    }
+    if (this.defaultDestination) {
+      this.destination.name = this.defaultDestination.name;
+      this.destination.latitude = this.defaultDestination.latitude;
+      this.destination.longitude = this.defaultDestination.longitude;
+    }
+  },
+  mounted: function mounted() {
+    var _this3 = this;
+
+    EventBus.$on('google-maps-loaded', function () {
+      _this3.initMap();
+      if (_this3.pointOfDeparture.latitude) _this3.addMarker(_this3.pointOfDeparture);
+      if (_this3.destination.latitude) _this3.addMarker(_this3.destination);
+      _this3.updateConnectingLine();
+    });
+  }
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "vue-ticket-locations-picker" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "d-flex align-items-end mr-5" }, [
+          _c("div", { staticClass: "form-group mr-2" }, [
+            _c(
+              "label",
+              {
+                staticClass: "mr-2",
+                attrs: { for: "point_of_departure_name" }
+              },
+              [_vm._v("Abfahrtsort:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.pointOfDeparture.name,
+                  expression: "pointOfDeparture.name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "point_of_departure_name",
+                name: "point_of_departure_name"
+              },
+              domProps: { value: _vm.pointOfDeparture.name },
+              on: {
+                keydown: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key)
+                  ) {
+                    return null
+                  }
+                  _vm.updateMap("pointOfDeparture", $event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.pointOfDeparture, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: {
+                type: "hidden",
+                id: "point_of_departure_latitude",
+                name: "point_of_departure_latitude"
+              },
+              domProps: { value: _vm.pointOfDeparture.latitude }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: {
+                type: "hidden",
+                id: "point_of_departure_longitude",
+                name: "point_of_departure_longitude"
+              },
+              domProps: { value: _vm.pointOfDeparture.longitude }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary mr-2",
+                attrs: { href: "#", title: "Aktualisieren" },
+                on: {
+                  click: function($event) {
+                    _vm.updateMap("pointOfDeparture", $event)
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-refresh",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v("\n                Karte aktualisieren\n            ")
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "d-flex align-items-end" }, [
+          _c("div", { staticClass: "form-group mr-2" }, [
+            _c(
+              "label",
+              { staticClass: "mr-2", attrs: { for: "destination_name" } },
+              [_vm._v("Zielort:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.destination.name,
+                  expression: "destination.name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "destination_name", name: "destination_name" },
+              domProps: { value: _vm.destination.name },
+              on: {
+                keydown: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key)
+                  ) {
+                    return null
+                  }
+                  _vm.updateMap("destination", $event)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.destination, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: {
+                type: "hidden",
+                id: "destination_latitude",
+                name: "destination_latitude"
+              },
+              domProps: { value: _vm.destination.latitude }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: {
+                type: "hidden",
+                id: "destination_longitude",
+                name: "destination_longitude"
+              },
+              domProps: { value: _vm.destination.longitude }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary mr-2",
+                attrs: { href: "#", title: "Aktualisieren" },
+                on: {
+                  click: function($event) {
+                    _vm.updateMap("destination", $event)
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-refresh",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v("\n                Karte aktualisieren\n            ")
+              ]
+            )
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "map form-group" })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-62f49b3a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

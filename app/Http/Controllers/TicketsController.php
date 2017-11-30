@@ -79,13 +79,45 @@ class TicketsController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
-        $ticket->point_of_departure_id = $request['point_of_departure_id'];
-        $ticket->destination_id = $request['destination_id'];
         $ticket->description = $request['description'];
         $ticket->category_id = $request['category_id'];
         $ticket->vehicle_class_id = $request['vehicle_class_id'];
         $ticket->price = $request['price'];
         $ticket->edit_count += 1;
+
+        // check point of departure
+        if ($request->has(['point_of_departure_name', 'point_of_departure_latitude', 'point_of_departure_longitude'])) {
+            $latitude = round($request['point_of_departure_latitude'], 5);
+            $longitude = round($request['point_of_departure_longitude'], 5);
+            $pointOfDeparture = Location::
+                where('latitude', $latitude)
+                ->where('longitude', $longitude)->first();    
+            if ($pointOfDeparture == null) {
+                $pointOfDeparture = new Location();
+                $pointOfDeparture->name = $request['point_of_departure_name'];
+                $pointOfDeparture->latitude = $latitude;
+                $pointOfDeparture->longitude = $longitude;
+                $pointOfDeparture->save();
+            } 
+            $ticket->point_of_departure_id = $pointOfDeparture->id;
+        }
+
+        // check destination
+        if ($request->has(['destination_name', 'destination_latitude', 'destination_longitude'])) {
+            $latitude = round($request['destination_latitude'], 5);
+            $longitude = round($request['destination_longitude'], 5);
+            $destination = Location::
+                where('latitude', $latitude)
+                ->where('longitude', $longitude)->first();    
+            if ($destination == null) {
+                $destination = new Location();
+                $destination->name = $request['destination_name'];
+                $destination->latitude = $latitude;
+                $destination->longitude = $longitude;
+                $destination->save();
+            } 
+            $ticket->destination_id = $destination->id;
+        }
 
         if ($request->has('points')) {
             $points = $request['points'];

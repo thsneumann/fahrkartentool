@@ -39,8 +39,8 @@ class LocationsController extends Controller
     {
         $location = new Location();
         $location->name = $request['name'];
-        $location->latitude = $request['latitude'];
-        $location->longitude = $request['longitude'];
+        $location->latitude = round($request['latitude'], 5);
+        $location->longitude = round($request['longitude'], 5);
         $location->save();
 
         if ($request['redirect']) {
