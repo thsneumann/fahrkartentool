@@ -1,22 +1,24 @@
-@extends('layouts.master')
+@extends('layouts.master', ['body_class' => 'homepage'])
+
+@section('nav')
+@endsection
+
+@section('scripts_before_app')
+
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    Du bist jetzt eingeloggt.<br>
-                    <a href="{{ route('game.index') }}">Zum Spiel</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<h1 class="home-title"><strong>FRITZ</strong><br>reist um die Welt</h1>
+
+<video id="home-globe" class="home-globe" src="/video/globe.m4v" autoplay="true" loop="true"></video>
+
+<nav id="home-nav" class="home-nav">
+    <a href="{{ route('map.index') }}" role="button" class="btn btn-lg btn-primary mr-3">Erkunden</a>
+    <a href="{{ route('game.index') }}" role="button" class="btn btn-lg btn-primary">Spielen</a>
+</nav>
+
 @endsection

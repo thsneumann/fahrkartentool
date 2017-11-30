@@ -35,12 +35,12 @@
 
             @if ($mode == 'check') 
                 <div class="alert alert-info mb-0">
-                    Hilf uns, die Eingaben anderer Benutzer zu kontrollieren.<br>
+                    Hilf uns, die Eingaben anderer Benutzer zu kontrollieren.
                     Ergänze fehlende oder korrigiere falsche Angaben.
                 </div>
             @endif
         </div>
-        <img class="ml-3 img-small align-self-end" src="/img/fritz_portrait.jpg" alt="Ein imaginiertes Porträt von Fritz Hellmuth.">
+        <img class="ml-5 img-small align-self-end" src="/img/fritz_portrait.jpg" alt="Ein imaginiertes Porträt von Fritz Hellmuth.">
     </div>
 
 

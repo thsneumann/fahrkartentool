@@ -14,8 +14,13 @@
 // PAGES
 
 Route::get('/', function () {
-    return view('index');
+    return view('intro');
 })->name('index');
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
@@ -50,5 +55,5 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/auth-home', 'HomeController@index')->name('auth-home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

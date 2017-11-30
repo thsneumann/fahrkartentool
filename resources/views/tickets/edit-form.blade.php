@@ -1,10 +1,10 @@
 
 
 <div class="row">
-    <div class="col-lg-5">
-        <figure class="figure-medium">
+    <div class="col-lg-5 text-center">
+        <figure class="figure-medium d-inline-block">
             @include('partials.ticket-thumb', ['ticket' => $ticket])
-            <figcaption class="figure-caption">{{ $ticket->signature }}</figcaption>
+            <figcaption class="figure-caption text-left">{{ $ticket->signature }}</figcaption>
         </figure>
     </div>
     <div class="col-lg-7">
