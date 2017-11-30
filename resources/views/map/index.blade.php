@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master', ['body_class' => 'map-page'])
 
 @section('styles')
 
