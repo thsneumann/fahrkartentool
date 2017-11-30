@@ -27,6 +27,13 @@
             Ausloggen
           </a>
         </li> 
+      @else
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('login') }}">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Einloggen
+          </a>
+        </li> 
       @endif
       <li class="nav-item {{ Route::currentRouteNamed('game.highscore') }}">
         <a class="nav-link" href="{{ route('game.highscore') }}">

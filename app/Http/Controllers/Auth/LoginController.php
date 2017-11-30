@@ -45,4 +45,13 @@ class LoginController extends Controller
         $user->save();
         session()->put('points', $user->points);
     }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect(route('game.index'));
+    }
 }
