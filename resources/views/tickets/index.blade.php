@@ -18,6 +18,7 @@
             <th scope="col">Ziel</th>
             <th scope="col">Beschreibung</th>
             <th scope="col">Kategorie</th>
+            <th scope="col">Klasse</th>
             {{-- <th scope="col">Tags</th> --}}
             <th scope="col">Aktionen</th>
         </thead>
@@ -54,6 +55,11 @@
                     <td>
                         @if ($ticket->category)
                             {{ $ticket->category->name }}
+                        @endif
+                    </td>
+                    <td>
+                        @if ($ticket->vehicleClass)
+                            {{ $ticket->vehicleClass->name }}
                         @endif
                     </td>
                     {{-- <td>

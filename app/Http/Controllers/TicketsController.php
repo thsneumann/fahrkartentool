@@ -7,6 +7,7 @@ use App\Ticket;
 use App\Location;
 use App\Tag;
 use App\Category;
+use App\VehicleClass;
 
 class TicketsController extends Controller
 {
@@ -64,7 +65,8 @@ class TicketsController extends Controller
         'ticket' => Ticket::findOrFail($id),
         'locations' => Location::orderBy('name')->get(),
         'categories' => Category::orderBy('name')->get(),
-        'tags' => Tag::orderBy('name')->get()
+        'vehicleClasses' => VehicleClass::all(),
+        // 'tags' => Tag::orderBy('name')->get()
         ]);
     }
 
@@ -81,6 +83,7 @@ class TicketsController extends Controller
         $ticket->destination_id = $request['destination_id'];
         $ticket->description = $request['description'];
         $ticket->category_id = $request['category_id'];
+        $ticket->vehicle_class_id = $request['vehicle_class_id'];
         $ticket->edit_count += 1;
 
         if ($request->has('points')) {

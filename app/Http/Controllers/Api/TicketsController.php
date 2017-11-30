@@ -11,7 +11,7 @@ class TicketsController extends Controller
 {
     private function toCSV($tickets)
     {
-        $headings = ['ID', 'Signatur', 'Abfahrtsort', 'Ziel', 'Beschreibung', 'Kategorie', 'Bearbeitungen', 'Änderungsdatum'];
+        $headings = ['ID', 'Signatur', 'Abfahrtsort', 'Ziel', 'Beschreibung', 'Kategorie', 'Klasse', 'Bearbeitungen', 'Änderungsdatum'];
         $output = implode(',', $headings) . PHP_EOL;
         foreach ($tickets as $ticket) {
             $columns = [
@@ -21,6 +21,7 @@ class TicketsController extends Controller
                 $ticket->destination ? $ticket->destination->name : '',
                 $ticket->description,
                 $ticket->category ? $ticket->category->name : '',
+                $ticket->vehicleClass ? $ticket->vehicleClass->name : '',
                 $ticket->edit_count,
                 $ticket->updated_at
             ];

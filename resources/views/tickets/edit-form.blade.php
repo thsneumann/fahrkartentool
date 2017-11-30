@@ -29,18 +29,28 @@
             </div>
 
             <div class="form-group">
-                <label for="description">Beschreibung:</label>
-                <textarea id="description" name="description" class="form-control"></textarea>
-            </div>
-
-            <div class="form-group">
                 <label for="category_id">Kategorie:</label>
                 <select id="category_id" name="category_id" class="form-control custom-select">
                     <option value="">Kategorie wählen</option>
-                    @foreach($categories as $category)
+                    @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="vehicle_class_id">Klasse:</label>
+                <select id="vehicle_class_id" name="vehicle_class_id" class="form-control custom-select">
+                    <option value="">Klasse wählen</option>
+                    @foreach ($vehicleClasses as $vehicleClass)
+                        <option value="{{ $vehicleClass->id }}">{{ $vehicleClass->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Zusatzinformationen:</label>
+                <textarea id="description" name="description" class="form-control"></textarea>
             </div>
 
             {{-- TODO: TAGS SELECT
