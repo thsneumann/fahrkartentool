@@ -7,6 +7,7 @@ use App\Ticket;
 use App\Location;
 use App\User;
 use App\Category;
+use App\VehicleClass;
 
 class GameController extends Controller
 {
@@ -48,6 +49,7 @@ class GameController extends Controller
             'ticket' => $ticket,
             'locations' => Location::orderBy('name')->get(),
             'categories' => Category::orderBy('name')->get(),
+            'vehicleClasses' => VehicleClass::all(),
             'points' => $points
         ]);
     }
