@@ -11,10 +11,13 @@
         <div class="media-body">
             @if ($points == 0)
                 <h2>Auf geht die Reise!</h2>
-                <p>Hilf mir, das Bild mit Metadaten anzureichern.<br>
-                Trage Abfahrts- und Zielort ein.<br>
-                Notiere im Feld "Beschreibung", was auf dem Ticket zu lesen ist.<br>
-                Ordne das Ticket einer Kategorie zu.</p>
+                <p>
+                    Hilf mir, das Bild mit Metadaten anzureichern.<br>
+                    Trage Abfahrts- und Zielort ein.<br>
+                    Ordne das Ticket einer Kategorie zu.<br>
+                    Falls du es erkennen kannst, gib Wagenklasse und Preis an.<br>
+                    Du weißt noch mehr? Notiere es unter "Zusatzinformationen". 
+                </p>
             @elseif ($points == 1)
                 <h2>Klasse!</h2>
                 <p>Du hast dein erstes Ticket bearbeitet.<br>
