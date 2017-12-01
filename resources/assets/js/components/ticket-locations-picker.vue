@@ -1,48 +1,46 @@
 <template>
 
 <div class="vue-ticket-locations-picker">
-    <div class="row">
-      <div class="col">
-        <div class="d-flex align-items-end mr-5">
-          <div class="form-group mr-2">
-            <label for="point_of_departure_name" class="mr-2">Abfahrtsort:</label>
-            <input id="point_of_departure_name" name="point_of_departure_name" class="form-control"
-                  v-model="pointOfDeparture.name" 
-                  @keydown.enter="updateMap('pointOfDeparture', $event)">
+  <div class="d-flex">
+    <div class="d-flex align-items-end">
+      <div class="form-group mr-2">
+        <label for="point_of_departure_name" class="mr-2">Abfahrtsort:</label>
+        <input id="point_of_departure_name" name="point_of_departure_name" class="form-control"
+              v-model="pointOfDeparture.name" 
+              @keydown.enter="updateMap('pointOfDeparture', $event)">
 
-            <input type="hidden" id="point_of_departure_latitude" name="point_of_departure_latitude" :value="pointOfDeparture.latitude">
-            <input type="hidden" id="point_of_departure_longitude" name="point_of_departure_longitude" :value="pointOfDeparture.longitude">
-          </div>
-          <div class="form-group">
-            <a class="btn btn-primary mr-2" href="#" title="Aktualisieren" @click="updateMap('pointOfDeparture', $event)">
-                <i class="fa fa-refresh" aria-hidden="true"></i>
-                Karte aktualisieren
-            </a>
-          </div>
-        </div>
+        <input type="hidden" id="point_of_departure_latitude" name="point_of_departure_latitude" :value="pointOfDeparture.latitude">
+        <input type="hidden" id="point_of_departure_longitude" name="point_of_departure_longitude" :value="pointOfDeparture.longitude">
       </div>
-      <div class="col">
-        <div class="d-flex align-items-end">
-          <div class="form-group mr-2">
-            <label for="destination_name" class="mr-2">Zielort:</label>
-            <input id="destination_name" name="destination_name" class="form-control"
-                  v-model="destination.name" 
-                  @keydown.enter="updateMap('destination', $event)">
 
-            <input type="hidden" id="destination_latitude" name="destination_latitude" :value="destination.latitude">
-            <input type="hidden" id="destination_longitude" name="destination_longitude" :value="destination.longitude">
-          </div>
-          <div class="form-group">
-            <a class="btn btn-primary mr-2" href="#" title="Aktualisieren" @click="updateMap('destination', $event)">
-                <i class="fa fa-refresh" aria-hidden="true"></i>
-                Karte aktualisieren
-            </a>
-          </div>
-        </div>
+      <div class="form-group">
+        <a class="btn btn-primary mr-2" href="#" title="Aktualisieren" @click="updateMap('pointOfDeparture', $event)">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+            Aktualisieren
+        </a>
       </div>
     </div>
 
-    <div class="map form-group"></div>
+    <div class="d-flex align-items-end">
+      <div class="form-group mr-2">
+        <label for="destination_name" class="mr-2">Zielort:</label>
+        <input id="destination_name" name="destination_name" class="form-control"
+              v-model="destination.name" 
+              @keydown.enter="updateMap('destination', $event)">
+
+        <input type="hidden" id="destination_latitude" name="destination_latitude" :value="destination.latitude">
+        <input type="hidden" id="destination_longitude" name="destination_longitude" :value="destination.longitude">
+      </div>
+      <div class="form-group">
+        <a class="btn btn-primary" href="#" title="Aktualisieren" @click="updateMap('destination', $event)">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+            Aktualisieren
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="map form-group"></div>
 </div>
 
 </template>

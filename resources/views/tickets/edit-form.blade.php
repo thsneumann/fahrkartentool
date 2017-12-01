@@ -58,6 +58,10 @@
                     <textarea id="description" name="description" class="form-control"></textarea>
                 </div>
 
+                <ticket-locations-picker :default-point-of-departure="{{ json_encode($ticket->pointOfDeparture) }}" :default-destination="{{ json_encode($ticket->destination) }}"></ticket-locations-picker>
+
+                <button type="submit" class="btn btn-lg btn-primary">Speichern</button>
+
                 {{-- TODO: TAGS SELECT
                 <div class="form-group">
                     <label for="tag_ids">Tags:</label>
@@ -71,7 +75,4 @@
         </div>
     </div>
 
-    <ticket-locations-picker :default-point-of-departure="{{ json_encode($ticket->pointOfDeparture) }}" :default-destination="{{ json_encode($ticket->destination) }}"></ticket-locations-picker>
-
-    <button type="submit" class="btn btn-primary">Speichern</button>
 </form>

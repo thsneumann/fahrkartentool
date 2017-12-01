@@ -484,133 +484,6 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(25);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(8);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(8);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ }),
-/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -632,7 +505,7 @@ module.exports = defaults;
 });
 
 /***/ }),
-/* 5 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -778,6 +651,133 @@ module.exports = defaults;
     color: '#92998d'
   }]
 }]);
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(25);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(8);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(8);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
 /* 6 */
@@ -1242,7 +1242,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(53);
+module.exports = __webpack_require__(56);
 
 
 /***/ }),
@@ -1251,7 +1251,7 @@ module.exports = __webpack_require__(53);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_home_animation__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_home_animation__ = __webpack_require__(55);
 __webpack_require__(14);
 
 window.EventBus = new Vue();
@@ -1259,8 +1259,8 @@ window.EventBus = new Vue();
 Vue.component('explorer-map', __webpack_require__(40));
 Vue.component('location-editor', __webpack_require__(43));
 Vue.component('location-picker', __webpack_require__(46));
-Vue.component('ticket-locations-picker', __webpack_require__(60));
-Vue.component('rotating-globe', __webpack_require__(49));
+Vue.component('ticket-locations-picker', __webpack_require__(49));
+Vue.component('rotating-globe', __webpack_require__(52));
 
 var app = new Vue({
   el: '#app'
@@ -17834,7 +17834,7 @@ var bootstrap = function (exports, $) {
 
   return exports;
 }({}, $);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
 /* 17 */
@@ -33561,7 +33561,7 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(19).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(19).setImmediate))
 
 /***/ }),
 /* 19 */
@@ -33813,7 +33813,7 @@ exports.clearImmediate = clearImmediate;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(6)))
 
 /***/ }),
 /* 21 */
@@ -33831,7 +33831,7 @@ module.exports = __webpack_require__(22);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(7);
 var Axios = __webpack_require__(24);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(5);
 
 /**
  * Create an instance of Axios
@@ -33914,7 +33914,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(5);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(33);
 var dispatchRequest = __webpack_require__(34);
@@ -34446,7 +34446,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(35);
 var isCancel = __webpack_require__(10);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(5);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -34743,8 +34743,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(3);
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 //
@@ -34950,8 +34950,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(3);
 //
 //
 //
@@ -35217,8 +35217,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(3);
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 //
@@ -35587,211 +35587,6 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/rotating-globe.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-457632e3", Component.options)
-  } else {
-    hotAPI.reload("data-v-457632e3", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-
-// taken from https://bl.ocks.org/mbostock/6747043 and wrapped in Vue container
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    makeGlobe: function makeGlobe() {
-      var _this = this;
-
-      var width = window.innerHeight / 1.5,
-          height = window.innerHeight / 1.5,
-          speed = -1e-2,
-          start = Date.now();
-
-      var sphere = { type: "Sphere" };
-
-      var projection = d3.geo.orthographic().scale(width / 2.1).clipAngle(90).translate([width / 2, height / 2]);
-
-      var graticule = d3.geo.graticule();
-
-      var canvas = d3.select("#globe").append("canvas").attr("width", width).attr("height", height);
-
-      var context = canvas.node().getContext("2d");
-
-      var path = d3.geo.path().projection(projection).context(context);
-
-      d3.json("/json/world-110m.json", function (error, topo) {
-        if (error) throw error;
-
-        var land = topojson.feature(topo, topo.objects.land),
-            grid = graticule();
-
-        d3.timer(function () {
-          var λ = speed * (Date.now() - start),
-              φ = -15;
-
-          context.clearRect(0, 0, width, height);
-
-          context.beginPath();
-          path(sphere);
-          context.lineWidth = 3;
-          context.strokeStyle = "#000";
-          context.stroke();
-          context.fillStyle = "#fff";
-          context.fill();
-
-          context.save();
-          context.translate(width / 2, 0);
-          context.scale(-1, 1);
-          context.translate(-width / 2, 0);
-          projection.rotate([λ + 180, -φ]);
-
-          context.beginPath();
-          path(land);
-          context.fillStyle = "#398252";
-          context.fill();
-
-          context.beginPath();
-          path(grid);
-          context.lineWidth = 0.5;
-          context.strokeStyle = "rgba(119,119,119,.5)";
-          context.stroke();
-
-          context.restore();
-          projection.rotate([λ, φ]);
-
-          context.beginPath();
-          path(grid);
-          context.lineWidth = 0.5;
-          context.strokeStyle = "rgba(119,119,119,.5)";
-          context.stroke();
-
-          context.beginPath();
-          path(land);
-          context.fillStyle = "#224e31";
-          context.fill();
-          context.lineWidth = 0.5;
-          context.strokeStyle = "#000";
-          context.stroke();
-        });
-
-        _this.startAnimation();
-      });
-
-      d3.select(self.frameElement).style("height", height + "px");
-    },
-    startAnimation: function startAnimation() {
-      this.$el.classList.remove("zoomed");
-      $("#home-nav").addClass("fade-in");
-    }
-  },
-
-  mounted: function mounted() {
-    console.log("rotating globe mounted");
-    this.makeGlobe();
-  }
-});
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "vue-globe zoomed", attrs: { id: "globe" } })
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-457632e3", module.exports)
-  }
-}
-
-/***/ }),
-/* 52 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = ({
-  run: function run() {
-    var globe = document.getElementById('home-globe');
-    var delay = parseInt(getComputedStyle(globe).transitionDuration, 10) * 1000;
-    globe.classList.remove('is-zoomed');
-
-    var homeNav = document.getElementById('home-nav');
-    setTimeout(function () {
-      homeNav.classList.add('fade-in');
-    }, delay);
-  }
-});
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(61)
-/* template */
-var __vue_template__ = __webpack_require__(62)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
 Component.options.__file = "resources/assets/js/components/ticket-locations-picker.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
@@ -35815,15 +35610,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 61 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(5);
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__ = __webpack_require__(3);
 //
 //
 //
@@ -36036,7 +35829,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 62 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -36044,176 +35837,169 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "vue-ticket-locations-picker" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "d-flex align-items-end mr-5" }, [
-          _c("div", { staticClass: "form-group mr-2" }, [
-            _c(
-              "label",
+    _c("div", { staticClass: "d-flex" }, [
+      _c("div", { staticClass: "d-flex align-items-end" }, [
+        _c("div", { staticClass: "form-group mr-2" }, [
+          _c(
+            "label",
+            { staticClass: "mr-2", attrs: { for: "point_of_departure_name" } },
+            [_vm._v("Abfahrtsort:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
               {
-                staticClass: "mr-2",
-                attrs: { for: "point_of_departure_name" }
-              },
-              [_vm._v("Abfahrtsort:")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.pointOfDeparture.name,
-                  expression: "pointOfDeparture.name"
+                name: "model",
+                rawName: "v-model",
+                value: _vm.pointOfDeparture.name,
+                expression: "pointOfDeparture.name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              id: "point_of_departure_name",
+              name: "point_of_departure_name"
+            },
+            domProps: { value: _vm.pointOfDeparture.name },
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key)
+                ) {
+                  return null
                 }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                id: "point_of_departure_name",
-                name: "point_of_departure_name"
+                _vm.updateMap("pointOfDeparture", $event)
               },
-              domProps: { value: _vm.pointOfDeparture.name },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.pointOfDeparture, "name", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "hidden",
+              id: "point_of_departure_latitude",
+              name: "point_of_departure_latitude"
+            },
+            domProps: { value: _vm.pointOfDeparture.latitude }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "hidden",
+              id: "point_of_departure_longitude",
+              name: "point_of_departure_longitude"
+            },
+            domProps: { value: _vm.pointOfDeparture.longitude }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary mr-2",
+              attrs: { href: "#", title: "Aktualisieren" },
               on: {
-                keydown: function($event) {
-                  if (
-                    !("button" in $event) &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key)
-                  ) {
-                    return null
-                  }
+                click: function($event) {
                   _vm.updateMap("pointOfDeparture", $event)
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.pointOfDeparture, "name", $event.target.value)
                 }
               }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "hidden",
-                id: "point_of_departure_latitude",
-                name: "point_of_departure_latitude"
-              },
-              domProps: { value: _vm.pointOfDeparture.latitude }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "hidden",
-                id: "point_of_departure_longitude",
-                name: "point_of_departure_longitude"
-              },
-              domProps: { value: _vm.pointOfDeparture.longitude }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-primary mr-2",
-                attrs: { href: "#", title: "Aktualisieren" },
-                on: {
-                  click: function($event) {
-                    _vm.updateMap("pointOfDeparture", $event)
-                  }
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fa fa-refresh",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v("\n                Karte aktualisieren\n            ")
-              ]
-            )
-          ])
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-refresh",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("\n            Aktualisieren\n        ")
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "d-flex align-items-end" }, [
-          _c("div", { staticClass: "form-group mr-2" }, [
-            _c(
-              "label",
-              { staticClass: "mr-2", attrs: { for: "destination_name" } },
-              [_vm._v("Zielort:")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.destination.name,
-                  expression: "destination.name"
+      _c("div", { staticClass: "d-flex align-items-end" }, [
+        _c("div", { staticClass: "form-group mr-2" }, [
+          _c(
+            "label",
+            { staticClass: "mr-2", attrs: { for: "destination_name" } },
+            [_vm._v("Zielort:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.destination.name,
+                expression: "destination.name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { id: "destination_name", name: "destination_name" },
+            domProps: { value: _vm.destination.name },
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key)
+                ) {
+                  return null
                 }
-              ],
-              staticClass: "form-control",
-              attrs: { id: "destination_name", name: "destination_name" },
-              domProps: { value: _vm.destination.name },
+                _vm.updateMap("destination", $event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.destination, "name", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "hidden",
+              id: "destination_latitude",
+              name: "destination_latitude"
+            },
+            domProps: { value: _vm.destination.latitude }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "hidden",
+              id: "destination_longitude",
+              name: "destination_longitude"
+            },
+            domProps: { value: _vm.destination.longitude }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { href: "#", title: "Aktualisieren" },
               on: {
-                keydown: function($event) {
-                  if (
-                    !("button" in $event) &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key)
-                  ) {
-                    return null
-                  }
+                click: function($event) {
                   _vm.updateMap("destination", $event)
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.destination, "name", $event.target.value)
                 }
               }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "hidden",
-                id: "destination_latitude",
-                name: "destination_latitude"
-              },
-              domProps: { value: _vm.destination.latitude }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "hidden",
-                id: "destination_longitude",
-                name: "destination_longitude"
-              },
-              domProps: { value: _vm.destination.longitude }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-primary mr-2",
-                attrs: { href: "#", title: "Aktualisieren" },
-                on: {
-                  click: function($event) {
-                    _vm.updateMap("destination", $event)
-                  }
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fa fa-refresh",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v("\n                Karte aktualisieren\n            ")
-              ]
-            )
-          ])
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-refresh",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("\n            Aktualisieren\n        ")
+            ]
+          )
         ])
       ])
     ]),
@@ -36230,6 +36016,205 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-62f49b3a", module.exports)
   }
 }
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(53)
+/* template */
+var __vue_template__ = __webpack_require__(54)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/rotating-globe.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-457632e3", Component.options)
+  } else {
+    hotAPI.reload("data-v-457632e3", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+// taken from https://bl.ocks.org/mbostock/6747043 and wrapped in Vue container
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    makeGlobe: function makeGlobe() {
+      var _this = this;
+
+      var width = window.innerHeight / 1.5,
+          height = window.innerHeight / 1.5,
+          speed = -1e-2,
+          start = Date.now();
+
+      var sphere = { type: "Sphere" };
+
+      var projection = d3.geo.orthographic().scale(width / 2.1).clipAngle(90).translate([width / 2, height / 2]);
+
+      var graticule = d3.geo.graticule();
+
+      var canvas = d3.select("#globe").append("canvas").attr("width", width).attr("height", height);
+
+      var context = canvas.node().getContext("2d");
+
+      var path = d3.geo.path().projection(projection).context(context);
+
+      d3.json("/json/world-110m.json", function (error, topo) {
+        if (error) throw error;
+
+        var land = topojson.feature(topo, topo.objects.land),
+            grid = graticule();
+
+        d3.timer(function () {
+          var λ = speed * (Date.now() - start),
+              φ = -15;
+
+          context.clearRect(0, 0, width, height);
+
+          context.beginPath();
+          path(sphere);
+          context.lineWidth = 3;
+          context.strokeStyle = "#000";
+          context.stroke();
+          context.fillStyle = "#fff";
+          context.fill();
+
+          context.save();
+          context.translate(width / 2, 0);
+          context.scale(-1, 1);
+          context.translate(-width / 2, 0);
+          projection.rotate([λ + 180, -φ]);
+
+          context.beginPath();
+          path(land);
+          context.fillStyle = "#398252";
+          context.fill();
+
+          context.beginPath();
+          path(grid);
+          context.lineWidth = 0.5;
+          context.strokeStyle = "rgba(119,119,119,.5)";
+          context.stroke();
+
+          context.restore();
+          projection.rotate([λ, φ]);
+
+          context.beginPath();
+          path(grid);
+          context.lineWidth = 0.5;
+          context.strokeStyle = "rgba(119,119,119,.5)";
+          context.stroke();
+
+          context.beginPath();
+          path(land);
+          context.fillStyle = "#224e31";
+          context.fill();
+          context.lineWidth = 0.5;
+          context.strokeStyle = "#000";
+          context.stroke();
+        });
+
+        _this.startAnimation();
+      });
+
+      d3.select(self.frameElement).style("height", height + "px");
+    },
+    startAnimation: function startAnimation() {
+      this.$el.classList.remove("zoomed");
+      $("#home-nav").addClass("fade-in");
+    }
+  },
+
+  mounted: function mounted() {
+    console.log("rotating globe mounted");
+    this.makeGlobe();
+  }
+});
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "vue-globe zoomed", attrs: { id: "globe" } })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-457632e3", module.exports)
+  }
+}
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = ({
+  run: function run() {
+    var globe = document.getElementById('home-globe');
+    var delay = parseInt(getComputedStyle(globe).transitionDuration, 10) * 1000;
+    globe.classList.remove('is-zoomed');
+
+    var homeNav = document.getElementById('home-nav');
+    setTimeout(function () {
+      homeNav.classList.add('fade-in');
+    }, delay);
+  }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
