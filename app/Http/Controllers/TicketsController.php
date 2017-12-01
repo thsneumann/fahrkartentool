@@ -86,7 +86,7 @@ class TicketsController extends Controller
         $ticket->edit_count += 1;
 
         // check point of departure
-        if ($request->has(['point_of_departure_name', 'point_of_departure_latitude', 'point_of_departure_longitude'])) {
+        if ($request['point_of_departure_name'] && $request['point_of_departure_latitude'] && $request['point_of_departure_longitude']) {
             $latitude = round($request['point_of_departure_latitude'], 5);
             $longitude = round($request['point_of_departure_longitude'], 5);
             $pointOfDeparture = Location::
@@ -103,7 +103,7 @@ class TicketsController extends Controller
         }
 
         // check destination
-        if ($request->has(['destination_name', 'destination_latitude', 'destination_longitude'])) {
+        if ($request['destination_name'] && $request['destination_latitude'] && $request['destination_longitude']) {
             $latitude = round($request['destination_latitude'], 5);
             $longitude = round($request['destination_longitude'], 5);
             $destination = Location::
