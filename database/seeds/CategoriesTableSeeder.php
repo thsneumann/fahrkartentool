@@ -15,7 +15,7 @@ class CategoriesTableSeeder extends Seeder
         $categories = ['Bahnsteigkarte', 'Fahrradkarte', 'Bettkarte', 
         'Hundefahrkarte', 'Militärfahrkarte', 'Leichenfahrkarte',
         'Kinderfahrkarte', 'Zeitfahrkarte', 'Arbeiterwochenkarte',
-        'Personenfahrkarte'];
+        'Personenfahrkarte', 'Sonstige'];
         foreach ($categories as $categoryName) {
             $category = new Category();
             $category->name = $categoryName;
