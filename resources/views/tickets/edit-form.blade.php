@@ -3,13 +3,13 @@
 <form method="POST" action="{{ route('tickets.update', ['id' => $ticket->id]) }}">
 
     <div class="row">
-        <div class="col-lg-5 text-center">
+        <div class="col-md-4 text-center">
             <figure class="figure-medium d-inline-block">
                 @include('partials.ticket-thumb', ['ticket' => $ticket])
                 <figcaption class="figure-caption text-left">{{ $ticket->signature }}</figcaption>
             </figure>
         </div>
-        <div class="col-lg-7">
+        <div class="col-md-8">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="PUT">
                 @if (isset($redirect))
