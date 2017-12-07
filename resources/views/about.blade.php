@@ -88,14 +88,14 @@
         </div>
 
         <div class="card">
-            <div class="card-header" role="tab" id="headingThree">
+            <div class="card-header" role="tab" id="headingFour">
             <h4 class="mb-0">
-                <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <a class="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                 Coding da Vinci
                 </a>
             </h4>
             </div>
-            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+            <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
             <div class="card-body">
                 <p>Coding da Vinci ist der erste deutsche Hackathon für offene Kulturdaten. Seit 2014 vernetzt Coding da Vinci technikaffine und kulturbegeisterte Communities mit deutschen Kulturinstitutionen, um das kreative Potential in unserem digitalen Kulturerbe weiter zu entfalten.</p>
                 <p>Während ein klassischer Hackathon den Teilnehmern nur wenig Zeit gibt, Softwareanwendungen zu entwickeln – in der Regel ein Wochenende – erstreckt sich Coding da Vinci über eine Zeitspanne von sechs bis zehn Wochen. Dieser erweiterte Zeitrahmen schafft den dringend benötigten Raum, in dem sich die oft getrennten Welten kreativer Technologieentwicklung und institutioneller Kulturbewahrung treffen können, um voneinander zu lernen und miteinander aktiv zu werden.
