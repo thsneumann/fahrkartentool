@@ -143,14 +143,22 @@ class TicketsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Reset a ticket's edited values; tickets cannot be properly deleted.
      *
      * @param  \App\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
     public function destroy(Ticket $ticket)
     {
-        $ticket->delete();
+        $ticket->point_of_departure_id = null;
+        $ticket->destination_id = null;
+        $ticket->description = null;
+        $ticket->category_id = null;
+        $ticket->vehicle_class_id = null;
+        $ticket->price = null;
+        $ticket->edit_count = 0;
+
+        $ticket->save();
 
         return redirect(route('tickets.index'));
     }
