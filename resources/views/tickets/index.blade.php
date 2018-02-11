@@ -20,7 +20,6 @@
             <th scope="col">Kategorie</th>
             <th scope="col">Klasse</th>
             <th scope="col">Preis</th>
-            {{-- <th scope="col">Tags</th> --}}
             <th scope="col">Aktionen</th>
         </thead>
         <tbody>
@@ -63,19 +62,10 @@
                             {{ $ticket->vehicleClass->name }}
                         @endif
                     </td>
-
                     <td>
                         {{ $ticket->price }}
                     </td>
-                    {{-- <td>
-                        <ul class="list-inline">
-                            @foreach ($ticket->tags as $tag)
-                                <li class="list-inline-item">
-                                    <a href="{{ route('tags.edit', ['id' => $tag->id]) }}">{{ $tag->name }}</a>{{ !$loop->last ? ', ' : '' }}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </td> --}}
+
                     <td class="d-flex">
                         <a href="{{ route('tickets.edit', ['id' => $ticket->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
                             <i class="fa fa-pencil" aria-hidden="true"></i>

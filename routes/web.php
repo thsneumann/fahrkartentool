@@ -41,7 +41,6 @@ Route::get('/map', 'MapController@index')->name('map.index');
 Route::resource('tickets', 'TicketsController');
 Route::resource('locations', 'LocationsController');
 Route::get('locations/{location}/popup', 'LocationsController@showPopup')->name('locations.popup');
-Route::resource('tags', 'TagsController');
 Route::resource('categories', 'CategoriesController');
 
 // API

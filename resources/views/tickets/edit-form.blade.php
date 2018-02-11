@@ -61,17 +61,6 @@
                 <ticket-locations-picker :default-point-of-departure="{{ json_encode($ticket->pointOfDeparture) }}" :default-destination="{{ json_encode($ticket->destination) }}"></ticket-locations-picker>
 
                 <button type="submit" class="btn btn-lg btn-primary">Speichern</button>
-
-                {{-- TODO: TAGS SELECT
-                <div class="form-group">
-                    <label for="tag_ids">Tags:</label>
-                    <select id="tag_ids" name="tag_ids" class="form-control custom-select" multiple>
-                    @foreach ($tags as $tag)
-                        TODO
-                    @endforeach
-                    </select>
-                </div>
-                --}}
         </div>
     </div>
 

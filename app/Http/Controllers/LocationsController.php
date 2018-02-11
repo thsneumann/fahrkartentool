@@ -25,7 +25,6 @@ class LocationsController extends Controller
      */
     public function create()
     {
-        // return view('locations.create', ['location' => Location::first()]);
         return view('locations.create');
     }
 

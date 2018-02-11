@@ -15,17 +15,6 @@ class MapController extends Controller
     {
         $tickets = Ticket::all();
 
-        /* $connections = [];
-
-        foreach ($tickets as $ticket) {
-            if (!($ticket->pointOfDeparture && $ticket->destination)) continue;
-            
-            $connections[] = [
-                [$ticket->pointOfDeparture->latitude, $ticket->pointOfDeparture->longitude],
-                [$ticket->destination->latitude, $ticket->destination->longitude]
-            ];
-        }
- */
         return view('map.index', ['tickets' => $tickets]);
     }
 }

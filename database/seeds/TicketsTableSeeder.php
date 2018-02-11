@@ -15,9 +15,7 @@ class TicketsTableSeeder extends Seeder
      */
     public function run()
     {
-        // Go through all the files in the image/seed folder and create dummy database entries
-        // $files = Storage::disk('public')->files('image/seed');
-
+        // Go through all the files in the image/seed folder and create database entries
         $dir = opendir('public/img/tickets');
         $files = [];
         while ($file = readdir($dir)) {
@@ -36,13 +34,7 @@ class TicketsTableSeeder extends Seeder
             $ticket->signature = $pathinfo['filename'];
             $ticket->image = $file;
             $ticket->thumb = $ticket->signature . '.jpg';
-            // $ticket->point_of_departure_id = Location::inRandomOrder()->first()->id;
-            // $ticket->destination_id = Location::inRandomOrder()->first()->id;
-            // $ticket->description = $faker->paragraph();
-            // $ticket->edit_count = 1;
             $ticket->save();
-            // $tags = Tag::inRandomOrder()->take(rand(1, 4))->get();
-            // $ticket->tags()->attach($tags);
         }
     }
 }

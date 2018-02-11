@@ -23,11 +23,6 @@
           Orte
         </a>
       </li>
-      {{-- 
-      <li class="nav-item {{ Route::currentRouteNamed('tags.index') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('tags.index') }}">Tags</a>
-      </li>
-      --}}
       <li class="nav-item {{ Route::currentRouteNamed('categories.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('categories.index') }}">
           <i class="fa fa-tag" aria-hidden="true"></i>

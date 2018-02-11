@@ -66,7 +66,6 @@ class TicketsController extends Controller
         'locations' => Location::orderBy('name')->get(),
         'categories' => Category::orderBy('name')->get(),
         'vehicleClasses' => VehicleClass::all(),
-        // 'tags' => Tag::orderBy('name')->get()
         ]);
     }
 
