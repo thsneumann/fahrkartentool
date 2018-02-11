@@ -17,8 +17,8 @@
       <div id="vue-location-editor-map" class="map form-group"></div>
     </div>
 
-    <input type="hidden" id="latitude" name="latitude" :value="location.latitude">
-    <input type="hidden" id="longitude" name="longitude" :value="location.longitude">
+    <input type="hidden" id="lat" name="lat" :value="location.lat">
+    <input type="hidden" id="lng" name="lng" :value="location.lng">
 </div>
 
 </template>
@@ -38,8 +38,8 @@ export default {
     return {
       location: {
         name: null,
-        latitude: null,
-        longitude: null
+        lat: null,
+        lng: null
       },
       map: null,
       marker: null,
@@ -54,17 +54,17 @@ export default {
         styles: gmapsStyles,
         zoom: 7,
         center: {
-          lat: this.location.latitude || config.defaultLocation.latitude,
-          lng: this.location.longitude || config.defaultLocation.longitude
+          lat: this.location.lat || config.defaultLocation.lat,
+          lng: this.location.lng || config.defaultLocation.lng
         }
       });
     },
 
     addMarker() {
-      if (this.location.latitude === null) return;
+      if (this.location.lat === null) return;
 
       this.marker = new google.maps.Marker({
-        position: { lat: this.location.latitude, lng: this.location.longitude },
+        position: { lat: this.location.lat, lng: this.location.lng },
         map: this.map,
         icon: config.markerIcon
       });
@@ -87,8 +87,8 @@ export default {
         const newLocation = response.data[0];
         const latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
         this.location.name = this.input;
-        this.location.latitude = latLng.lat;
-        this.location.longitude = latLng.lng;
+        this.location.lat = latLng.lat;
+        this.location.lng = latLng.lng;
 
         if (this.marker === null) {
           this.addMarker();
@@ -104,8 +104,8 @@ export default {
   created() {
     if (this.defaultLocation) {
       this.location.name = this.defaultLocation.name;
-      this.location.latitude = this.defaultLocation.latitude;
-      this.location.longitude = this.defaultLocation.longitude;
+      this.location.lat = this.defaultLocation.lat;
+      this.location.lng = this.defaultLocation.lng;
     }
   },
 

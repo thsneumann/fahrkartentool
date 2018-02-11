@@ -9,8 +9,8 @@
               v-model="pointOfDeparture.name" 
               @keydown.enter="updateMap('pointOfDeparture', $event)">
 
-        <input type="hidden" id="point_of_departure_latitude" name="point_of_departure_latitude" :value="pointOfDeparture.latitude">
-        <input type="hidden" id="point_of_departure_longitude" name="point_of_departure_longitude" :value="pointOfDeparture.longitude">
+        <input type="hidden" id="point_of_departure_lat" name="point_of_departure_lat" :value="pointOfDeparture.lat">
+        <input type="hidden" id="point_of_departure_lng" name="point_of_departure_lng" :value="pointOfDeparture.lng">
       </div>
 
       <div class="form-group">
@@ -28,8 +28,8 @@
               v-model="destination.name" 
               @keydown.enter="updateMap('destination', $event)">
 
-        <input type="hidden" id="destination_latitude" name="destination_latitude" :value="destination.latitude">
-        <input type="hidden" id="destination_longitude" name="destination_longitude" :value="destination.longitude">
+        <input type="hidden" id="destination_lat" name="destination_lat" :value="destination.lat">
+        <input type="hidden" id="destination_lng" name="destination_lng" :value="destination.lng">
       </div>
       <div class="form-group">
         <a class="btn btn-primary" href="#" title="Aktualisieren" @click="updateMap('destination', $event)">
@@ -63,15 +63,15 @@ export default {
     return {
       pointOfDeparture: {
         name: null,
-        latitude: null,
-        longitude: null,
+        lat: null,
+        lng: null,
         marker: null,
         infowindow: null
       },
       destination: {
         name: null,
-        latitude: null,
-        longitude: null,
+        lat: null,
+        lng: null,
         marker: null,
         infowindow: null
       },
@@ -98,15 +98,15 @@ export default {
   methods: {
     initMap() {
       let center;
-      if (this.pointOfDeparture.latitude && this.pointOfDeparture.longitude) {
+      if (this.pointOfDeparture.lat && this.pointOfDeparture.lng) {
         center = {
-          lat: this.pointOfDeparture.latitude,
-          lng: this.pointOfDeparture.longitude
+          lat: this.pointOfDeparture.lat,
+          lng: this.pointOfDeparture.lng
         };
       } else {
         center = {
-          lat: config.defaultLocation.latitude,
-          lng: config.defaultLocation.longitude
+          lat: config.defaultLocation.lat,
+          lng: config.defaultLocation.lng
         };
       }
 
@@ -124,7 +124,7 @@ export default {
 
     addMarker(location) {
       location.marker = new google.maps.Marker({
-        position: { lat: location.latitude, lng: location.longitude },
+        position: { lat: location.lat, lng: location.lng },
         map: this.map,
         icon: config.markerIcon
       });
@@ -149,8 +149,8 @@ export default {
         const newLocation = response.data[0];
         const latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
 
-        location.latitude = latLng.lat;
-        location.longitude = latLng.lng;
+        location.lat = latLng.lat;
+        location.lng = latLng.lng;
 
         if (location.marker) {
           location.marker.setPosition(latLng);
@@ -173,12 +173,12 @@ export default {
       this.connectingLine = new google.maps.Polyline({
         path: [
           {
-            lat: this.connection.from.latitude,
-            lng: this.connection.from.longitude
+            lat: this.connection.from.lat,
+            lng: this.connection.from.lng
           },
           {
-            lat: this.connection.to.latitude,
-            lng: this.connection.to.longitude
+            lat: this.connection.to.lat,
+            lng: this.connection.to.lng
           }
         ],
         icons: [
@@ -195,21 +195,21 @@ export default {
   created() {
     if (this.defaultPointOfDeparture) {
       this.pointOfDeparture.name = this.defaultPointOfDeparture.name;
-      this.pointOfDeparture.latitude = this.defaultPointOfDeparture.latitude;
-      this.pointOfDeparture.longitude = this.defaultPointOfDeparture.longitude;
+      this.pointOfDeparture.lat = this.defaultPointOfDeparture.lat;
+      this.pointOfDeparture.lng = this.defaultPointOfDeparture.lng;
     }
     if (this.defaultDestination) {
       this.destination.name = this.defaultDestination.name;
-      this.destination.latitude = this.defaultDestination.latitude;
-      this.destination.longitude = this.defaultDestination.longitude;
+      this.destination.lat = this.defaultDestination.lat;
+      this.destination.lng = this.defaultDestination.lng;
     }
   },
 
   mounted() {
     EventBus.$on('google-maps-loaded', () => {
       this.initMap();
-      if (this.pointOfDeparture.latitude) this.addMarker(this.pointOfDeparture);
-      if (this.destination.latitude) this.addMarker(this.destination);
+      if (this.pointOfDeparture.lat) this.addMarker(this.pointOfDeparture);
+      if (this.destination.lat) this.addMarker(this.destination);
       this.updateConnectingLine();
     });
   }

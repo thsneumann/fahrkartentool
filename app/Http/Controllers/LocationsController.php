@@ -39,8 +39,8 @@ class LocationsController extends Controller
     {
         $location = new Location();
         $location->name = $request['name'];
-        $location->latitude = round($request['latitude'], 5);
-        $location->longitude = round($request['longitude'], 5);
+        $location->lat = round($request['lat'], 5);
+        $location->lng = round($request['lng'], 5);
         $location->save();
 
         if ($request['redirect']) {
@@ -83,8 +83,8 @@ class LocationsController extends Controller
     {
         $location = Location::findOrFail($id);
         $location->name = $request['name'];
-        $location->latitude = $request['latitude'];
-        $location->longitude = $request['longitude'];
+        $location->lat = $request['lat'];
+        $location->lng = $request['lng'];
         $location->save();
 
         return redirect(route('locations.index'));

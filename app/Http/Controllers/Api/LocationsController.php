@@ -28,8 +28,8 @@ class LocationsController extends Controller
     {
         $location = new Location();
         $location->name = $request['name'];
-        $location->latitude = round($request['latitude'], 5);
-        $location->longitude = round($request['longitude'], 5);
+        $location->lat = round($request['lat'], 5);
+        $location->lng = round($request['lng'], 5);
         $location->save();
         
         return $location;
@@ -76,7 +76,7 @@ class LocationsController extends Controller
         $tickets = $location->pointOfDepartureFor;
        
         foreach ($tickets as $ticket) {
-            $outgoing[] = ['latitude' => $ticket->destination->latitude, 'longitude' => $ticket->destination->longitude];
+            $outgoing[] = ['lat' => $ticket->destination->lat, 'lng' => $ticket->destination->lng];
         }
 
         return $outgoing;
@@ -89,7 +89,7 @@ class LocationsController extends Controller
         $tickets = $location->destinationFor;
        
         foreach ($tickets as $ticket) {
-            $incoming[] = ['latitude' => $ticket->pointOfDeparture->latitude, 'longitude' => $ticket->pointOfDeparture->longitude];
+            $incoming[] = ['lat' => $ticket->pointOfDeparture->lat, 'lng' => $ticket->pointOfDeparture->lng];
         }
 
         return $incoming;

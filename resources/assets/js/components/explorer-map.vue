@@ -23,8 +23,8 @@ export default {
         styles: gmapsStyles,
         zoom: 7,
         center: {
-          lat: config.defaultLocation.latitude,
-          lng: config.defaultLocation.longitude
+          lat: config.defaultLocation.lat,
+          lng: config.defaultLocation.lng
         }
       });
 
@@ -39,8 +39,8 @@ export default {
       // add marker and infowindow for Technikmuseum
       const marker = new google.maps.Marker({
         position: {
-          lat: config.technikmuseumLocation.latitude,
-          lng: config.technikmuseumLocation.longitude
+          lat: config.technikmuseumLocation.lat,
+          lng: config.technikmuseumLocation.lng
         },
         map: this.map,
         icon: config.technikmuseumLocation.markerIcon
@@ -64,7 +64,7 @@ export default {
     addMarkers(locations) {
       locations.data.forEach(location => {
         var marker = new google.maps.Marker({
-          position: { lat: location.latitude, lng: location.longitude },
+          position: { lat: location.lat, lng: location.lng },
           map: this.map,
           icon: config.markerIcon
         });
@@ -113,8 +113,8 @@ export default {
     createConnectingLine(location, destination) {
       return new google.maps.Polyline({
         path: [
-          { lat: location.latitude, lng: location.longitude },
-          { lat: destination.latitude, lng: destination.longitude }
+          { lat: location.lat, lng: location.lng },
+          { lat: destination.lat, lng: destination.lng }
         ],
         icons: [
           {

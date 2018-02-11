@@ -86,34 +86,34 @@ class TicketsController extends Controller
         $ticket->edit_count += 1;
 
         // check point of departure
-        if ($request['point_of_departure_name'] && $request['point_of_departure_latitude'] && $request['point_of_departure_longitude']) {
-            $latitude = round($request['point_of_departure_latitude'], 5);
-            $longitude = round($request['point_of_departure_longitude'], 5);
+        if ($request['point_of_departure_name'] && $request['point_of_departure_lat'] && $request['point_of_departure_lng']) {
+            $lat = round($request['point_of_departure_lat'], 5);
+            $lng = round($request['point_of_departure_lng'], 5);
             $pointOfDeparture = Location::
-                where('latitude', $latitude)
-                ->where('longitude', $longitude)->first();    
+                where('lat', $lat)
+                ->where('lng', $lng)->first();    
             if ($pointOfDeparture == null) {
                 $pointOfDeparture = new Location();
                 $pointOfDeparture->name = $request['point_of_departure_name'];
-                $pointOfDeparture->latitude = $latitude;
-                $pointOfDeparture->longitude = $longitude;
+                $pointOfDeparture->lat = $lat;
+                $pointOfDeparture->lng = $lng;
                 $pointOfDeparture->save();
             } 
             $ticket->point_of_departure_id = $pointOfDeparture->id;
         }
 
         // check destination
-        if ($request['destination_name'] && $request['destination_latitude'] && $request['destination_longitude']) {
-            $latitude = round($request['destination_latitude'], 5);
-            $longitude = round($request['destination_longitude'], 5);
+        if ($request['destination_name'] && $request['destination_lat'] && $request['destination_lng']) {
+            $lat = round($request['destination_lat'], 5);
+            $lng = round($request['destination_lng'], 5);
             $destination = Location::
-                where('latitude', $latitude)
-                ->where('longitude', $longitude)->first();    
+                where('lat', $lat)
+                ->where('lng', $lng)->first();    
             if ($destination == null) {
                 $destination = new Location();
                 $destination->name = $request['destination_name'];
-                $destination->latitude = $latitude;
-                $destination->longitude = $longitude;
+                $destination->lat = $lat;
+                $destination->lng = $lng;
                 $destination->save();
             } 
             $ticket->destination_id = $destination->id;
