@@ -25,7 +25,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="date">Datum:</label>
-                            <input type="date" name="date" value="{{ $ticket->date }}" class="form-control">
+                            <input type="date" name="date" value="{{ $ticket->date->toDateString() }}" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-6">

@@ -16,6 +16,7 @@
             <th scope="col">bearbeitet?</th>
             <th scope="col">Abfahrtsort</th>
             <th scope="col">Ziel</th>
+            <th scope="col">Datum</th>
             <th scope="col">Beschreibung</th>
             <th scope="col">Kategorie</th>
             <th scope="col">Klasse</th>
@@ -46,6 +47,11 @@
                         @if ($ticket->destination)
                             <a href="{{ route('locations.edit', ['id' => $ticket->destination_id]) }}">{{ $ticket->destination->name }}</a>
                         @endif        
+                    </td>
+                    <td>
+                        @if ($ticket->date)
+                            {{ $ticket->date->format('d. m. Y') }}
+                        @endif
                     </td>
                     <td>
                         @if ($ticket->description)
