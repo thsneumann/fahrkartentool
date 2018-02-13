@@ -619,13 +619,13 @@ module.exports = function normalizeComponent (
   geocoderUrl: 'http://open.mapquestapi.com/nominatim/v1/search.php?key=GnlgEeqqbhpwGfztQOiVmwwolGEnV5AX&format=json&q=',
   defaultLocation: {
     name: 'Berlin',
-    latitude: 52.52,
-    longitude: 13.4
+    lat: 52.52,
+    lng: 13.4
   },
   technikmuseumLocation: {
     name: 'Deutsches Technikmuseum',
-    latitude: 52.4987014,
-    longitude: 13.3756959,
+    lat: 52.4987014,
+    lng: 13.3756959,
     markerIcon: '/img/marker_technikmuseum.png'
   },
   markerIcon: '/img/marker.png'
@@ -34767,14 +34767,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   methods: {
     initMap: function initMap() {
-      var _this = this;
-
       this.map = new google.maps.Map(this.$el, {
         styles: __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__["a" /* default */],
         zoom: 7,
         center: {
-          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude,
-          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude
+          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lat,
+          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lng
         }
       });
 
@@ -34783,75 +34781,57 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         console.error(error);
       });
 
-      // add marker and infowindow for Technikmuseum
-      var marker = new google.maps.Marker({
-        position: {
-          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].technikmuseumLocation.latitude,
-          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].technikmuseumLocation.longitude
-        },
-        map: this.map,
-        icon: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].technikmuseumLocation.markerIcon
-      });
-
-      var infowindow = new google.maps.InfoWindow({
-        content: document.getElementById('technikmuseum-infowindow-content').innerHTML
-      });
-
-      marker.addListener('click', function () {
-        infowindow.open(_this.map, marker);
-      });
-
       // define arrow symbol
       this.lineSymbol = {
         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
       };
     },
     addMarkers: function addMarkers(locations) {
-      var _this2 = this;
+      var _this = this;
 
       locations.data.forEach(function (location) {
         var marker = new google.maps.Marker({
-          position: { lat: location.latitude, lng: location.longitude },
-          map: _this2.map,
+          position: { lat: location.lat, lng: location.lng },
+          map: _this.map,
           icon: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].markerIcon
         });
         marker.addListener('click', function () {
-          _this2.showLocationInfo(marker, location);
+          _this.showLocationInfo(marker, location);
         });
       });
     },
     showLocationInfo: function showLocationInfo(marker, location) {
-      var _this3 = this;
+      var _this2 = this;
 
       axios.get('/locations/' + location.id + '/popup').then(function (response) {
-        if (_this3.infowindow) _this3.infowindow.close();
+        if (_this2.infowindow) _this2.infowindow.close();
 
-        _this3.infowindow = new google.maps.InfoWindow({
+        _this2.infowindow = new google.maps.InfoWindow({
           content: response.data
         });
-        _this3.infowindow.open(_this3.map, marker);
+        _this2.infowindow.open(_this2.map, marker);
       }).catch(function (error) {
         console.error(error);
       });
 
       axios.get('/api/locations/' + location.id + '/outgoing').then(function (destinations) {
-        _this3.clearConnectingLines();
-        _this3.connectingLines = destinations.data.map(function (destination) {
-          return _this3.createConnectingLine(location, destination);
+        _this2.clearConnectingLines();
+        _this2.connectingLines = destinations.data.map(function (destination) {
+          return _this2.createConnectingLine(location, destination);
         });
       }).then(function () {
         axios.get('/api/locations/' + location.id + '/incoming').then(function (pointsOfDeparture) {
           var _connectingLines;
 
-          (_connectingLines = _this3.connectingLines).push.apply(_connectingLines, _toConsumableArray(pointsOfDeparture.data.map(function (pointOfDeparture) {
-            return _this3.createConnectingLine(pointOfDeparture, location);
+          (_connectingLines = _this2.connectingLines).push.apply(_connectingLines, _toConsumableArray(pointsOfDeparture.data.map(function (pointOfDeparture) {
+            return _this2.createConnectingLine(pointOfDeparture, location);
           })));
         });
       });
     },
     createConnectingLine: function createConnectingLine(location, destination) {
       return new google.maps.Polyline({
-        path: [{ lat: location.latitude, lng: location.longitude }, { lat: destination.latitude, lng: destination.longitude }],
+        path: [{ lat: location.lat, lng: location.lng }, { lat: destination.lat, lng: destination.lng }],
         icons: [{
           icon: this.lineSymbol,
           offset: '100%'
@@ -34990,8 +34970,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       location: {
         name: null,
-        latitude: null,
-        longitude: null
+        lat: null,
+        lng: null
       },
       map: null,
       marker: null,
@@ -35007,18 +34987,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         styles: __WEBPACK_IMPORTED_MODULE_1__gmaps_styles__["a" /* default */],
         zoom: 7,
         center: {
-          lat: this.location.latitude || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude,
-          lng: this.location.longitude || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude
+          lat: this.location.lat || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lat,
+          lng: this.location.lng || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lng
         }
       });
     },
     addMarker: function addMarker() {
       var _this = this;
 
-      if (this.location.latitude === null) return;
+      if (this.location.lat === null) return;
 
       this.marker = new google.maps.Marker({
-        position: { lat: this.location.latitude, lng: this.location.longitude },
+        position: { lat: this.location.lat, lng: this.location.lng },
         map: this.map,
         icon: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].markerIcon
       });
@@ -35042,8 +35022,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var newLocation = response.data[0];
         var latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
         _this2.location.name = _this2.input;
-        _this2.location.latitude = latLng.lat;
-        _this2.location.longitude = latLng.lng;
+        _this2.location.lat = latLng.lat;
+        _this2.location.lng = latLng.lng;
 
         if (_this2.marker === null) {
           _this2.addMarker();
@@ -35059,8 +35039,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     if (this.defaultLocation) {
       this.location.name = this.defaultLocation.name;
-      this.location.latitude = this.defaultLocation.latitude;
-      this.location.longitude = this.defaultLocation.longitude;
+      this.location.lat = this.defaultLocation.lat;
+      this.location.lng = this.defaultLocation.lng;
     }
   },
   mounted: function mounted() {
@@ -35141,13 +35121,13 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("input", {
-      attrs: { type: "hidden", id: "latitude", name: "latitude" },
-      domProps: { value: _vm.location.latitude }
+      attrs: { type: "hidden", id: "lat", name: "lat" },
+      domProps: { value: _vm.location.lat }
     }),
     _vm._v(" "),
     _c("input", {
-      attrs: { type: "hidden", id: "longitude", name: "longitude" },
-      domProps: { value: _vm.location.longitude }
+      attrs: { type: "hidden", id: "lng", name: "lng" },
+      domProps: { value: _vm.location.lng }
     })
   ])
 }
@@ -35282,15 +35262,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       pointOfDeparture: {
         name: null,
-        latitude: null,
-        longitude: null,
+        lat: null,
+        lng: null,
         marker: null,
         infowindow: null
       },
       destination: {
         name: null,
-        latitude: null,
-        longitude: null,
+        lat: null,
+        lng: null,
         marker: null,
         infowindow: null
       },
@@ -35314,15 +35294,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     initMap: function initMap() {
       var center = void 0;
-      if (this.pointOfDeparture.latitude && this.pointOfDeparture.longitude) {
+      if (this.pointOfDeparture.lat && this.pointOfDeparture.lng) {
         center = {
-          lat: this.pointOfDeparture.latitude,
-          lng: this.pointOfDeparture.longitude
+          lat: this.pointOfDeparture.lat,
+          lng: this.pointOfDeparture.lng
         };
       } else {
         center = {
-          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.latitude,
-          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.longitude
+          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lat,
+          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lng
         };
       }
 
@@ -35341,7 +35321,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       location.marker = new google.maps.Marker({
-        position: { lat: location.latitude, lng: location.longitude },
+        position: { lat: location.lat, lng: location.lng },
         map: this.map,
         icon: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].markerIcon
       });
@@ -35367,8 +35347,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var newLocation = response.data[0];
         var latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
 
-        location.latitude = latLng.lat;
-        location.longitude = latLng.lng;
+        location.lat = latLng.lat;
+        location.lng = latLng.lng;
 
         if (location.marker) {
           location.marker.setPosition(latLng);
@@ -35389,11 +35369,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.connectingLine = new google.maps.Polyline({
         path: [{
-          lat: this.connection.from.latitude,
-          lng: this.connection.from.longitude
+          lat: this.connection.from.lat,
+          lng: this.connection.from.lng
         }, {
-          lat: this.connection.to.latitude,
-          lng: this.connection.to.longitude
+          lat: this.connection.to.lat,
+          lng: this.connection.to.lng
         }],
         icons: [{
           icon: this.lineSymbol,
@@ -35407,13 +35387,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     if (this.defaultPointOfDeparture) {
       this.pointOfDeparture.name = this.defaultPointOfDeparture.name;
-      this.pointOfDeparture.latitude = this.defaultPointOfDeparture.latitude;
-      this.pointOfDeparture.longitude = this.defaultPointOfDeparture.longitude;
+      this.pointOfDeparture.lat = this.defaultPointOfDeparture.lat;
+      this.pointOfDeparture.lng = this.defaultPointOfDeparture.lng;
     }
     if (this.defaultDestination) {
       this.destination.name = this.defaultDestination.name;
-      this.destination.latitude = this.defaultDestination.latitude;
-      this.destination.longitude = this.defaultDestination.longitude;
+      this.destination.lat = this.defaultDestination.lat;
+      this.destination.lng = this.defaultDestination.lng;
     }
   },
   mounted: function mounted() {
@@ -35421,8 +35401,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     EventBus.$on('google-maps-loaded', function () {
       _this3.initMap();
-      if (_this3.pointOfDeparture.latitude) _this3.addMarker(_this3.pointOfDeparture);
-      if (_this3.destination.latitude) _this3.addMarker(_this3.destination);
+      if (_this3.pointOfDeparture.lat) _this3.addMarker(_this3.pointOfDeparture);
+      if (_this3.destination.lat) _this3.addMarker(_this3.destination);
       _this3.updateConnectingLine();
     });
   }
@@ -35483,19 +35463,19 @@ var render = function() {
           _c("input", {
             attrs: {
               type: "hidden",
-              id: "point_of_departure_latitude",
-              name: "point_of_departure_latitude"
+              id: "point_of_departure_lat",
+              name: "point_of_departure_lat"
             },
-            domProps: { value: _vm.pointOfDeparture.latitude }
+            domProps: { value: _vm.pointOfDeparture.lat }
           }),
           _vm._v(" "),
           _c("input", {
             attrs: {
               type: "hidden",
-              id: "point_of_departure_longitude",
-              name: "point_of_departure_longitude"
+              id: "point_of_departure_lng",
+              name: "point_of_departure_lng"
             },
-            domProps: { value: _vm.pointOfDeparture.longitude }
+            domProps: { value: _vm.pointOfDeparture.lng }
           })
         ]),
         _vm._v(" "),
@@ -35564,19 +35544,19 @@ var render = function() {
           _c("input", {
             attrs: {
               type: "hidden",
-              id: "destination_latitude",
-              name: "destination_latitude"
+              id: "destination_lat",
+              name: "destination_lat"
             },
-            domProps: { value: _vm.destination.latitude }
+            domProps: { value: _vm.destination.lat }
           }),
           _vm._v(" "),
           _c("input", {
             attrs: {
               type: "hidden",
-              id: "destination_longitude",
-              name: "destination_longitude"
+              id: "destination_lng",
+              name: "destination_lng"
             },
-            domProps: { value: _vm.destination.longitude }
+            domProps: { value: _vm.destination.lng }
           })
         ]),
         _vm._v(" "),

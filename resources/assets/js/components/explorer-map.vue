@@ -36,25 +36,6 @@ export default {
           console.error(error);
         });
 
-      // add marker and infowindow for Technikmuseum
-      const marker = new google.maps.Marker({
-        position: {
-          lat: config.technikmuseumLocation.lat,
-          lng: config.technikmuseumLocation.lng
-        },
-        map: this.map,
-        icon: config.technikmuseumLocation.markerIcon
-      });
-
-      const infowindow = new google.maps.InfoWindow({
-        content: document.getElementById('technikmuseum-infowindow-content')
-          .innerHTML
-      });
-
-      marker.addListener('click', () => {
-        infowindow.open(this.map, marker);
-      });
-
       // define arrow symbol
       this.lineSymbol = {
         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
