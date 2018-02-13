@@ -78,6 +78,7 @@ class TicketsController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
+        $ticket->date = $request['date'];
         $ticket->description = $request['description'];
         $ticket->category_id = $request['category_id'];
         $ticket->vehicle_class_id = $request['vehicle_class_id'];

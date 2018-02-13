@@ -19,16 +19,28 @@
                     <input type="hidden" name="points" value="{{ $points }}">
                 @endif
 
-                <div class="form-group">
-                    <label for="category_id">Kategorie:</label>
-                    <select id="category_id" name="category_id" class="form-control custom-select">
-                        <option value="">Kategorie wählen</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                            {{ $category->id == $ticket->category_id ? ' selected': '' }}
-                            >{{ $category->name }}</option>
-                        @endforeach
-                    </select>
+                <ticket-locations-picker :default-point-of-departure="{{ json_encode($ticket->pointOfDeparture) }}" :default-destination="{{ json_encode($ticket->destination) }}"></ticket-locations-picker>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="date">Datum:</label>
+                            <input type="date" name="date" value="{{ $ticket->date }}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="category_id">Kategorie:</label>
+                            <select id="category_id" name="category_id" class="form-control custom-select">
+                                <option value="">Kategorie wählen</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                    {{ $category->id == $ticket->category_id ? ' selected': '' }}
+                                    >{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -57,8 +69,6 @@
                     <label for="description">Zusatzinformationen:</label>
                     <textarea id="description" name="description" class="form-control"></textarea>
                 </div>
-
-                <ticket-locations-picker :default-point-of-departure="{{ json_encode($ticket->pointOfDeparture) }}" :default-destination="{{ json_encode($ticket->destination) }}"></ticket-locations-picker>
 
                 <button type="submit" class="btn btn-lg btn-primary">Speichern</button>
         </div>
