@@ -25,7 +25,7 @@
 
 <script>
 import config from '../config';
-import gmapsStyles from '../gmaps-styles';
+import gmapsStyles from '../gmaps-styles.json';
 
 export default {
   props: {
