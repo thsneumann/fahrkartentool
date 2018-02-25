@@ -12,7 +12,7 @@
 
 @section('content')
 
-<h1 class="home-title"><strong>FRITZ</strong><br>reist um die Welt</h1>
+<h1 class="home-title">Das Fahrkartentool</h1>
 
 <video id="home-globe" class="home-globe" src="/video/globe.m4v" autoplay="true" loop="true"></video>
 

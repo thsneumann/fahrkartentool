@@ -14,14 +14,14 @@
             </div>
             <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
-                <p>Das Projekt “FRITZ reist um die Welt” entstand im Rahmen des Kultur-Hackathon Coding da Vinci 2017. Es hat sich zum Ziel gesetzt, die bislang noch ausstehende Verschlagwortung der umfangreichen historischen Fahrkartensammlung des Deutschen Technikmuseums mithilfe eines Crowdsourcing-Tools voranzutreiben.</p>
+                <p>Das Projekt “Fahrkartentool” entstand im Rahmen des Kultur-Hackathon Coding da Vinci 2017. Es hat sich zum Ziel gesetzt, die bislang noch ausstehende Verschlagwortung der umfangreichen historischen Fahrkartensammlung des Deutschen Technikmuseums mithilfe eines Crowdsourcing-Tools voranzutreiben.</p>
                 <p>Die Web-App bietet zwei Nutzungsmöglichkeiten: einen Spiele- und einen Erkundungsmodus. Ein künstlerisch gestaltetes Einführungsvideo erklärt die Sammlung und das Projekt. Im Spielemodus werden dem Benutzer anschließend noch nicht bearbeitete Fahrkarten vorgelegt, die er mit Metadaten wie Abfahrts- und Zielort, Kategorie und Beschreibungstext anreichert; abwechselnd werden ihm auch die Eingaben anderer Benutzer zur Kontrolle vorgelegt. Für die Verschlagwortung wird er mit Punkten belohnt. Wer ein Profil erstellt, kann seinen Punktestand speichern. Eine Rangliste zeigt die User mit den meisten Punkten an. Nach der Eingabe wird die Fahrkarte und die gefahrene Verbindung auf einer Weltkarte markiert. Diese dient als Ausgangspunkt zum Explorieren der Sammlung.</p>
                 <p>Im Erkundungsmodus ermöglichen darüber hinaus tabellarische Ansichten der Tickets, der aufgenommenen Orte und Kategorien eine bequeme Verwaltung der digitalisierten Fahrkartensammlung. Der Benutzer kann zwischen Spiel- und Erkundungsmodus jederzeit hin- und herschalten. Eine REST-API bietet Exportfunktionen der gesammelten Daten im JSON- und CSV-Format.</p>
                 <p>Das Projekt richtet sich sowohl an die eher spielerisch veranlagte “Crowd”, als auch an Archivare und Wissenschaftler, die mehr über die globalen Verflechtungen im Reiseverkehr des ausgehenden 19. Jahrhunderts erfahren möchten. Durch die integrierte API richtet sich das Projekt nicht zuletzt auch an Entwickler, welche die Daten in eigene Projekte integrieren können.</p>
-                <p>FRITZ wurde in Laravel und VueJS geschrieben, ist auf <a href="https://github.com/thsneumann/fritz" target="_blank">Github</a> frei verfügbar und unter der <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GPL3</a> lizensiert.</p>
+                <p>Das Fahrkartentool wurde in Laravel und VueJS geschrieben, ist auf <a href="https://github.com/thsneumann/fahrkartentool" target="_blank">Github</a> frei verfügbar und unter der <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GPL3</a> lizensiert.</p>
                 <p>Die selbst erstellten Grafiken und die Intro-Animation stehen unter der <a href="https://creativecommons.org/licenses/by-sa/3.0/de/" target="_blank">CC-BY-SA3.0 DE Lizenz</a> zur Verfügung.</p>
                 <p class="mb-3">
-                    <a href="https://github.com/thsneumann/fritz" target="_blank">
+                    <a href="https://github.com/thsneumann/fahrkartentool" target="_blank">
                         <i class="fa fa-external-link" aria-hidden="true"></i>
                         Github-Repository
                     </a>
