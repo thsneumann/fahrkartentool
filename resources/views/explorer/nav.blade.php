@@ -29,6 +29,12 @@
           Kategorien
         </a>
       </li>
+      <li class="nav-item {{ Route::currentRouteNamed('about') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('about') }}">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          Info
+        </a>
+      </li>
       
       <li class="nav-item ml-auto">
         <a class="btn btn-primary" href="{{ route('game.index') }}">
