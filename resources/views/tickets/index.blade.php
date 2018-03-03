@@ -76,13 +76,15 @@
                         <a href="{{ route('tickets.edit', ['id' => $ticket->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
-                        <form method="POST" action="{{ route('tickets.destroy', ['id' => $ticket->id]) }}">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-sm btn-danger">
-                                <i class="fa fa-eraser" aria-hidden="true"></i>
-                            </button>
-                        </form>
+                        @if (Auth::check() && Auth::user()->is_admin)
+                            <form method="POST" action="{{ route('tickets.destroy', ['id' => $ticket->id]) }}">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-eraser" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

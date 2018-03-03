@@ -145,7 +145,7 @@ class TicketsController extends Controller
     }
 
     /**
-     * Reset a ticket's edited values; tickets cannot be properly deleted.
+     * Reset a ticket's edited values; tickets cannot be deleted, only resetted.
      *
      * @param  \App\Ticket  $ticket
      * @return \Illuminate\Http\Response
