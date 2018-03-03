@@ -61,17 +61,8 @@ button.btn:hover {
   max-width: 10rem;
 }
 
-.site-content {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-.map-page .site-content {
-  padding-bottom: 0;
-}
-
-.site-footer {
-  margin-top: auto;
+.pos-rel {
+  position: relative;
 }
 
 .homepage {
@@ -182,6 +173,19 @@ button.btn:hover {
   top: 100px;
 }
 
+.site-content {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.map-page .site-content {
+  padding-bottom: 0;
+}
+
+.site-footer {
+  margin-top: auto;
+}
+
 #explorer-map {
   margin-top: -2rem;
   width: 100%;
@@ -263,5 +267,24 @@ button.btn:hover {
 .vue-ticket-locations-picker .map {
   width: 100%;
   height: 400px;
+}
+
+.geocoder-result-list {
+  position: absolute;
+  z-index: 1;
+  min-width: 600px;
+  max-width: 100vw;
+  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+  background-color: #ffffff;
+}
+
+.geocoder-result-list li {
+  padding: .375rem .75rem;
+}
+
+.geocoder-result-list li:hover {
+  background-color: #bbb;
+  cursor: pointer;
 }
 

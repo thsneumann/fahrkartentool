@@ -38,6 +38,7 @@ class LocationsController extends Controller
     {
         $location = new Location();
         $location->name = $request['name'];
+        $location->longname = $request['longname'];
         $location->lat = round($request['lat'], 5);
         $location->lng = round($request['lng'], 5);
         $location->save();
@@ -82,6 +83,7 @@ class LocationsController extends Controller
     {
         $location = Location::findOrFail($id);
         $location->name = $request['name'];
+        $location->longname = $request['longname'];
         $location->lat = $request['lat'];
         $location->lng = $request['lng'];
         $location->save();

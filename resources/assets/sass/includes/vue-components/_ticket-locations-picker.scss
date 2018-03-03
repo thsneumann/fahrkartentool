@@ -4,3 +4,22 @@
     height: 400px;
   }
 }
+
+.geocoder-result-list {
+  position: absolute;
+  z-index: 1;
+  min-width: 600px;
+  max-width: 100vw;
+  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+  background-color: #ffffff;
+
+  li {
+    padding: .375rem .75rem;
+
+    &:hover {
+      background-color: #bbb;
+      cursor: pointer;
+    }
+  }
+}

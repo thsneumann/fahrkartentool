@@ -3,39 +3,40 @@
 <div class="vue-ticket-locations-picker">
   <div class="d-flex">
     <div class="d-flex align-items-end">
-      <div class="form-group mr-2">
+      <div class="form-group pos-rel mr-2">
         <label for="point_of_departure_name" class="mr-2">Abfahrtsort:</label>
         <input id="point_of_departure_name" name="point_of_departure_name" class="form-control"
-              v-model="pointOfDeparture.name" 
-              @keydown.enter="updateMap('pointOfDeparture', $event)">
+              v-model.trim="pointOfDeparture.name" 
+              @input="updateInput(pointOfDeparture)">
 
+        <input type="hidden" id="point_of_departure_longname" name="point_of_departure_longname" :value="pointOfDeparture.longname">
         <input type="hidden" id="point_of_departure_lat" name="point_of_departure_lat" :value="pointOfDeparture.lat">
         <input type="hidden" id="point_of_departure_lng" name="point_of_departure_lng" :value="pointOfDeparture.lng">
-      </div>
 
-      <div class="form-group">
-        <a class="btn btn-primary mr-2" href="#" title="Aktualisieren" @click="updateMap('pointOfDeparture', $event)">
-            <i class="fa fa-refresh" aria-hidden="true"></i>
-            Aktualisieren
-        </a>
+        <ul class="geocoder-result-list">
+          <li v-for="locationData in pointOfDeparture.geocoderResults" @click="select(locationData, pointOfDeparture)">
+            {{ locationData.display_name }}
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="d-flex align-items-end">
-      <div class="form-group mr-2">
+      <div class="form-group pos-rel mr-2">
         <label for="destination_name" class="mr-2">Zielort:</label>
         <input id="destination_name" name="destination_name" class="form-control"
-              v-model="destination.name" 
-              @keydown.enter="updateMap('destination', $event)">
+              v-model.trim="destination.name" 
+              @input="updateInput(destination)">
 
+        <input type="hidden" id="destination_longname" name="destination_longname" :value="destination.longname">
         <input type="hidden" id="destination_lat" name="destination_lat" :value="destination.lat">
         <input type="hidden" id="destination_lng" name="destination_lng" :value="destination.lng">
-      </div>
-      <div class="form-group">
-        <a class="btn btn-primary" href="#" title="Aktualisieren" @click="updateMap('destination', $event)">
-            <i class="fa fa-refresh" aria-hidden="true"></i>
-            Aktualisieren
-        </a>
+
+        <ul class="geocoder-result-list">
+          <li v-for="location in destination.geocoderResults" @click="select(location, destination)">
+            {{ location.display_name }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -46,6 +47,7 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce';
 import config from '../config';
 import gmapsStyles from '../gmaps-styles.json';
 
@@ -63,17 +65,20 @@ export default {
     return {
       pointOfDeparture: {
         name: null,
+        longname: null,
         lat: null,
         lng: null,
         marker: null,
-        infowindow: null
+        infowindow: null,
+        geocoderResults: []
       },
       destination: {
         name: null,
         lat: null,
         lng: null,
         marker: null,
-        infowindow: null
+        infowindow: null,
+        geocoderResults: []
       },
       lineSymbol: null,
       connectingLine: null
@@ -96,6 +101,25 @@ export default {
   },
 
   methods: {
+    select(locationData, location) {
+      location.longname = locationData.display_name;
+      location.lat = +locationData.lat;
+      location.lng = +locationData.lon;
+      location.geocoderResults = [];
+
+      this.updateMap(location);
+    },
+
+    updateInput: debounce(function(location) {
+      if (location.name === '') return;
+
+      axios.get(config.geocoderUrl + location.name).then(response => {
+        if (response.data.length === 0) return;
+
+        location.geocoderResults = response.data.slice(0, 5);
+      });
+    }, 300),
+
     initMap() {
       let center;
       if (this.pointOfDeparture.lat && this.pointOfDeparture.lng) {
@@ -138,31 +162,22 @@ export default {
       });
     },
 
-    updateMap(field, event) {
-      event.preventDefault();
+    updateMap(location) {
+      const latLng = {
+        lat: location.lat,
+        lng: location.lng
+      };
 
-      const location = this[field];
+      if (location.marker) {
+        location.marker.setPosition(latLng);
+      } else {
+        this.addMarker(location);
+      }
+      location.infowindow.setContent('<b>' + location.name + '</b>');
 
-      axios.get(config.geocoderUrl + location.name).then(response => {
-        if (response.data.length === 0) return;
+      this.updateConnectingLine();
 
-        const newLocation = response.data[0];
-        const latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
-
-        location.lat = latLng.lat;
-        location.lng = latLng.lng;
-
-        if (location.marker) {
-          location.marker.setPosition(latLng);
-        } else {
-          this.addMarker(location);
-        }
-        location.infowindow.setContent('<b>' + location.name + '</b>');
-
-        this.updateConnectingLine();
-
-        this.map.panTo(latLng);
-      });
+      this.map.panTo(latLng);
     },
 
     updateConnectingLine() {

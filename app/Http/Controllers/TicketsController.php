@@ -95,6 +95,7 @@ class TicketsController extends Controller
             if ($pointOfDeparture == null) {
                 $pointOfDeparture = new Location();
                 $pointOfDeparture->name = $request['point_of_departure_name'];
+                $pointOfDeparture->longname = $request['point_of_departure_longname'];
                 $pointOfDeparture->lat = $lat;
                 $pointOfDeparture->lng = $lng;
                 $pointOfDeparture->save();
@@ -112,6 +113,7 @@ class TicketsController extends Controller
             if ($destination == null) {
                 $destination = new Location();
                 $destination->name = $request['destination_name'];
+                $destination->longname = $request['destination_longname'];
                 $destination->lat = $lat;
                 $destination->lng = $lng;
                 $destination->save();

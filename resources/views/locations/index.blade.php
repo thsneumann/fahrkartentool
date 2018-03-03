@@ -15,6 +15,7 @@
             <thead>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Langname</th>
                 <th scope="col">Breitengrad</th>
                 <th scope="col">Längengrad</th>
                 <th scope="col">Tickets mit diesem Abfahrort</th>
@@ -26,6 +27,7 @@
                     <tr>
                         <th scope="row">{{ $location->id }}</th>
                         <td>{{ $location->name }}</td>
+                        <td>{{ $location->longname }}</td>
                         <td>{{ $location->lat }}</td>
                         <td>{{ $location->lng }}</td>
                         <td>{{ count($location->pointOfDepartureFor) }}</td>

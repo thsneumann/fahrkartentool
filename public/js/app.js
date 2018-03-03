@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(7);
-var isBuffer = __webpack_require__(23);
+var isBuffer = __webpack_require__(24);
 
 /*global toString:true*/
 
@@ -408,7 +408,7 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(25);
+var normalizeHeaderName = __webpack_require__(26);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -615,7 +615,6 @@ module.exports = function normalizeComponent (
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-  leafletAccessToken: 'pk.eyJ1IjoidGhzbmV1bWFubiIsImEiOiJjajBiMGNpbnQwMXo0MzJsM3JrMmVvaW9xIn0._JPXczrSxb1MBYdvpc16WQ',
   geocoderUrl: 'http://open.mapquestapi.com/nominatim/v1/search.php?key=GnlgEeqqbhpwGfztQOiVmwwolGEnV5AX&format=json&q=',
   defaultLocation: {
     name: 'Berlin',
@@ -853,12 +852,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(26);
-var buildURL = __webpack_require__(28);
-var parseHeaders = __webpack_require__(29);
-var isURLSameOrigin = __webpack_require__(30);
+var settle = __webpack_require__(27);
+var buildURL = __webpack_require__(29);
+var parseHeaders = __webpack_require__(30);
+var isURLSameOrigin = __webpack_require__(31);
 var createError = __webpack_require__(9);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(31);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(32);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -955,7 +954,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(32);
+      var cookies = __webpack_require__(33);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -1039,7 +1038,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(27);
+var enhanceError = __webpack_require__(28);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -1099,24 +1098,408 @@ module.exports = Cancel;
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(13);
-module.exports = __webpack_require__(50);
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
 
+/** Used as the `TypeError` message for "Functions" methods. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        result = wait - timeSinceLastCall;
+
+    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = debounce;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(14);
+module.exports = __webpack_require__(51);
+
+
+/***/ }),
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_home_animation__ = __webpack_require__(49);
-__webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_home_animation__ = __webpack_require__(50);
+__webpack_require__(15);
 
 window.EventBus = new Vue();
 
-Vue.component('explorer-map', __webpack_require__(40));
-Vue.component('location-editor', __webpack_require__(43));
-Vue.component('ticket-locations-picker', __webpack_require__(46));
+Vue.component('explorer-map', __webpack_require__(41));
+Vue.component('location-editor', __webpack_require__(44));
+Vue.component('ticket-locations-picker', __webpack_require__(47));
 
 var app = new Vue({
   el: '#app'
@@ -1132,19 +1515,19 @@ window.initMap = function () {
 // if (document.body.classList.contains('homepage')) HomeAnimation.run();
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 try {
-  window.$ = window.jQuery = __webpack_require__(15);
+  window.$ = window.jQuery = __webpack_require__(16);
 } catch (e) {}
 
-__webpack_require__(16);
 __webpack_require__(17);
+__webpack_require__(18);
 
-window.Vue = __webpack_require__(18);
+window.Vue = __webpack_require__(19);
 
-window.axios = __webpack_require__(21);
+window.axios = __webpack_require__(22);
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
@@ -1160,7 +1543,7 @@ if (token) {
 }
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11531,7 +11914,7 @@ return jQuery;
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -17804,7 +18187,7 @@ var bootstrap = function (exports, $) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 // ==================================================
@@ -22962,7 +23345,7 @@ var bootstrap = function (exports, $) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33528,10 +33911,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(19).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(20).setImmediate))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -33584,13 +33967,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(20);
+__webpack_require__(21);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -33783,13 +34166,13 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(22);
+module.exports = __webpack_require__(23);
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33797,7 +34180,7 @@ module.exports = __webpack_require__(22);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(7);
-var Axios = __webpack_require__(24);
+var Axios = __webpack_require__(25);
 var defaults = __webpack_require__(2);
 
 /**
@@ -33832,14 +34215,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(11);
-axios.CancelToken = __webpack_require__(38);
+axios.CancelToken = __webpack_require__(39);
 axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(39);
+axios.spread = __webpack_require__(40);
 
 module.exports = axios;
 
@@ -33848,7 +34231,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /*!
@@ -33875,7 +34258,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33883,10 +34266,10 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(33);
-var dispatchRequest = __webpack_require__(34);
-var isAbsoluteURL = __webpack_require__(36);
-var combineURLs = __webpack_require__(37);
+var InterceptorManager = __webpack_require__(34);
+var dispatchRequest = __webpack_require__(35);
+var isAbsoluteURL = __webpack_require__(37);
+var combineURLs = __webpack_require__(38);
 
 /**
  * Create a new instance of Axios
@@ -33968,7 +34351,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33987,7 +34370,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34020,7 +34403,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34048,7 +34431,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34123,7 +34506,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34167,7 +34550,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34242,7 +34625,7 @@ module.exports = (
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34285,7 +34668,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34345,7 +34728,7 @@ module.exports = (
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34404,14 +34787,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(35);
+var transformData = __webpack_require__(36);
 var isCancel = __webpack_require__(10);
 var defaults = __webpack_require__(2);
 
@@ -34490,7 +34873,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34517,7 +34900,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34538,7 +34921,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34559,7 +34942,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34623,7 +35006,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34657,15 +35040,15 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(41)
+var __vue_script__ = __webpack_require__(42)
 /* template */
-var __vue_template__ = __webpack_require__(42)
+var __vue_template__ = __webpack_require__(43)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -34705,7 +35088,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34727,7 +35110,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   data: function data() {
     return {
       map: null,
-      accessToken: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].leafletAccessToken,
       connectingLines: null,
       infowindow: null,
       lineSymbol: null
@@ -34825,7 +35207,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 });
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -34845,15 +35227,15 @@ if (false) {
 }
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(44)
+var __vue_script__ = __webpack_require__(45)
 /* template */
-var __vue_template__ = __webpack_require__(45)
+var __vue_template__ = __webpack_require__(46)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -34893,14 +35275,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles_json__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__gmaps_styles_json__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_debounce__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_debounce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_debounce__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json__);
 //
 //
 //
@@ -34926,6 +35310,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -34942,36 +35330,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       location: {
         name: null,
         lat: null,
-        lng: null
+        lng: null,
+        geocoderResults: []
       },
       map: null,
       marker: null,
-      infowindow: null,
-      input: this.defaultLocation && this.defaultLocation.name
+      infowindow: null
     };
   },
 
 
   methods: {
+    select: function select(locationData) {
+      this.location.longname = locationData.display_name;
+      this.location.lat = +locationData.lat;
+      this.location.lng = +locationData.lon;
+      this.location.geocoderResults = [];
+
+      this.updateMap();
+    },
+
+
+    updateInput: __WEBPACK_IMPORTED_MODULE_0_lodash_debounce___default()(function () {
+      var _this = this;
+
+      if (this.location.name === '') return;
+
+      axios.get(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].geocoderUrl + this.location.name).then(function (response) {
+        if (response.data.length === 0) return;
+
+        console.log(response.data);
+
+        _this.location.geocoderResults = response.data.slice(0, 5);
+      });
+    }, 300),
+
     initMap: function initMap() {
       this.map = new google.maps.Map(this.$el.querySelector('.map'), {
-        styles: __WEBPACK_IMPORTED_MODULE_1__gmaps_styles_json___default.a,
+        styles: __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json___default.a,
         zoom: 7,
         center: {
-          lat: this.location.lat || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lat,
-          lng: this.location.lng || __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lng
+          lat: this.location.lat || __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].defaultLocation.lat,
+          lng: this.location.lng || __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].defaultLocation.lng
         }
       });
     },
     addMarker: function addMarker() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.location.lat === null) return;
 
       this.marker = new google.maps.Marker({
         position: { lat: this.location.lat, lng: this.location.lng },
         map: this.map,
-        icon: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].markerIcon
+        icon: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].markerIcon
       });
 
       this.infowindow = new google.maps.InfoWindow({
@@ -34979,31 +35391,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
 
       this.marker.addListener('click', function () {
-        _this.infowindow.open(_this.map, _this.marker);
+        _this2.infowindow.open(_this2.map, _this2.marker);
       });
     },
-    updateMap: function updateMap(event) {
-      var _this2 = this;
+    updateMap: function updateMap() {
+      var latLng = { lat: this.location.lat, lng: this.location.lng };
 
-      event.preventDefault();
-
-      axios.get(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].geocoderUrl + this.input).then(function (response) {
-        if (response.data.length === 0) return;
-
-        var newLocation = response.data[0];
-        var latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
-        _this2.location.name = _this2.input;
-        _this2.location.lat = latLng.lat;
-        _this2.location.lng = latLng.lng;
-
-        if (_this2.marker === null) {
-          _this2.addMarker();
-        } else {
-          _this2.marker.setPosition(latLng);
-          _this2.infowindow.setContent('<b>' + _this2.input + '</b>');
-        }
-        _this2.map.panTo(latLng);
-      });
+      if (this.marker === null) {
+        this.addMarker();
+      } else {
+        this.marker.setPosition(latLng);
+        this.infowindow.setContent('<b>' + this.location.name + '</b>');
+      }
+      this.map.panTo(latLng);
     }
   },
 
@@ -35025,7 +35425,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -35034,55 +35434,61 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "vue-location-editor" }, [
     _c("div", { staticClass: "picker" }, [
-      _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "form-group pos-rel" }, [
         _c("div", { staticClass: "d-flex align-items-center" }, [
           _c("input", {
             directives: [
               {
                 name: "model",
-                rawName: "v-model",
-                value: _vm.input,
-                expression: "input"
+                rawName: "v-model.trim",
+                value: _vm.location.name,
+                expression: "location.name",
+                modifiers: { trim: true }
               }
             ],
             staticClass: "form-control mr-2",
             attrs: { type: "text", id: "name", name: "name" },
-            domProps: { value: _vm.location.name, value: _vm.input },
+            domProps: { value: _vm.location.name, value: _vm.location.name },
             on: {
-              keydown: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key)
-                ) {
-                  return null
-                }
-                _vm.updateMap($event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.input = $event.target.value
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.location, "name", $event.target.value.trim())
+                },
+                _vm.updateInput
+              ],
+              blur: function($event) {
+                _vm.$forceUpdate()
               }
             }
-          }),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary mr-2",
-              attrs: { href: "#", title: "Aktualisieren" },
-              on: { click: _vm.updateMap }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-refresh",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v("\n                Karte aktualisieren\n            ")
-            ]
-          )
-        ])
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "geocoder-result-list" },
+          _vm._l(_vm.location.geocoderResults, function(locationData) {
+            return _c(
+              "li",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.select(locationData)
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n              " +
+                    _vm._s(locationData.display_name) +
+                    "\n            "
+                )
+              ]
+            )
+          })
+        )
       ]),
       _vm._v(" "),
       _c("div", {
@@ -35090,6 +35496,11 @@ var render = function() {
         attrs: { id: "vue-location-editor-map" }
       })
     ]),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden", id: "longname", name: "longname" },
+      domProps: { value: _vm.location.longname }
+    }),
     _vm._v(" "),
     _c("input", {
       attrs: { type: "hidden", id: "lat", name: "lat" },
@@ -35113,15 +35524,15 @@ if (false) {
 }
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(47)
+var __vue_script__ = __webpack_require__(48)
 /* template */
-var __vue_template__ = __webpack_require__(48)
+var __vue_template__ = __webpack_require__(49)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -35161,14 +35572,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles_json__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gmaps_styles_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__gmaps_styles_json__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_debounce__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_debounce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_debounce__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json__);
 //
 //
 //
@@ -35216,6 +35629,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -35234,17 +35649,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       pointOfDeparture: {
         name: null,
+        longname: null,
         lat: null,
         lng: null,
         marker: null,
-        infowindow: null
+        infowindow: null,
+        geocoderResults: []
       },
       destination: {
         name: null,
         lat: null,
         lng: null,
         marker: null,
-        infowindow: null
+        infowindow: null,
+        geocoderResults: []
       },
       lineSymbol: null,
       connectingLine: null
@@ -35264,6 +35682,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    select: function select(locationData, location) {
+      location.longname = locationData.display_name;
+      location.lat = +locationData.lat;
+      location.lng = +locationData.lon;
+      location.geocoderResults = [];
+
+      this.updateMap(location);
+    },
+
+
+    updateInput: __WEBPACK_IMPORTED_MODULE_0_lodash_debounce___default()(function (location) {
+      if (location.name === '') return;
+
+      axios.get(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].geocoderUrl + location.name).then(function (response) {
+        if (response.data.length === 0) return;
+
+        location.geocoderResults = response.data.slice(0, 5);
+      });
+    }, 300),
+
     initMap: function initMap() {
       var center = void 0;
       if (this.pointOfDeparture.lat && this.pointOfDeparture.lng) {
@@ -35273,13 +35711,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
       } else {
         center = {
-          lat: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lat,
-          lng: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].defaultLocation.lng
+          lat: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].defaultLocation.lat,
+          lng: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].defaultLocation.lng
         };
       }
 
       this.map = new google.maps.Map(this.$el.querySelector('.map'), {
-        styles: __WEBPACK_IMPORTED_MODULE_1__gmaps_styles_json___default.a,
+        styles: __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json___default.a,
         zoom: 5,
         center: center
       });
@@ -35295,7 +35733,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       location.marker = new google.maps.Marker({
         position: { lat: location.lat, lng: location.lng },
         map: this.map,
-        icon: __WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].markerIcon
+        icon: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].markerIcon
       });
 
       location.infowindow = new google.maps.InfoWindow({
@@ -35306,33 +35744,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         location.infowindow.open(_this.map, location.marker);
       });
     },
-    updateMap: function updateMap(field, event) {
-      var _this2 = this;
+    updateMap: function updateMap(location) {
+      var latLng = {
+        lat: location.lat,
+        lng: location.lng
+      };
 
-      event.preventDefault();
+      if (location.marker) {
+        location.marker.setPosition(latLng);
+      } else {
+        this.addMarker(location);
+      }
+      location.infowindow.setContent('<b>' + location.name + '</b>');
 
-      var location = this[field];
+      this.updateConnectingLine();
 
-      axios.get(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* default */].geocoderUrl + location.name).then(function (response) {
-        if (response.data.length === 0) return;
-
-        var newLocation = response.data[0];
-        var latLng = { lat: +newLocation.lat, lng: +newLocation.lon };
-
-        location.lat = latLng.lat;
-        location.lng = latLng.lng;
-
-        if (location.marker) {
-          location.marker.setPosition(latLng);
-        } else {
-          _this2.addMarker(location);
-        }
-        location.infowindow.setContent('<b>' + location.name + '</b>');
-
-        _this2.updateConnectingLine();
-
-        _this2.map.panTo(latLng);
-      });
+      this.map.panTo(latLng);
     },
     updateConnectingLine: function updateConnectingLine() {
       if (this.connection === null) return;
@@ -35369,19 +35796,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this2 = this;
 
     EventBus.$on('google-maps-loaded', function () {
-      _this3.initMap();
-      if (_this3.pointOfDeparture.lat) _this3.addMarker(_this3.pointOfDeparture);
-      if (_this3.destination.lat) _this3.addMarker(_this3.destination);
-      _this3.updateConnectingLine();
+      _this2.initMap();
+      if (_this2.pointOfDeparture.lat) _this2.addMarker(_this2.pointOfDeparture);
+      if (_this2.destination.lat) _this2.addMarker(_this2.destination);
+      _this2.updateConnectingLine();
     });
   }
 });
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -35391,7 +35818,7 @@ var render = function() {
   return _c("div", { staticClass: "vue-ticket-locations-picker" }, [
     _c("div", { staticClass: "d-flex" }, [
       _c("div", { staticClass: "d-flex align-items-end" }, [
-        _c("div", { staticClass: "form-group mr-2" }, [
+        _c("div", { staticClass: "form-group pos-rel mr-2" }, [
           _c(
             "label",
             { staticClass: "mr-2", attrs: { for: "point_of_departure_name" } },
@@ -35402,9 +35829,10 @@ var render = function() {
             directives: [
               {
                 name: "model",
-                rawName: "v-model",
+                rawName: "v-model.trim",
                 value: _vm.pointOfDeparture.name,
-                expression: "pointOfDeparture.name"
+                expression: "pointOfDeparture.name",
+                modifiers: { trim: true }
               }
             ],
             staticClass: "form-control",
@@ -35414,22 +35842,34 @@ var render = function() {
             },
             domProps: { value: _vm.pointOfDeparture.name },
             on: {
-              keydown: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key)
-                ) {
-                  return null
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.pointOfDeparture,
+                    "name",
+                    $event.target.value.trim()
+                  )
+                },
+                function($event) {
+                  _vm.updateInput(_vm.pointOfDeparture)
                 }
-                _vm.updateMap("pointOfDeparture", $event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.pointOfDeparture, "name", $event.target.value)
+              ],
+              blur: function($event) {
+                _vm.$forceUpdate()
               }
             }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "hidden",
+              id: "point_of_departure_longname",
+              name: "point_of_departure_longname"
+            },
+            domProps: { value: _vm.pointOfDeparture.longname }
           }),
           _vm._v(" "),
           _c("input", {
@@ -35448,34 +35888,38 @@ var render = function() {
               name: "point_of_departure_lng"
             },
             domProps: { value: _vm.pointOfDeparture.lng }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
+          }),
+          _vm._v(" "),
           _c(
-            "a",
-            {
-              staticClass: "btn btn-primary mr-2",
-              attrs: { href: "#", title: "Aktualisieren" },
-              on: {
-                click: function($event) {
-                  _vm.updateMap("pointOfDeparture", $event)
-                }
-              }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-refresh",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v("\n            Aktualisieren\n        ")
-            ]
+            "ul",
+            { staticClass: "geocoder-result-list" },
+            _vm._l(_vm.pointOfDeparture.geocoderResults, function(
+              locationData
+            ) {
+              return _c(
+                "li",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.select(locationData, _vm.pointOfDeparture)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(locationData.display_name) +
+                      "\n          "
+                  )
+                ]
+              )
+            })
           )
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "d-flex align-items-end" }, [
-        _c("div", { staticClass: "form-group mr-2" }, [
+        _c("div", { staticClass: "form-group pos-rel mr-2" }, [
           _c(
             "label",
             { staticClass: "mr-2", attrs: { for: "destination_name" } },
@@ -35486,31 +35930,40 @@ var render = function() {
             directives: [
               {
                 name: "model",
-                rawName: "v-model",
+                rawName: "v-model.trim",
                 value: _vm.destination.name,
-                expression: "destination.name"
+                expression: "destination.name",
+                modifiers: { trim: true }
               }
             ],
             staticClass: "form-control",
             attrs: { id: "destination_name", name: "destination_name" },
             domProps: { value: _vm.destination.name },
             on: {
-              keydown: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key)
-                ) {
-                  return null
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.destination, "name", $event.target.value.trim())
+                },
+                function($event) {
+                  _vm.updateInput(_vm.destination)
                 }
-                _vm.updateMap("destination", $event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.destination, "name", $event.target.value)
+              ],
+              blur: function($event) {
+                _vm.$forceUpdate()
               }
             }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "hidden",
+              id: "destination_longname",
+              name: "destination_longname"
+            },
+            domProps: { value: _vm.destination.longname }
           }),
           _vm._v(" "),
           _c("input", {
@@ -35529,28 +35982,30 @@ var render = function() {
               name: "destination_lng"
             },
             domProps: { value: _vm.destination.lng }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
+          }),
+          _vm._v(" "),
           _c(
-            "a",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { href: "#", title: "Aktualisieren" },
-              on: {
-                click: function($event) {
-                  _vm.updateMap("destination", $event)
-                }
-              }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-refresh",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v("\n            Aktualisieren\n        ")
-            ]
+            "ul",
+            { staticClass: "geocoder-result-list" },
+            _vm._l(_vm.destination.geocoderResults, function(location) {
+              return _c(
+                "li",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.select(location, _vm.destination)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(location.display_name) +
+                      "\n          "
+                  )
+                ]
+              )
+            })
           )
         ])
       ])
@@ -35570,7 +36025,7 @@ if (false) {
 }
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35588,7 +36043,7 @@ if (false) {
 });
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

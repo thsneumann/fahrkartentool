@@ -10,7 +10,6 @@ export default {
   data() {
     return {
       map: null,
-      accessToken: config.leafletAccessToken,
       connectingLines: null,
       infowindow: null,
       lineSymbol: null
