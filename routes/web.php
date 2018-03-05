@@ -43,6 +43,10 @@ Route::resource('locations', 'LocationsController');
 Route::get('locations/{location}/popup', 'LocationsController@showPopup')->name('locations.popup');
 Route::resource('categories', 'CategoriesController');
 
+// ADMIN
+
+Route::get('/admin', 'AdminController@index')->name('admin');
+
 // API
 // TODO: move to api.php && require login
 Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function () {
