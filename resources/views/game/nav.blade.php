@@ -20,6 +20,14 @@
           Karte
         </a>
       </li>
+      
+      <li class="nav-item {{ Route::currentRouteNamed('game.highscore') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('game.highscore') }}">
+          <i class="fa fa-trophy" aria-hidden="true"></i>
+          Bestenliste
+        </a>
+      </li>
+
       @if (Auth::check())
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}">
@@ -35,12 +43,6 @@
           </a>
         </li> 
       @endif
-      <li class="nav-item {{ Route::currentRouteNamed('game.highscore') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('game.highscore') }}">
-          <i class="fa fa-trophy" aria-hidden="true"></i>
-          Bestenliste
-        </a>
-      </li>
 
       <li class="nav-item ml-auto">
         <a class="btn btn-primary" href="{{ route('map.index') }}">
