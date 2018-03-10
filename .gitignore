@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/public/img/tickets/thumbs
 # /public/css/app.css
 # /public/js/app.js
 /storage/*.key
