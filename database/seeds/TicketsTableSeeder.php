@@ -16,12 +16,12 @@ class TicketsTableSeeder extends Seeder
     public function run()
     {
         // Go through all the files in the image/seed folder and create database entries
-        $basePath = 'public/img/tickets';
+        $basePath = 'public/img/tickets/';
         $dir = opendir($basePath);
         $files = [];
         while ($file = readdir($dir)) {
             $pathinfo = pathinfo($file);
-            if (isset($pathinfo['extension']) && $pathinfo['extension'] == 'png') {
+            if (isset($pathinfo['extension']) && $pathinfo['extension'] == 'jpg') {
                 $files[] = $file;
             }
         }
@@ -29,16 +29,11 @@ class TicketsTableSeeder extends Seeder
 
         foreach ($files as $file) {
             $pathinfo = pathinfo($file);
-            // dd($file);
             $ticket = new Ticket();
             $ticket->signature = $pathinfo['filename'];
             $ticket->image = $file;
             $ticket->thumb = $pathinfo['filename'] . '.jpg';
             $ticket->save();
-
-            // Create thumbnail
-            $img = Image::make($basePath . '/' . $file)->heighten(300);
-            $img->save($basePath . '/' . $pathinfo['dirname'] . '/thumbs/' . $ticket->thumb, 80);
         }
     }
 }
