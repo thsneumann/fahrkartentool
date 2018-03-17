@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/game';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -52,6 +52,6 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect(route('game.index'));
+        return redirect(url()->previous());
     }
 }

@@ -1,77 +1,24 @@
-<!DOCTYPE html>
-<html lang="de">
+@extends('layouts.master', ['body_class' => 'homepage'])
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fahrkartentool</title>
+@section('nav')
+@endsection
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+@section('scripts_before_app')
 
-        body {
-            background-color: #000;
-            overflow: hidden;
-        }
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
 
-        video {
-            width: 100%;
-            height: 100vh;
-            object-fit: contain;
-            transition: transform 2s;
-        }
+@endsection
 
-        video.is-zoomed {
-            transform: scale(10);
-        }
+@section('content')
 
-        .skip-link {
-            display: block;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            padding: 5px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            font-size: 12px;
-            transition: background-color 0.3s;
-            color: #fff;
-            text-decoration: none;
-        }
+<h1 class="home-title">Das Fahrkartentool</h1>
 
-        .skip-link:hover {
-            background-color: rgba(255, 255, 255, 1);
-            color: #000;
-        }
-    </style>
-</head>
+<video id="home-globe" class="home-globe" src="/video/globe.m4v" autoplay="true" loop="true"></video>
 
-<body>
-    <video id="intro" src="/video/intro.m4v" autoplay="true"></video>
+<nav id="home-nav" class="home-nav">
+    <a href="{{ route('map') }}" role="button" class="btn btn-lg btn-primary mr-3">Erkunden</a>
+    <a href="{{ route('game.index') }}" role="button" class="btn btn-lg btn-primary">Spielen</a>
+</nav>
 
-    <a href="{{ route('home') }}" class="skip-link">Intro überspringen</a>
-
-    <script>
-        var intro = document.getElementById('intro');
-
-        function redirect() {
-            window.location.href = '{{ route('home') }}';
-        }
-
-        function introEnded() {
-            intro.currentTime = intro.duration - 1;
-            setTimeout(function() {
-                intro.classList.add('is-zoomed');
-                var delay = parseInt(getComputedStyle(intro).transitionDuration, 10) * 1000;
-                setTimeout(redirect, delay);
-            }, 200);
-        }
-
-        intro.addEventListener('ended', introEnded, false);
-    </script>
-</body>
-
-</html>
+@endsection

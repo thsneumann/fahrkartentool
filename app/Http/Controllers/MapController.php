@@ -15,6 +15,6 @@ class MapController extends Controller
     {
         $tickets = Ticket::all();
 
-        return view('map.index', ['tickets' => $tickets]);
+        return view('map', ['tickets' => $tickets]);
     }
 }

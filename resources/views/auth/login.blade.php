@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('nav')
-    @include('game.nav')
 @endsection
 
 @section('content')

@@ -1,8 +1,4 @@
-@extends('layouts.master')
-
-@section('nav')
-    @include('game.nav')
-@endsection
+@extends('layouts.master', ['mode' => 'game'])
 
 @section('content')
 

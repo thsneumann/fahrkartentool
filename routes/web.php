@@ -37,7 +37,8 @@ Route::group(['prefix' => 'game'], function () {
 
 // EXPLORE
 
-Route::get('/map', 'MapController@index')->name('map.index');
+Route::get('/explore', 'ExploreController@index')->name('explore.index');
+Route::get('/map', 'MapController@index')->name('map');
 Route::resource('tickets', 'TicketsController');
 Route::resource('locations', 'LocationsController');
 Route::get('locations/{location}/popup', 'LocationsController@showPopup')->name('locations.popup');
@@ -58,5 +59,4 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
 
 Auth::routes();
 
-Route::get('/auth-home', 'HomeController@index')->name('auth-home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

@@ -15,7 +15,11 @@
     <div id="app" class="page-wrap">
       <header class="site-header">
         @section('nav')
-          @include('explorer.nav')
+          @if (isset($mode))
+            @include('layouts.nav', ['mode' => $mode])
+          @else
+            @include('layouts.nav', ['mode' => 'explorer'])
+          @endif
         @show
       </header>
 
