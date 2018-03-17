@@ -3,18 +3,9 @@
 @section('nav')
 @endsection
 
-@section('scripts_before_app')
-
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
-
-@endsection
-
 @section('content')
 
 <h1 class="home-title">Das Fahrkartentool</h1>
-
-<video id="home-globe" class="home-globe" src="/video/globe.m4v" autoplay="true" loop="true"></video>
 
 <nav id="home-nav" class="home-nav">
     <a href="{{ route('map') }}" role="button" class="btn btn-lg btn-primary mr-3">Erkunden</a>
