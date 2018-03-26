@@ -1,6 +1,6 @@
 try {
   window.$ = window.jQuery = require('jquery');
-} catch (e) {}
+} catch (e) { }
 
 require('./vendor/bootstrap.bundle');
 require('@fancyapps/fancybox');

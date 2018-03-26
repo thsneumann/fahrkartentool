@@ -5,6 +5,7 @@
 <script>
 import config from '../config';
 import gmapsStyles from '../gmaps-styles.json';
+import '../vendor/markerclusterer';
 
 export default {
   data() {
@@ -42,6 +43,8 @@ export default {
     },
 
     addMarkers(locations) {
+      const markers = [];
+
       locations.data.forEach(location => {
         var marker = new google.maps.Marker({
           position: { lat: location.lat, lng: location.lng },
@@ -51,7 +54,14 @@ export default {
         marker.addListener('click', () => {
           this.showLocationInfo(marker, location);
         });
+        markers.push(marker);
       });
+
+      const options = {
+        imagePath: 'img/m'
+      };
+
+      const markerClusterer = new MarkerClusterer(this.map, markers, options);
     },
 
     showLocationInfo(marker, location) {
