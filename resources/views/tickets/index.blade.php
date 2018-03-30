@@ -15,6 +15,7 @@
             <th scope="col">Bild</th>
             <th scope="col">bearbeitet?</th>
             <th scope="col">Abfahrtsort</th>
+            <th scope="col">Zwischenstationen</th>
             <th scope="col">Ziel</th>
             <th scope="col">Datum</th>
             <th scope="col">Beschreibung</th>
@@ -39,13 +40,20 @@
                         @endif
                     </td>
                     <td>
-                        @if ($ticket->pointOfDeparture)
-                            <a href="{{ route('locations.edit', ['id' => $ticket->point_of_departure_id]) }}">{{ $ticket->pointOfDeparture->name }}</a>
+                        @if ($ticket->origin())
+                            <a href="{{ route('locations.edit', ['id' => $ticket->origin()->id]) }}">{{ $ticket->origin()->name }}</a>
                         @endif
                     </td>
                     <td>
-                        @if ($ticket->destination)
-                            <a href="{{ route('locations.edit', ['id' => $ticket->destination_id]) }}">{{ $ticket->destination->name }}</a>
+                        @if ($ticket->stopovers())
+                            @foreach ($ticket->stopovers() as $stopover)
+                                <a href="{{ route('locations.edit', ['id' => $stopover->id]) }}">{{ $stopover->name }}</a><br>
+                            @endforeach
+                        @endif
+                    </td>
+                    <td>
+                        @if ($ticket->destination())
+                            <a href="{{ route('locations.edit', ['id' => $ticket->destination()->id]) }}">{{ $ticket->destination()->name }}</a>
                         @endif        
                     </td>
                     <td>

@@ -12,9 +12,11 @@ class LocationsTableSeeder extends Seeder
      */
     public function run(Faker\Generator $faker)
     {
+        return;
+
         $faker = Faker\Factory::create();
 
-        $max = 1000;
+        $max = 100;
 
         for ($i = 0; $i < $max; $i++) {
             $location = new Location();
