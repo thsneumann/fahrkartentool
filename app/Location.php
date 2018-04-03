@@ -7,13 +7,18 @@ use App\Ticket;
 
 class Location extends Model
 {
-    public function pointOfDepartureFor()
+    public function tickets()
     {
-        return $this->hasMany(Ticket::class, 'point_of_departure_id');
+        return $this->belongsToMany(Ticket::class)->withPivot('index');
+    }
+
+    public function originFor()
+    {
+        return $this->belongsToMany(Ticket::class)->wherePivot('index', 0);
     }
 
     public function destinationFor()
     {
-        return $this->hasMany(Ticket::class, 'destination_id');
+        return $this->belongsToMany(Ticket::class)->wherePivot('index', 9999);
     }
 }

@@ -85,46 +85,38 @@ class TicketsController extends Controller
         $ticket->price = $request['price'];
         $ticket->edit_count += 1;
 
-        // check point of departure
-        if ($request['point_of_departure_name'] && $request['point_of_departure_lat'] && $request['point_of_departure_lng']) {
-            $lat = round($request['point_of_departure_lat'], 5);
-            $lng = round($request['point_of_departure_lng'], 5);
-            $pointOfDeparture = Location::
-                where('lat', $lat)
-                ->where('lng', $lng)->first();    
-            if ($pointOfDeparture == null) {
-                $pointOfDeparture = new Location();
-                $pointOfDeparture->name = $request['point_of_departure_name'];
-                $pointOfDeparture->longname = $request['point_of_departure_longname'];
-                $pointOfDeparture->lat = $lat;
-                $pointOfDeparture->lng = $lng;
-                $pointOfDeparture->save();
-            } 
-            $ticket->point_of_departure_id = $pointOfDeparture->id;
+        // update locations
+        $locations = json_decode($request['locations']);
+        $pivotEntries = [];
+        $index = 0;
+        foreach ($locations as $location) {
+            $id = $location->id;
+            if ($id === null) {
+                // round lat/lng to 5 decimal degrees
+                $lat = round($location->lat, 5);
+                $lng = round($location->lng, 5);
+                // check if location already exists, assign existing location id or create new location entry
+                $locationEntry = Location::where('lat', $lat)->where('lng', $lng)->first();
+                if ($locationEntry == null) {
+                    $locationEntry = new Location();
+                    $locationEntry->name = $location->name;
+                    $locationEntry->longname = $location->longname;
+                    $locationEntry->lat = $lat;
+                    $locationEntry->lng = $lng;
+                    $locationEntry->save();
+                }
+                $id = $locationEntry->id;
+            }
+            if ($index == count($locations) - 1) $index = 9999;
+            $pivotEntries[$id] = ['index' => $index];
+            $index += 1;
         }
-
-        // check destination
-        if ($request['destination_name'] && $request['destination_lat'] && $request['destination_lng']) {
-            $lat = round($request['destination_lat'], 5);
-            $lng = round($request['destination_lng'], 5);
-            $destination = Location::
-                where('lat', $lat)
-                ->where('lng', $lng)->first();    
-            if ($destination == null) {
-                $destination = new Location();
-                $destination->name = $request['destination_name'];
-                $destination->longname = $request['destination_longname'];
-                $destination->lat = $lat;
-                $destination->lng = $lng;
-                $destination->save();
-            } 
-            $ticket->destination_id = $destination->id;
-        }
-
+        $ticket->locations()->sync($pivotEntries);
+        
+        // save points for logged in user
         if ($request->has('points')) {
             $points = $request['points'];
             session()->put('points', $points + 1);
-            // save points for logged in user
             if (auth()->check()) {
                 $user = auth()->user();
                 $user->points = $points + 1;

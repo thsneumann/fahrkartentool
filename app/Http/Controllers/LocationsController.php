@@ -107,8 +107,8 @@ class LocationsController extends Controller
     public function showPopup($id)
     {
         $location = Location::findOrFail($id);
-        $podTickets = Ticket::where('point_of_departure_id', $id)->get();
-        $destTickets = Ticket::where('destination_id', $id)->get();
-        return view('locations.popup', compact('location', 'podTickets', 'destTickets'));
+        $ticketsWithOrigin = $location->originFor;
+        $ticketsWithDestination = $location->destinationFor;
+        return view('locations.popup', compact('location', 'ticketsWithOrigin', 'ticketsWithDestination'));
     }
 }

@@ -92,8 +92,8 @@ export default {
             .get('/api/locations/' + location.id + '/incoming')
             .then(pointsOfDeparture => {
               this.connectingLines.push(
-                ...pointsOfDeparture.data.map(pointOfDeparture => {
-                  return this.createConnectingLine(pointOfDeparture, location);
+                ...pointsOfDeparture.data.map(origin => {
+                  return this.createConnectingLine(origin, location);
                 })
               );
             });

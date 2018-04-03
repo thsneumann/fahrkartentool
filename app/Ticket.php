@@ -12,14 +12,32 @@ class Ticket extends Model
         'date' => 'date'
     ];
 
-    public function pointOfDeparture()
+    public function locations()
     {
-        return $this->belongsTo(Location::class, 'point_of_departure_id');
+        return $this->belongsToMany(Location::class)->withPivot('index');
+    }
+
+    public function origin()
+    {
+        return $this->locations()->where('index', 0)->first();
     }
 
     public function destination()
     {
-        return $this->belongsTo(Location::class, 'destination_id');
+        if ($this->locations()->count() < 2) return null;
+        
+        return $this->locations()->where('index', 9999)->first();
+    }
+
+    public function stopovers()
+    {
+        if ($this->locations()->count() < 3) return null;
+
+        $stopovers = $this->locations()->orderBy('index')->get();
+        // remove origin and destination
+        $stopovers->shift();
+        $stopovers->pop();
+        return $stopovers;
     }
 
     public function category()

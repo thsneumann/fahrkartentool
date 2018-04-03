@@ -19,7 +19,7 @@
                     <input type="hidden" name="points" value="{{ $points }}">
                 @endif
 
-                <ticket-locations-picker :default-point-of-departure="{{ json_encode($ticket->pointOfDeparture) }}" :default-destination="{{ json_encode($ticket->destination) }}"></ticket-locations-picker>
+                <ticket-locations-picker :default-locations="{{ json_encode($ticket->locations()->orderBy('index')->get() )}}" ></ticket-locations-picker>
 
                 <div class="row">
                     <div class="col-sm-6">

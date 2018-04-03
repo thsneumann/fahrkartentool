@@ -1,45 +1,42 @@
 <template>
 
 <div class="vue-ticket-locations-picker">
-  <div class="d-flex">
-    <div class="d-flex align-items-end">
+    <p>Stationen</p>
+    
+    <div :key="i" class="d-flex align-items-end" v-for="(location, i) in locations">
       <div class="form-group pos-rel mr-2">
-        <label for="point_of_departure_name" class="mr-2">Abfahrtsort:</label>
-        <input id="point_of_departure_name" name="point_of_departure_name" class="form-control"
-              v-model.trim="pointOfDeparture.name" 
-              @input="updateInput(pointOfDeparture)">
-
-        <input type="hidden" id="point_of_departure_longname" name="point_of_departure_longname" :value="pointOfDeparture.longname">
-        <input type="hidden" id="point_of_departure_lat" name="point_of_departure_lat" :value="pointOfDeparture.lat">
-        <input type="hidden" id="point_of_departure_lng" name="point_of_departure_lng" :value="pointOfDeparture.lng">
+        <div class="d-flex align-items-center">
+          <i class="fa fa-map-marker mr-2"></i>
+          <input :id="getId(i, 'name')" class="form-control mr-2"
+              v-model.trim="location.name" 
+              @input="updateInput(location)">
+          <a href="#" class="mr-2" @click.prevent="moveUp(i)">
+            <i class="fa fa-angle-up"></i>
+          </a>
+          <a href="#" class="mr-2" @click.prevent="moveDown(i)">
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <a href="#" @click.prevent="remove(i)">
+            <i class="fa fa-trash"></i>
+          </a>
+        </div>
 
         <ul class="geocoder-result-list">
-          <li v-for="locationData in pointOfDeparture.geocoderResults" @click="select(locationData, pointOfDeparture)">
+          <li :key="i" v-for="(locationData, i) in location.geocoderResults" @click="select(locationData, location)">
             {{ locationData.display_name }}
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="d-flex align-items-end">
-      <div class="form-group pos-rel mr-2">
-        <label for="destination_name" class="mr-2">Zielort:</label>
-        <input id="destination_name" name="destination_name" class="form-control"
-              v-model.trim="destination.name" 
-              @input="updateInput(destination)">
+    <input type="hidden" id="locations" name="locations" :value="locationsFieldValue">
 
-        <input type="hidden" id="destination_longname" name="destination_longname" :value="destination.longname">
-        <input type="hidden" id="destination_lat" name="destination_lat" :value="destination.lat">
-        <input type="hidden" id="destination_lng" name="destination_lng" :value="destination.lng">
-
-        <ul class="geocoder-result-list">
-          <li v-for="location in destination.geocoderResults" @click="select(location, destination)">
-            {{ location.display_name }}
-          </li>
-        </ul>
-      </div>
+    <div class="d-flex align-items-center mb-4">
+      <a href="#" @click.prevent="addLocation">
+        <i class="fa fa-plus-circle mr-2"></i>
+        Station hinzufügen
+      </a>
     </div>
-  </div>
 
   <div class="map form-group"></div>
 </div>
@@ -51,56 +48,86 @@ import debounce from 'lodash.debounce';
 import config from '../config';
 import gmapsStyles from '../gmaps-styles.json';
 
+const emptyLocation = {
+  id: null,
+  name: null,
+  longname: null,
+  lat: null,
+  lng: null,
+  geocoderResults: []
+};
+
 export default {
   props: {
-    defaultPointOfDeparture: {
-      type: Object
-    },
-    defaultDestination: {
-      type: Object
+    defaultLocations: {
+      type: Array
     }
   },
 
   data() {
     return {
-      pointOfDeparture: {
-        name: null,
-        longname: null,
-        lat: null,
-        lng: null,
-        marker: null,
-        infowindow: null,
-        geocoderResults: []
-      },
-      destination: {
-        name: null,
-        lat: null,
-        lng: null,
-        marker: null,
-        infowindow: null,
-        geocoderResults: []
-      },
+      isMapLoaded: false,
+      locations: [],
+      realLocations: [],
       lineSymbol: null,
-      connectingLine: null
+      connectingLines: []
     };
   },
 
   computed: {
-    connection() {
-      if (
-        this.pointOfDeparture.marker === null ||
-        this.destination.marker === null
-      )
-        return null;
+    locationsFieldValue() {
+      const locations = this.locations.filter(l => l.lat !== null).map(l => ({
+        id: l.id,
+        name: l.name,
+        longname: l.longname,
+        lat: l.lat,
+        lng: l.lng
+      }));
 
-      return {
-        from: this.pointOfDeparture,
-        to: this.destination
-      };
+      return JSON.stringify(locations);
+    }
+  },
+
+  watch: {
+    locations() {
+      console.log('watch locations');
+      if (!this.isMapLoaded) return;
+
+      this.updateConnectingLines();
+      this.fitMapBounds();
     }
   },
 
   methods: {
+    getId(i, name) {
+      return 'location-' + i + '_' + name;
+    },
+
+    addLocation() {
+      this.locations.push(Object.assign({}, emptyLocation));
+    },
+
+    getNonEmptyLocations() {
+      return this.locations.filter(location => location.lat !== null);
+    },
+
+    moveUp(i) {
+      if (i === 0) return;
+
+      this.locations.splice(i - 1, 0, this.locations.splice(i, 1)[0]);
+    },
+
+    moveDown(i) {
+      if (i === this.locations.length - 1) return;
+
+      this.locations.splice(i + 1, 0, this.locations.splice(i, 1)[0]);
+    },
+
+    remove(i) {
+      if (this.locations[i].marker) this.locations[i].marker.setMap(null);
+      this.locations.splice(i, 1);
+    },
+
     select(locationData, location) {
       location.longname = locationData.display_name;
       location.lat = +locationData.lat;
@@ -108,6 +135,7 @@ export default {
       location.geocoderResults = [];
 
       this.updateMap(location);
+      this.updateConnectingLines();
     },
 
     updateInput: debounce(function(location) {
@@ -122,10 +150,10 @@ export default {
 
     initMap() {
       let center;
-      if (this.pointOfDeparture.lat && this.pointOfDeparture.lng) {
+      if (this.locations.length > 0) {
         center = {
-          lat: this.pointOfDeparture.lat,
-          lng: this.pointOfDeparture.lng
+          lat: this.locations[0].lat,
+          lng: this.locations[0].lng
         };
       } else {
         center = {
@@ -137,6 +165,7 @@ export default {
       this.map = new google.maps.Map(this.$el.querySelector('.map'), {
         styles: gmapsStyles,
         zoom: 5,
+        maxZoom: 13,
         center
       });
 
@@ -144,6 +173,8 @@ export default {
       this.lineSymbol = {
         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
       };
+
+      this.isMapLoaded = true;
     },
 
     addMarker(location) {
@@ -163,6 +194,8 @@ export default {
     },
 
     updateMap(location) {
+      console.log('update map');
+
       const latLng = {
         lat: location.lat,
         lng: location.lng
@@ -175,57 +208,81 @@ export default {
       }
       location.infowindow.setContent('<b>' + location.name + '</b>');
 
-      this.updateConnectingLine();
-
-      this.map.panTo(latLng);
+      // this.map.panTo(latLng);
+      this.fitMapBounds();
     },
 
-    updateConnectingLine() {
-      if (this.connection === null) return;
+    fitMapBounds() {
+      console.log('fit map bounds');
+      const locations = this.getNonEmptyLocations();
 
-      if (this.connectingLine) this.connectingLine.setMap(null);
+      if (locations.length === 0) {
+        this.setDefaultView();
+        return;
+      }
 
-      this.connectingLine = new google.maps.Polyline({
-        path: [
-          {
-            lat: this.connection.from.lat,
-            lng: this.connection.from.lng
-          },
-          {
-            lat: this.connection.to.lat,
-            lng: this.connection.to.lng
-          }
-        ],
-        icons: [
-          {
-            icon: this.lineSymbol,
-            offset: '100%'
-          }
-        ],
-        map: this.map
+      const bounds = new google.maps.LatLngBounds();
+      locations.forEach(location => {
+        bounds.extend(location);
       });
+      this.map.fitBounds(bounds);
+    },
+
+    setDefaultView() {
+      this.map.setCenter(config.defaultLocation);
+      this.map.setZoom(5);
+    },
+
+    updateConnectingLines() {
+      console.log('update connecting lines');
+      this.connectingLines.forEach(line => {
+        line.setMap(null);
+      });
+      this.connectingLines = [];
+
+      const locations = this.getNonEmptyLocations();
+      if (locations.length <= 1) return;
+
+      let i = 0;
+      do {
+        this.connectingLines.push(
+          new google.maps.Polyline({
+            path: [
+              {
+                lat: locations[i].lat,
+                lng: locations[i].lng
+              },
+              {
+                lat: locations[i + 1].lat,
+                lng: locations[i + 1].lng
+              }
+            ],
+            icons: [
+              {
+                icon: this.lineSymbol,
+                offset: '100%'
+              }
+            ],
+            map: this.map
+          })
+        );
+        i += 1;
+      } while (i < locations.length - 1);
     }
   },
 
   created() {
-    if (this.defaultPointOfDeparture) {
-      this.pointOfDeparture.name = this.defaultPointOfDeparture.name;
-      this.pointOfDeparture.lat = this.defaultPointOfDeparture.lat;
-      this.pointOfDeparture.lng = this.defaultPointOfDeparture.lng;
-    }
-    if (this.defaultDestination) {
-      this.destination.name = this.defaultDestination.name;
-      this.destination.lat = this.defaultDestination.lat;
-      this.destination.lng = this.defaultDestination.lng;
-    }
+    this.locations = this.defaultLocations.slice(0);
   },
 
   mounted() {
     EventBus.$on('google-maps-loaded', () => {
       this.initMap();
-      if (this.pointOfDeparture.lat) this.addMarker(this.pointOfDeparture);
-      if (this.destination.lat) this.addMarker(this.destination);
-      this.updateConnectingLine();
+      this.locations.forEach(location => {
+        this.addMarker(location);
+      });
+      this.updateConnectingLines();
+      this.fitMapBounds();
     });
   }
 };

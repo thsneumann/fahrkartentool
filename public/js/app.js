@@ -36866,61 +36866,92 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
 
+
+var emptyLocation = {
+  id: null,
+  name: null,
+  longname: null,
+  lat: null,
+  lng: null,
+  geocoderResults: []
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    defaultPointOfDeparture: {
-      type: Object
-    },
-    defaultDestination: {
-      type: Object
+    defaultLocations: {
+      type: Array
     }
   },
 
   data: function data() {
     return {
-      pointOfDeparture: {
-        name: null,
-        longname: null,
-        lat: null,
-        lng: null,
-        marker: null,
-        infowindow: null,
-        geocoderResults: []
-      },
-      destination: {
-        name: null,
-        lat: null,
-        lng: null,
-        marker: null,
-        infowindow: null,
-        geocoderResults: []
-      },
+      isMapLoaded: false,
+      locations: [],
+      realLocations: [],
       lineSymbol: null,
-      connectingLine: null
+      connectingLines: []
     };
   },
 
 
   computed: {
-    connection: function connection() {
-      if (this.pointOfDeparture.marker === null || this.destination.marker === null) return null;
+    locationsFieldValue: function locationsFieldValue() {
+      var locations = this.locations.filter(function (l) {
+        return l.lat !== null;
+      }).map(function (l) {
+        return {
+          id: l.id,
+          name: l.name,
+          longname: l.longname,
+          lat: l.lat,
+          lng: l.lng
+        };
+      });
 
-      return {
-        from: this.pointOfDeparture,
-        to: this.destination
-      };
+      return JSON.stringify(locations);
+    }
+  },
+
+  watch: {
+    locations: function locations() {
+      console.log('watch locations');
+      if (!this.isMapLoaded) return;
+
+      this.updateConnectingLines();
+      this.fitMapBounds();
     }
   },
 
   methods: {
+    getId: function getId(i, name) {
+      return 'location-' + i + '_' + name;
+    },
+    addLocation: function addLocation() {
+      this.locations.push(Object.assign({}, emptyLocation));
+    },
+    getNonEmptyLocations: function getNonEmptyLocations() {
+      return this.locations.filter(function (location) {
+        return location.lat !== null;
+      });
+    },
+    moveUp: function moveUp(i) {
+      if (i === 0) return;
+
+      this.locations.splice(i - 1, 0, this.locations.splice(i, 1)[0]);
+    },
+    moveDown: function moveDown(i) {
+      if (i === this.locations.length - 1) return;
+
+      this.locations.splice(i + 1, 0, this.locations.splice(i, 1)[0]);
+    },
+    remove: function remove(i) {
+      if (this.locations[i].marker) this.locations[i].marker.setMap(null);
+      this.locations.splice(i, 1);
+    },
     select: function select(locationData, location) {
       location.longname = locationData.display_name;
       location.lat = +locationData.lat;
@@ -36928,6 +36959,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       location.geocoderResults = [];
 
       this.updateMap(location);
+      this.updateConnectingLines();
     },
 
 
@@ -36943,10 +36975,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     initMap: function initMap() {
       var center = void 0;
-      if (this.pointOfDeparture.lat && this.pointOfDeparture.lng) {
+      if (this.locations.length > 0) {
         center = {
-          lat: this.pointOfDeparture.lat,
-          lng: this.pointOfDeparture.lng
+          lat: this.locations[0].lat,
+          lng: this.locations[0].lng
         };
       } else {
         center = {
@@ -36958,6 +36990,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.map = new google.maps.Map(this.$el.querySelector('.map'), {
         styles: __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json___default.a,
         zoom: 5,
+        maxZoom: 13,
         center: center
       });
 
@@ -36965,6 +36998,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.lineSymbol = {
         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
       };
+
+      this.isMapLoaded = true;
     },
     addMarker: function addMarker(location) {
       var _this = this;
@@ -36984,6 +37019,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     updateMap: function updateMap(location) {
+      console.log('update map');
+
       var latLng = {
         lat: location.lat,
         lng: location.lng
@@ -36996,52 +37033,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
       location.infowindow.setContent('<b>' + location.name + '</b>');
 
-      this.updateConnectingLine();
-
-      this.map.panTo(latLng);
+      // this.map.panTo(latLng);
+      this.fitMapBounds();
     },
-    updateConnectingLine: function updateConnectingLine() {
-      if (this.connection === null) return;
+    fitMapBounds: function fitMapBounds() {
+      console.log('fit map bounds');
+      var locations = this.getNonEmptyLocations();
 
-      if (this.connectingLine) this.connectingLine.setMap(null);
+      if (locations.length === 0) {
+        this.setDefaultView();
+        return;
+      }
 
-      this.connectingLine = new google.maps.Polyline({
-        path: [{
-          lat: this.connection.from.lat,
-          lng: this.connection.from.lng
-        }, {
-          lat: this.connection.to.lat,
-          lng: this.connection.to.lng
-        }],
-        icons: [{
-          icon: this.lineSymbol,
-          offset: '100%'
-        }],
-        map: this.map
+      var bounds = new google.maps.LatLngBounds();
+      locations.forEach(function (location) {
+        bounds.extend(location);
       });
+      this.map.fitBounds(bounds);
+    },
+    setDefaultView: function setDefaultView() {
+      this.map.setCenter(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].defaultLocation);
+      this.map.setZoom(5);
+    },
+    updateConnectingLines: function updateConnectingLines() {
+      console.log('update connecting lines');
+      this.connectingLines.forEach(function (line) {
+        line.setMap(null);
+      });
+      this.connectingLines = [];
+
+      var locations = this.getNonEmptyLocations();
+      if (locations.length <= 1) return;
+
+      var i = 0;
+      do {
+        this.connectingLines.push(new google.maps.Polyline({
+          path: [{
+            lat: locations[i].lat,
+            lng: locations[i].lng
+          }, {
+            lat: locations[i + 1].lat,
+            lng: locations[i + 1].lng
+          }],
+          icons: [{
+            icon: this.lineSymbol,
+            offset: '100%'
+          }],
+          map: this.map
+        }));
+        i += 1;
+      } while (i < locations.length - 1);
     }
   },
 
   created: function created() {
-    if (this.defaultPointOfDeparture) {
-      this.pointOfDeparture.name = this.defaultPointOfDeparture.name;
-      this.pointOfDeparture.lat = this.defaultPointOfDeparture.lat;
-      this.pointOfDeparture.lng = this.defaultPointOfDeparture.lng;
-    }
-    if (this.defaultDestination) {
-      this.destination.name = this.defaultDestination.name;
-      this.destination.lat = this.defaultDestination.lat;
-      this.destination.lng = this.defaultDestination.lng;
-    }
+    this.locations = this.defaultLocations.slice(0);
   },
   mounted: function mounted() {
     var _this2 = this;
 
     EventBus.$on('google-maps-loaded', function () {
       _this2.initMap();
-      if (_this2.pointOfDeparture.lat) _this2.addMarker(_this2.pointOfDeparture);
-      if (_this2.destination.lat) _this2.addMarker(_this2.destination);
-      _this2.updateConnectingLine();
+      _this2.locations.forEach(function (location) {
+        _this2.addMarker(location);
+      });
+      _this2.updateConnectingLines();
+      _this2.fitMapBounds();
     });
   }
 });
@@ -37054,204 +37111,150 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "vue-ticket-locations-picker" }, [
-    _c("div", { staticClass: "d-flex" }, [
-      _c("div", { staticClass: "d-flex align-items-end" }, [
-        _c("div", { staticClass: "form-group pos-rel mr-2" }, [
-          _c(
-            "label",
-            { staticClass: "mr-2", attrs: { for: "point_of_departure_name" } },
-            [_vm._v("Abfahrtsort:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model.trim",
-                value: _vm.pointOfDeparture.name,
-                expression: "pointOfDeparture.name",
-                modifiers: { trim: true }
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              id: "point_of_departure_name",
-              name: "point_of_departure_name"
-            },
-            domProps: { value: _vm.pointOfDeparture.name },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
+  return _c(
+    "div",
+    { staticClass: "vue-ticket-locations-picker" },
+    [
+      _c("p", [_vm._v("Stationen")]),
+      _vm._v(" "),
+      _vm._l(_vm.locations, function(location, i) {
+        return _c("div", { key: i, staticClass: "d-flex align-items-end" }, [
+          _c("div", { staticClass: "form-group pos-rel mr-2" }, [
+            _c("div", { staticClass: "d-flex align-items-center" }, [
+              _c("i", { staticClass: "fa fa-map-marker mr-2" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: location.name,
+                    expression: "location.name",
+                    modifiers: { trim: true }
                   }
-                  _vm.$set(
-                    _vm.pointOfDeparture,
-                    "name",
-                    $event.target.value.trim()
-                  )
-                },
-                function($event) {
-                  _vm.updateInput(_vm.pointOfDeparture)
+                ],
+                staticClass: "form-control mr-2",
+                attrs: { id: _vm.getId(i, "name") },
+                domProps: { value: location.name },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(location, "name", $event.target.value.trim())
+                    },
+                    function($event) {
+                      _vm.updateInput(location)
+                    }
+                  ],
+                  blur: function($event) {
+                    _vm.$forceUpdate()
+                  }
                 }
-              ],
-              blur: function($event) {
-                _vm.$forceUpdate()
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: {
-              type: "hidden",
-              id: "point_of_departure_longname",
-              name: "point_of_departure_longname"
-            },
-            domProps: { value: _vm.pointOfDeparture.longname }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: {
-              type: "hidden",
-              id: "point_of_departure_lat",
-              name: "point_of_departure_lat"
-            },
-            domProps: { value: _vm.pointOfDeparture.lat }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: {
-              type: "hidden",
-              id: "point_of_departure_lng",
-              name: "point_of_departure_lng"
-            },
-            domProps: { value: _vm.pointOfDeparture.lng }
-          }),
-          _vm._v(" "),
-          _c(
-            "ul",
-            { staticClass: "geocoder-result-list" },
-            _vm._l(_vm.pointOfDeparture.geocoderResults, function(
-              locationData
-            ) {
-              return _c(
-                "li",
+              }),
+              _vm._v(" "),
+              _c(
+                "a",
                 {
+                  staticClass: "mr-2",
+                  attrs: { href: "#" },
                   on: {
                     click: function($event) {
-                      _vm.select(locationData, _vm.pointOfDeparture)
+                      $event.preventDefault()
+                      _vm.moveUp(i)
                     }
                   }
                 },
-                [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(locationData.display_name) +
-                      "\n          "
-                  )
-                ]
+                [_c("i", { staticClass: "fa fa-angle-up" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "mr-2",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.moveDown(i)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-angle-down" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.remove(i)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-trash" })]
               )
-            })
-          )
+            ]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              { staticClass: "geocoder-result-list" },
+              _vm._l(location.geocoderResults, function(locationData, i) {
+                return _c(
+                  "li",
+                  {
+                    key: i,
+                    on: {
+                      click: function($event) {
+                        _vm.select(locationData, location)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(locationData.display_name) +
+                        "\n          "
+                    )
+                  ]
+                )
+              })
+            )
+          ])
         ])
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "hidden", id: "locations", name: "locations" },
+        domProps: { value: _vm.locationsFieldValue }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-flex align-items-center mb-4" }, [
+        _c(
+          "a",
+          {
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.addLocation($event)
+              }
+            }
+          },
+          [
+            _c("i", { staticClass: "fa fa-plus-circle mr-2" }),
+            _vm._v("\n        Station hinzufügen\n      ")
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "d-flex align-items-end" }, [
-        _c("div", { staticClass: "form-group pos-rel mr-2" }, [
-          _c(
-            "label",
-            { staticClass: "mr-2", attrs: { for: "destination_name" } },
-            [_vm._v("Zielort:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model.trim",
-                value: _vm.destination.name,
-                expression: "destination.name",
-                modifiers: { trim: true }
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { id: "destination_name", name: "destination_name" },
-            domProps: { value: _vm.destination.name },
-            on: {
-              input: [
-                function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.destination, "name", $event.target.value.trim())
-                },
-                function($event) {
-                  _vm.updateInput(_vm.destination)
-                }
-              ],
-              blur: function($event) {
-                _vm.$forceUpdate()
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: {
-              type: "hidden",
-              id: "destination_longname",
-              name: "destination_longname"
-            },
-            domProps: { value: _vm.destination.longname }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: {
-              type: "hidden",
-              id: "destination_lat",
-              name: "destination_lat"
-            },
-            domProps: { value: _vm.destination.lat }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: {
-              type: "hidden",
-              id: "destination_lng",
-              name: "destination_lng"
-            },
-            domProps: { value: _vm.destination.lng }
-          }),
-          _vm._v(" "),
-          _c(
-            "ul",
-            { staticClass: "geocoder-result-list" },
-            _vm._l(_vm.destination.geocoderResults, function(location) {
-              return _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.select(location, _vm.destination)
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(location.display_name) +
-                      "\n          "
-                  )
-                ]
-              )
-            })
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "map form-group" })
-  ])
+      _c("div", { staticClass: "map form-group" })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

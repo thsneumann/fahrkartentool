@@ -26,14 +26,7 @@ class LocationsController extends Controller
      */
     public function store(Request $request)
     {
-        $location = new Location();
-        $location->name = $request['name'];
-        $location->longname = $request['longname'];
-        $location->lat = round($request['lat'], 5);
-        $location->lng = round($request['lng'], 5);
-        $location->save();
-        
-        return $location;
+        //
     }
 
     /**
@@ -74,10 +67,10 @@ class LocationsController extends Controller
     {
         $location = Location::findOrFail($id);
         $outgoing = [];
-        $tickets = $location->pointOfDepartureFor;
-       
+        $tickets = $location->originFor;
+        
         foreach ($tickets as $ticket) {
-            $outgoing[] = ['lat' => $ticket->destination->lat, 'lng' => $ticket->destination->lng];
+            $outgoing[] = ['lat' => $ticket->destination()->lat, 'lng' => $ticket->destination()->lng];
         }
 
         return $outgoing;
@@ -88,9 +81,9 @@ class LocationsController extends Controller
         $location = Location::findOrFail($id);
         $incoming = [];
         $tickets = $location->destinationFor;
-       
+        
         foreach ($tickets as $ticket) {
-            $incoming[] = ['lat' => $ticket->pointOfDeparture->lat, 'lng' => $ticket->pointOfDeparture->lng];
+            $incoming[] = ['lat' => $ticket->origin()->lat, 'lng' => $ticket->origin()->lng];
         }
 
         return $incoming;

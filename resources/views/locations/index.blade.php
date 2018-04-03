@@ -30,7 +30,7 @@
                         <td>{{ $location->longname }}</td>
                         <td>{{ $location->lat }}</td>
                         <td>{{ $location->lng }}</td>
-                        <td>{{ count($location->pointOfDepartureFor) }}</td>
+                        <td>{{ count($location->originFor) }}</td>
                         <td>{{ count($location->destinationFor) }}</td>
                         <td class="d-flex">
                             <a href="{{ route('locations.edit', ['id' => $location->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">

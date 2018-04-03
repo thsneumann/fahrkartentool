@@ -1,10 +1,10 @@
 <div class="map-popup">
     <h3>{{ $location->name }}</h3>
     
-    @if (count($podTickets) > 0)
+    @if (count($ticketsWithOrigin) > 0)
         <h4>Tickets mit diesem Abfahrtsort</h4>
         <ul class="ticket-list">
-        @foreach ($podTickets as $ticket)
+        @foreach ($ticketsWithOrigin as $ticket)
             <li>
                 @include('partials.ticket-thumb', ['ticket' => $ticket])
                 <a href="{{ route('tickets.edit', ['id' => $ticket->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
@@ -15,10 +15,10 @@
         </ul>
     @endif
     
-    @if (count($destTickets) > 0)
+    @if (count($ticketsWithDestination) > 0)
         <h4>Tickets mit diesem Zielort</h4>
         <ul class="ticket-list">
-        @foreach ($destTickets as $ticket)
+        @foreach ($ticketsWithDestination as $ticket)
             <li>
                 @include('partials.ticket-thumb', ['ticket' => $ticket])
                 <a href="{{ route('tickets.edit', ['id' => $ticket->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
@@ -28,7 +28,7 @@
         @endforeach
     @endif
 
-    @if (count($podTickets) == 0 && count($destTickets) == 0)
-        <p><em>Diesem Ort wurden noch keine Tickets zugeordnet</em></p>
+    @if (count($ticketsWithOrigin) == 0 && count($ticketsWithDestination) == 0)
+        <p><em>Diesem Ort wurde noch nicht als Abfahrts- oder Zielort zugeordnet.</em></p>
     @endif
 </div>
