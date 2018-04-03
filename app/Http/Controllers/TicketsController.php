@@ -108,7 +108,7 @@ class TicketsController extends Controller
                 $id = $locationEntry->id;
             }
             $locationCount = count($locations);
-            if ($locationCount > 1 && index == $locationCount - 1) $index = 9999;
+            if ($locationCount > 1 && $index == $locationCount - 1) $index = 9999;
             $pivotEntries[$id] = ['index' => $index];
             $index += 1;
         }
