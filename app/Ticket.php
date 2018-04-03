@@ -26,7 +26,7 @@ class Ticket extends Model
     {
         if ($this->locations()->count() < 2) return null;
         
-        return $this->locations()->orderBy('index')->get()->last();
+        return $this->locations()->where('index', 9999)->first();
     }
 
     public function stopovers()

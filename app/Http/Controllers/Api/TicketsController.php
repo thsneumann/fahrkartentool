@@ -11,16 +11,17 @@ class TicketsController extends Controller
 {
     private function toCSV($tickets)
     {
-        $headings = ['ID', 'Signatur', 'Abfahrtsort', 'Abfahrtsort (lang)', 'Ziel', 'Ziel (lang)', 'Beschreibung', 'Kategorie', 'Klasse', 'Preis', 'Bearbeitungen', 'Änderungsdatum'];
+        $headings = ['ID', 'Signatur', 'Abfahrtsort', 'Abfahrtsort (lang)', 'Zwischenhalte', 'Ziel', 'Ziel (lang)', 'Beschreibung', 'Kategorie', 'Klasse', 'Preis', 'Bearbeitungen', 'Änderungsdatum'];
         $output = implode(',', $headings) . PHP_EOL;
         foreach ($tickets as $ticket) {
             $columns = [
                 $ticket->id,
                 $ticket->signature,
-                $ticket->pointOfDeparture ? $ticket->pointOfDeparture->name : '',
-                $ticket->pointOfDeparture ? '"' . $ticket->pointOfDeparture->longname . '"' : '',
-                $ticket->destination ? $ticket->destination->name : '',
-                $ticket->destination ? '"' . $ticket->destination->longname . '"' : '',
+                $ticket->origin() ? $ticket->origin()->name : '',
+                $ticket->origin() ? '"' . $ticket->origin()->longname . '"' : '',
+                $ticket->stopovers() ? '"' . $ticket->stopovers()->implode('name', ', ') . '"' : '',
+                $ticket->destination() ? $ticket->destination()->name : '',
+                $ticket->destination() ? '"' . $ticket->destination()->longname . '"' : '',
                 $ticket->description,
                 $ticket->category ? $ticket->category->name : '',
                 $ticket->vehicleClass ? $ticket->vehicleClass->name : '',

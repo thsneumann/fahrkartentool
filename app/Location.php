@@ -12,13 +12,13 @@ class Location extends Model
         return $this->belongsToMany(Ticket::class)->withPivot('index');
     }
 
-    /* public function pointOfDepartureFor()
+    public function originFor()
     {
-        return $this->hasMany(Ticket::class, 'point_of_departure_id');
+        return $this->belongsToMany(Ticket::class)->wherePivot('index', 0);
     }
 
     public function destinationFor()
     {
-        return $this->hasMany(Ticket::class, 'destination_id');
-    } */
+        return $this->belongsToMany(Ticket::class)->wherePivot('index', 9999);
+    }
 }
