@@ -107,7 +107,8 @@ class TicketsController extends Controller
                 }
                 $id = $locationEntry->id;
             }
-            if ($index == count($locations) - 1) $index = 9999;
+            $locationCount = count($locations);
+            if ($locationCount > 1 && index == $locationCount - 1) $index = 9999;
             $pivotEntries[$id] = ['index' => $index];
             $index += 1;
         }
@@ -144,7 +145,6 @@ class TicketsController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        $ticket->point_of_departure_id = null;
         $ticket->destination_id = null;
         $ticket->description = null;
         $ticket->category_id = null;
