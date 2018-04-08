@@ -21,18 +21,8 @@ button.btn:hover {
   cursor: pointer;
 }
 
-.figure-medium {
-  max-width: 600px;
-}
-
-.img-small {
-  height: 150px;
-}
-
-.navbar-nav {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+.tickets-table .img-thumbnail {
+  max-width: 10rem;
 }
 
 .page-wrap {
@@ -46,63 +36,8 @@ button.btn:hover {
   min-height: 100vh;
 }
 
-.pagination {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.pagination li {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.tickets-table .img-thumbnail {
-  max-width: 10rem;
-}
-
 .pos-rel {
   position: relative;
-}
-
-.homepage {
-  background-color: #000;
-  background: url("/img/erde.png") no-repeat center center;
-  background-size: cover;
-  overflow: hidden;
-}
-
-.homepage .site-content {
-  padding: 0;
-}
-
-.home-title {
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  top: 0.5rem;
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  font-size: 4rem;
-}
-
-.home-nav {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.home-nav .btn {
-  padding: 1rem 2rem;
-  font-size: 2rem;
 }
 
 .site-content {
@@ -116,6 +51,65 @@ button.btn:hover {
 
 .site-footer {
   margin-top: auto;
+}
+
+.arrow-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 340px;
+  max-width: 100%;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.arrow-link img {
+  margin-left: auto;
+}
+
+.figure-medium {
+  max-width: 600px;
+}
+
+.image-grid {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.image-grid [class^='col'] {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.img-small {
+  height: 150px;
+}
+
+.video-preview {
+  display: block;
+  position: relative;
+}
+
+.video-preview .play-button {
+  position: absolute;
+  left: 30%;
+  bottom: 15px;
+}
+
+.video-preview:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 #explorer-map {
@@ -172,6 +166,54 @@ button.btn:hover {
   bottom: 0.25rem;
   padding: 0.125rem 0.25rem;
   font-size: 0.5rem;
+}
+
+.navbar-nav {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.pagination {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.pagination li {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.welcome-page,
+.intro-page {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.welcome-page {
+  background: url("/img/bg_intro.jpg") center;
+  color: #fff;
+}
+
+.welcome-page a {
+  color: #fff;
+}
+
+.intro-page a {
+  color: #000;
+}
+
+.text-size-1 {
+  font-size: 1.25rem;
+}
+
+.text-size-2 {
+  font-size: 1.5rem;
+}
+
+.text-size-3 {
+  font-size: 2.5rem;
 }
 
 .vue-location-editor .map {

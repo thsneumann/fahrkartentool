@@ -1,0 +1,20 @@
+.welcome-page,
+.intro-page {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.welcome-page {
+  background: url('/img/bg_intro.jpg') center;
+  color: #fff;
+
+  a {
+    color: #fff;
+  }
+}
+
+.intro-page {
+  a {
+    color: #000;
+  }
+}

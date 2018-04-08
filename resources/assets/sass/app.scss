@@ -8,11 +8,15 @@
 // APP
 
 @import 'includes/base';
+@import 'includes/buttons';
 @import 'includes/content';
-@import 'includes/helpers';
-@import 'includes/homepage';
 @import 'includes/layout';
+@import 'includes/links';
+@import 'includes/media';
 @import 'includes/map';
+@import 'includes/nav';
+@import 'includes/pages';
+@import 'includes/text';
 @import 'includes/vue-components/location-editor';
 @import 'includes/vue-components/location-picker';
 @import 'includes/vue-components/ticket-locations-picker';

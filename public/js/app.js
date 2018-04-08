@@ -35187,8 +35187,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         axios.get('/api/locations/' + location.id + '/incoming').then(function (pointsOfDeparture) {
           var _connectingLines;
 
-          (_connectingLines = _this2.connectingLines).push.apply(_connectingLines, _toConsumableArray(pointsOfDeparture.data.map(function (pointOfDeparture) {
-            return _this2.createConnectingLine(pointOfDeparture, location);
+          (_connectingLines = _this2.connectingLines).push.apply(_connectingLines, _toConsumableArray(pointsOfDeparture.data.map(function (origin) {
+            return _this2.createConnectingLine(origin, location);
           })));
         });
       });

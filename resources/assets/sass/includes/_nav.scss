@@ -1,0 +1,12 @@
+.navbar-nav {
+  flex-grow: 1;
+}
+
+.pagination {
+  justify-content: center;
+
+  li {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}

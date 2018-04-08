@@ -14,8 +14,12 @@
 // PAGES
 
 Route::get('/', function () {
-    return view('intro');
+    return view('welcome');
 })->name('index');
+
+Route::get('/intro', function() {
+    return view('intro');
+})->name('intro');
 
 Route::get('/home', function () {
     return view('home');

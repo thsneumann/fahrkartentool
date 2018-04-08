@@ -1,36 +1,6 @@
-button.btn:hover {
-  cursor: pointer;
-}
-
-.figure-medium {
-  max-width: 600px;
-}
-
-.img-small {
-  height: 150px;
-}
-
-.navbar-nav {
-  flex-grow: 1;
-}
-
-.page-wrap {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.pagination {
-  justify-content: center;
-
-  li {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-}
-
 .tickets-table {
   .img-thumbnail {
     max-width: 10rem;
   }
 }
+
