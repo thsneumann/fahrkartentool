@@ -15,17 +15,6 @@ class GameController extends Controller
 
     public function index()
     {
-        $points = session()->get('points');
-        
-        if ($points > 0) {
-            return $this->play();
-        }
-        
-        return view('game.welcome');
-    }
-
-    public function play()
-    {
         $mode = $this->getRandomPlayMode();
 
         if ($mode == 'check') {
@@ -44,7 +33,7 @@ class GameController extends Controller
         $points = session()->get('points', 0);
         if ($points == 0) $mode = 'add';
 
-        return view('game.play', [
+        return view('game.index', [
             'mode' => $mode,
             'ticket' => $ticket,
             'locations' => Location::orderBy('name')->get(),
@@ -56,7 +45,7 @@ class GameController extends Controller
 
     public function addLocation()
     {
-        return view('locations.create', ['redirect' => 'game.play']);
+        return view('locations.create', ['redirect' => 'game.index']);
     }
 
     public function highscore()
