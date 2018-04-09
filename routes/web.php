@@ -34,7 +34,6 @@ Route::get('/about', function () {
 
 Route::group(['prefix' => 'game'], function () {
     Route::get('/', 'GameController@index')->name('game.index');
-    Route::get('/add-location', 'GameController@addLocation')->name('game.add-location');
     Route::get('highscore', 'GameController@highscore')->name('game.highscore');
 });
 

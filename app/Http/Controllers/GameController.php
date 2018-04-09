@@ -43,11 +43,6 @@ class GameController extends Controller
         ]);
     }
 
-    public function addLocation()
-    {
-        return view('locations.create', ['redirect' => 'game.index']);
-    }
-
     public function highscore()
     {
         $users = User::where('points', '>', 0)->orderBy('points', 'desc')->get();
