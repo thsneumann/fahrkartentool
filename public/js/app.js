@@ -35159,7 +35159,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       });
 
       var options = {
-        imagePath: 'img/m'
+        imagePath: 'img/m',
+        minimumClusterSize: 10
       };
 
       var markerClusterer = new MarkerClusterer(this.map, markers, options);

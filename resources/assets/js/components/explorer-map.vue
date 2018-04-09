@@ -58,7 +58,8 @@ export default {
       });
 
       const options = {
-        imagePath: 'img/m'
+        imagePath: 'img/m',
+        minimumClusterSize: 10
       };
 
       const markerClusterer = new MarkerClusterer(this.map, markers, options);
