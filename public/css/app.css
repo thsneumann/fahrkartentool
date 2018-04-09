@@ -112,6 +112,12 @@ button.btn:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+#intro-video {
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
+  background-color: #000000;
+}
+
 #explorer-map {
   margin-top: -2rem;
   width: 100%;

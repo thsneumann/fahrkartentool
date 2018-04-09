@@ -39,7 +39,7 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="video/intro.m4v" target="_blank" class="video-preview">
+            <a href="#intro-video" class="video-preview" data-fancybox data-small-btn="true">
                 <img src="img/video-vorschau.jpg" alt="Vorschaubild Erklärvideo.">
                 <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts." class="play-button">
             </a>
@@ -47,6 +47,11 @@
     </div>
 </div>
 
+<video id="intro-video" controls style="display: none">
+    <source src="{{ asset('video/intro.mp4') }}" type="video/mp4">
+    Ihr Browser unterstützt keine HTML5-Videos.
+</video>
 
+</div>
 
 @endsection
