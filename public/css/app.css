@@ -17,6 +17,12 @@ ul {
   padding: 0;
 }
 
+.alert-info {
+  color: #000;
+  background-color: #b8ceeb;
+  border-color: #b8ceeb;
+}
+
 button.btn:hover {
   cursor: pointer;
 }
@@ -51,6 +57,14 @@ button.btn:hover {
 
 .site-footer {
   margin-top: auto;
+}
+
+a {
+  color: #3586de;
+}
+
+a:hover {
+  color: #2973c5;
 }
 
 .arrow-link {
