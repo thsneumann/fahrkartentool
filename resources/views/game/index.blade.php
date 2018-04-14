@@ -39,7 +39,6 @@
                 </div>
             @endif
         </div>
-        <img class="ml-5 img-small align-self-end" src="/img/fritz_portrait.jpg" alt="Ein imaginiertes Porträt von Fritz Hellmuth.">
     </div>
 
 
