@@ -8,6 +8,7 @@
         <div class="d-flex align-items-center">
           <i class="fa fa-map-marker mr-2"></i>
           <input :id="getId(i, 'name')" class="form-control mr-2"
+              autocomplete="off"
               v-model.trim="location.name" 
               @input="updateInput(location)">
           <a href="#" class="mr-2" @click.prevent="moveUp(i)">

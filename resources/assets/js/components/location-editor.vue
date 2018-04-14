@@ -4,7 +4,9 @@
     <div class="picker">
       <div class="form-group pos-rel">
         <div class="d-flex align-items-center">
-            <input type="text" id="name" name="name" :value="location.name" class="form-control mr-2"
+            <input type="text" id="name" name="name" :value="location.name" 
+            class="form-control mr-2"
+            autocomplete="off"
             v-model.trim="location.name" 
             @input="updateInput">
         </div>
