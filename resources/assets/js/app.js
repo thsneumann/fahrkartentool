@@ -16,8 +16,3 @@ const app = new Vue({
 window.initMap = () => {
   EventBus.$emit('google-maps-loaded');
 };
-
-// Home page animation
-import HomeAnimation from './modules/home-animation';
-
-// if (document.body.classList.contains('homepage')) HomeAnimation.run();

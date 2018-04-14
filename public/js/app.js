@@ -1483,16 +1483,13 @@ module.exports = debounce;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(52);
+module.exports = __webpack_require__(51);
 
 
 /***/ }),
 /* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_home_animation__ = __webpack_require__(51);
 __webpack_require__(15);
 
 window.EventBus = new Vue();
@@ -1508,11 +1505,6 @@ var app = new Vue({
 window.initMap = function () {
   EventBus.$emit('google-maps-loaded');
 };
-
-// Home page animation
-
-
-// if (document.body.classList.contains('homepage')) HomeAnimation.run();
 
 /***/ }),
 /* 15 */
@@ -37269,24 +37261,6 @@ if (false) {
 
 /***/ }),
 /* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = ({
-  run: function run() {
-    var globe = document.getElementById('home-globe');
-    var delay = parseInt(getComputedStyle(globe).transitionDuration, 10) * 1000;
-    globe.classList.remove('is-zoomed');
-
-    var homeNav = document.getElementById('home-nav');
-    setTimeout(function () {
-      homeNav.classList.add('fade-in');
-    }, delay);
-  }
-});
-
-/***/ }),
-/* 52 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
