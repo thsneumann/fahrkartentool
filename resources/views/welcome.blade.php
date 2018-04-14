@@ -5,16 +5,12 @@
 
 @section('content')
 
-<div class="container-fluid">
-    <div class="row mb-5">
-        <div class="col">
-            <p class="text-size-3 text-uppercase font-weight-bold">Herzlich Willkommen!</p>
-        </div>
-    </div>
-
-    <div class="row mb-5">
+<div class="container-fluid d-flex flex-column">
+    <div class="row mb-3">
         <div class="col-sm-5">
-            <h1 class="text-uppercase font-weight-bold mb-4">Fritz-Ticket-Tool</h1>
+            <p class="text-size-3 text-uppercase font-weight-bold">Herzlich Willkommen!</p>
+
+            <h1 class="text-size-3 text-uppercase font-weight-bold mb-4">Fritz-Fahrkarten-Tool</h1>
             <div class="text-size-1 font-weight-bold">
                 <p>Die Historische Fahrkartensammlung<br>
                 des Deutschen Technikmuseums<br>
@@ -31,8 +27,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row align-items-end mt-auto">
         <div class="col-sm-8">
+            <img src="img/raute_technikmuseum.png" alt="Logo Stiftung Deutsches Technikmuseum" class="mb-2">
             <a href="{{ route('intro') }}" class="arrow-link">
                 Los geht&apos;s!
                 <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts.">
@@ -40,8 +37,13 @@
         </div>
         <div class="col-sm-4">
             <a href="#intro-video" class="video-preview" data-fancybox data-small-btn="true">
-                <img src="img/video-vorschau.jpg" alt="Vorschaubild Erklärvideo.">
-                <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts." class="play-button">
+                <figure class="mb-0">
+                    <img src="img/video-vorschau.jpg" alt="Vorschaubild Erklärvideo.">
+                    <figcaption class="caption text-size-1 text-uppercase">
+                        <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts." class="mr-2">
+                        Erklärvideo
+                    </figcaption>
+                </figure>
             </a>
         </div>
     </div>

@@ -1,15 +1,27 @@
 .welcome-page,
 .intro-page {
-  padding-left: 3.5rem;
-  padding-right: 3.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  // overflow-x: hidden;
+
+  
 }
 
 .welcome-page {
-  background: url('/img/bg_intro.jpg') center;
+  background: url('/img/bg_intro.jpg') no-repeat center;
+  background-size: cover;
   color: #fff;
 
   a {
     color: #fff;
+  }
+
+  .site-content {
+    min-height: 100vh;
+
+    > div {
+      height: 100%;
+    }
   }
 }
 
