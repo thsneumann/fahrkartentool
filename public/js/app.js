@@ -36911,7 +36911,6 @@ var emptyLocation = {
 
   watch: {
     locations: function locations() {
-      console.log('watch locations');
       if (!this.isMapLoaded) return;
 
       this.updateConnectingLines();
@@ -36924,7 +36923,11 @@ var emptyLocation = {
       return 'location-' + i + '_' + name;
     },
     addLocation: function addLocation() {
-      this.locations.push(Object.assign({}, emptyLocation));
+      if (this.locations.length <= 1) {
+        this.locations.push(Object.assign({}, emptyLocation));
+      } else {
+        this.locations.splice(this.locations.length - 1, 0, Object.assign({}, emptyLocation));
+      }
     },
     getNonEmptyLocations: function getNonEmptyLocations() {
       return this.locations.filter(function (location) {
@@ -36968,7 +36971,8 @@ var emptyLocation = {
 
     initMap: function initMap() {
       var center = void 0;
-      if (this.locations.length > 0) {
+      var locations = this.getNonEmptyLocations(this.locations);
+      if (locations.length > 0) {
         center = {
           lat: this.locations[0].lat,
           lng: this.locations[0].lng
@@ -37012,8 +37016,6 @@ var emptyLocation = {
       });
     },
     updateMap: function updateMap(location) {
-      console.log('update map');
-
       var latLng = {
         lat: location.lat,
         lng: location.lng
@@ -37030,9 +37032,7 @@ var emptyLocation = {
       this.fitMapBounds();
     },
     fitMapBounds: function fitMapBounds() {
-      console.log('fit map bounds');
       var locations = this.getNonEmptyLocations();
-
       if (locations.length === 0) {
         this.setDefaultView();
         return;
@@ -37045,11 +37045,9 @@ var emptyLocation = {
       this.map.fitBounds(bounds);
     },
     setDefaultView: function setDefaultView() {
-      this.map.setCenter(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].defaultLocation);
       this.map.setZoom(5);
     },
     updateConnectingLines: function updateConnectingLines() {
-      console.log('update connecting lines');
       this.connectingLines.forEach(function (line) {
         line.setMap(null);
       });
@@ -37080,14 +37078,19 @@ var emptyLocation = {
   },
 
   created: function created() {
-    this.locations = this.defaultLocations.slice(0);
+    if (this.defaultLocations.length > 0) {
+      this.locations = this.defaultLocations.slice(0);
+    } else {
+      this.locations.push(Object.assign({}, emptyLocation), Object.assign({}, emptyLocation));
+    }
   },
   mounted: function mounted() {
     var _this2 = this;
 
     EventBus.$on('google-maps-loaded', function () {
       _this2.initMap();
-      _this2.locations.forEach(function (location) {
+      var locations = _this2.getNonEmptyLocations();
+      locations.forEach(function (location) {
         _this2.addMarker(location);
       });
       _this2.updateConnectingLines();
@@ -37108,7 +37111,7 @@ var render = function() {
     "div",
     { staticClass: "vue-ticket-locations-picker" },
     [
-      _c("p", [_vm._v("Stationen")]),
+      _vm._m(0),
       _vm._v(" "),
       _vm._l(_vm.locations, function(location, i) {
         return _c("div", { key: i, staticClass: "d-flex align-items-end" }, [
@@ -37249,7 +37252,20 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("em", [
+        _vm._v(
+          "Bitte tragen Sie Abfahrts- und Zielort sowie gegebenenfalls Zwischenstationen ein."
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

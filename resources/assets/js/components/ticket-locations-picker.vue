@@ -1,7 +1,7 @@
 <template>
 
 <div class="vue-ticket-locations-picker">
-    <p>Stationen</p>
+    <p><em>Bitte tragen Sie Abfahrts- und Zielort sowie gegebenenfalls Zwischenstationen ein.</em></p>
     
     <div :key="i" class="d-flex align-items-end" v-for="(location, i) in locations">
       <div class="form-group pos-rel mr-2">
@@ -90,7 +90,6 @@ export default {
 
   watch: {
     locations() {
-      console.log('watch locations');
       if (!this.isMapLoaded) return;
 
       this.updateConnectingLines();
@@ -104,7 +103,15 @@ export default {
     },
 
     addLocation() {
-      this.locations.push(Object.assign({}, emptyLocation));
+      if (this.locations.length <= 1) {
+        this.locations.push(Object.assign({}, emptyLocation));
+      } else {
+        this.locations.splice(
+          this.locations.length - 1,
+          0,
+          Object.assign({}, emptyLocation)
+        );
+      }
     },
 
     getNonEmptyLocations() {
@@ -150,7 +157,8 @@ export default {
 
     initMap() {
       let center;
-      if (this.locations.length > 0) {
+      const locations = this.getNonEmptyLocations(this.locations);
+      if (locations.length > 0) {
         center = {
           lat: this.locations[0].lat,
           lng: this.locations[0].lng
@@ -194,8 +202,6 @@ export default {
     },
 
     updateMap(location) {
-      console.log('update map');
-
       const latLng = {
         lat: location.lat,
         lng: location.lng
@@ -213,9 +219,7 @@ export default {
     },
 
     fitMapBounds() {
-      console.log('fit map bounds');
       const locations = this.getNonEmptyLocations();
-
       if (locations.length === 0) {
         this.setDefaultView();
         return;
@@ -229,12 +233,10 @@ export default {
     },
 
     setDefaultView() {
-      this.map.setCenter(config.defaultLocation);
       this.map.setZoom(5);
     },
 
     updateConnectingLines() {
-      console.log('update connecting lines');
       this.connectingLines.forEach(line => {
         line.setMap(null);
       });
@@ -272,13 +274,21 @@ export default {
   },
 
   created() {
-    this.locations = this.defaultLocations.slice(0);
+    if (this.defaultLocations.length > 0) {
+      this.locations = this.defaultLocations.slice(0);
+    } else {
+      this.locations.push(
+        Object.assign({}, emptyLocation),
+        Object.assign({}, emptyLocation)
+      );
+    }
   },
 
   mounted() {
     EventBus.$on('google-maps-loaded', () => {
       this.initMap();
-      this.locations.forEach(location => {
+      const locations = this.getNonEmptyLocations();
+      locations.forEach(location => {
         this.addMarker(location);
       });
       this.updateConnectingLines();
