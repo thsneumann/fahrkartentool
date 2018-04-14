@@ -1,26 +1,20 @@
+@php
+    $ticketNames = [
+        'Fahrradkarte Schneppenthal', 
+        'Bettkarte Hamburg - Kopenhagen', 
+        'Arbeiter-Wochen-Fahrkarte Hamburg - Harburg',
+        'Militärfahrkarte Finsterwalde - Annahütte',
+        'Fahrkarte Dinslaken - Oberhausen',
+        'Fahrradkarte Kleinbahn Prettin - Annaburg',
+        'Fahrkarte Flinders St. - Caulfield',
+        'Viehbegleiterkarte Hvidding'
+    ]
+@endphp
+
 <div class="row image-grid">
-    <div class="col-sm-3">
-        <img src="img/ticket_01.jpg" alt="Fahrradkarte Schneppenthal">
-    </div>
-    <div class="col-sm-3">
-        <img src="img/ticket_02.jpg" alt="Bettkarte Hamburg - Kopenhagen">
-    </div>
-    <div class="col-sm-3">
-        <img src="img/ticket_03.jpg" alt="Arbeiter-Wochen-Fahrkarte Hamburg - Harburg">
-    </div>
-    <div class="col-sm-3">
-        <img src="img/ticket_04.jpg" alt="Militärfahrkarte Finsterwalde - Annahütte">
-    </div>
-    <div class="col-sm-3">
-        <img src="img/ticket_05.jpg" alt="Fahrkarte Dinslaken - Oberhausen">
-    </div>
-    <div class="col-sm-3">
-        <img src="img/ticket_06.jpg" alt="Fahrradkarte Kleinbahn Prettin - Annaburg">
-    </div>
-    <div class="col-sm-3">
-        <img src="img/ticket_07.jpg" alt="Fahrkarte Flinders St. - Caulfield">
-    </div>
-    <div class="col-sm-3">
-        <img src="img/ticket_08.jpg" alt="Viehbegleiterkarte Hvidding">
-    </div>
+    @foreach ($ticketNames as $ticketName)
+        <div class="col-4 col-sm-3">
+            <img src="img/ticket_0{{ $loop->iteration }}.jpg" alt="{{ $ticketName }}">
+        </div>
+    @endforeach
 </div>
