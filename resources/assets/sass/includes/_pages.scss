@@ -1,10 +1,11 @@
 .welcome-page,
 .intro-page {
-  padding-left: 2rem;
-  padding-right: 2rem;
-  // overflow-x: hidden;
+  overflow-x: hidden;
 
-  
+  @media (min-width: $sm) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .welcome-page {

@@ -7,7 +7,7 @@
 
 <div class="container-fluid d-flex flex-column">
     <div class="row mb-3">
-        <div class="col-sm-5">
+        <div class="col-lg-6 col-xl-5">
             <p class="text-size-3 text-uppercase font-weight-bold">Herzlich Willkommen!</p>
 
             <h1 class="text-size-3 text-uppercase font-weight-bold mb-4">Fritz-Fahrkarten-Tool</h1>
@@ -22,7 +22,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-sm-4 offset-sm-3">
+        <div class="col-lg-5 offset-lg-1 col-xl-4 offset-xl-3">
             @include('partials/image-grid')
         </div>
     </div>
@@ -30,7 +30,7 @@
     <div class="row align-items-end mt-auto">
         <div class="col-sm-8">
             <img src="img/raute_technikmuseum.png" alt="Logo Stiftung Deutsches Technikmuseum" class="mb-2">
-            <a href="{{ route('intro') }}" class="arrow-link">
+            <a href="{{ route('intro') }}" class="arrow-link mb-2 mb-sm-0">
                 Los geht&apos;s!
                 <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts.">
             </a>
