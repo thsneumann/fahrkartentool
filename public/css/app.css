@@ -234,6 +234,11 @@ a:hover {
   padding-right: 0;
 }
 
+.intro-page .footer-links {
+  width: 300px;
+  max-width: 100%;
+}
+
 .text-size-1 {
   font-size: 1.125rem;
 }

@@ -38,15 +38,17 @@
 
     <div class="row">
       <div class="col-sm-8">
-          <a href="{{ route('explore.index') }}" class="arrow-link">
+        <div class="footer-links">
+          <a href="{{ route('explore.index') }}" class="d-flex align-items-center font-weight-bold text-uppercase text-size-3">
               Erkunden
-              <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts.">
+              <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts." class="ml-auto">
           </a>
           <br>
-          <a href="{{ route('edit.index') }}" class="arrow-link">
+          <a href="{{ route('edit.index') }}" class="d-flex align-items-center font-weight-bold text-uppercase text-size-3">
               Bearbeiten
-              <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts.">
+              <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts." class="ml-auto">
           </a>
+        </div>
       </div>
     </div>
   </div>
