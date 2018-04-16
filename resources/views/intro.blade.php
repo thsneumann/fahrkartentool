@@ -10,21 +10,17 @@
         <h1 class="text-uppercase font-weight-bold">Los geht&apos;s!</h1>
       </div>
       <div class="col-sm-6">
-        <ul class="d-flex text-uppercase text-size-1">
-            <li class="ml-sm-auto mr-4">
-              <a href="{{ route('about') }}" class="d-flex align-items-center">
-                Info
-                <img src="img/pfeil_rechts.png" width="20" class="ml-2" alt="Pfeil nach rechts.">
-              </a>
-            </li>
-            <li>
-              <a href="#" class="d-flex align-items-center">
-                Impressum
-                <img src="img/pfeil_rechts.png" width="20" class="ml-2" alt="Pfeil nach rechts.">
-              </a>
-            </li>
-          </ul>   
-      </div>
+        <nav class="navbar navbar-light">
+            <ul class="navbar-nav">
+              <li class="nav-item ml-auto">
+                <a class="nav-link text-size-1" href="{{ route('about') }}">
+                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                  Info
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
     </div>
     
     <div class="row mb-3">
