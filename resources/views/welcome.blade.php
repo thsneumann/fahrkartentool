@@ -39,9 +39,9 @@
             <a href="#intro-video" class="video-preview" data-fancybox data-small-btn="true">
                 <figure class="mb-0">
                     <img src="img/video-vorschau.jpg" alt="Vorschaubild Erklärvideo.">
-                    <figcaption class="caption text-size-1 text-uppercase">
-                        <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts." class="mr-2">
+                    <figcaption class="d-flex align-items-center caption text-size-1 text-uppercase">
                         Erklärvideo
+                        <img src="img/pfeil_rechts.png" width="30" alt="Pfeil nach rechts." class="ml-2">
                     </figcaption>
                 </figure>
             </a>
