@@ -16,3 +16,5 @@ const app = new Vue({
 window.initMap = () => {
   EventBus.$emit('google-maps-loaded');
 };
+
+require('./modules/set-min-date');

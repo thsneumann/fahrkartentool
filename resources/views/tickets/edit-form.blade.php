@@ -24,8 +24,9 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="date">Datum:</label>
-                            <input type="date" name="date" value="{{ $ticket->date ? $ticket->date->toDateString() : '' }}" class="form-control">
+                            <label for="date">Datum:</label><br>
+                            <input type="date" name="date" value="{{ $ticket->date ? $ticket->date->toDateString() : '' }}" min="1850-01-01" max="1925-12-31" class="form-control">
+                            <small>Muss zwischen 1850 und 1925 liegen.</small>
                         </div>
                     </div>
                     <div class="col-sm-6">
