@@ -102,9 +102,14 @@
                 <small>(Quelle: <a href="https://codingdavinci.de/about/index-de.html" target="_blank">codingdavinci.de</a>)</small>
                 </p>
                 <p class="mt-3">
-                    <a href="https://codingdavinci.de/">
+                    <a href="https://codingdavinci.de/" target="_blank">
                         <i class="fa fa-external-link" aria-hidden="true"></i>
                         Website von Coding da Vinci
+                    </a>
+                </p>
+                <p>
+                    <a href="https://codingdavinci.de/" target="_blank">
+                        <img src="img/logo-coding-da-vinci-2017.png" alt="Logo Coding Da Vinci 2017">
                     </a>
                 </p>
             </div>
