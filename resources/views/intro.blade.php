@@ -7,13 +7,13 @@
   <div class="container-fluid">
     <div class="row mb-3">
       <div class="col-sm-6">
-        <h1 class="text-uppercase font-weight-bold">Los geht&apos;s!</h1>
+        <h1 class="text-uppercase text-nowrap font-weight-bold">Los geht&apos;s!</h1>
       </div>
       <div class="col-sm-6">
         <nav class="navbar navbar-light">
             <ul class="navbar-nav">
-              <li class="nav-item ml-auto">
-                <a class="nav-link text-size-1" href="{{ route('about') }}">
+              <li class="nav-item ml-sm-auto">
+                <a class="nav-link text-size-2" href="{{ route('about') }}">
                   <i class="fa fa-info-circle" aria-hidden="true"></i>
                   Info
                 </a>

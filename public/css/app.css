@@ -240,6 +240,11 @@ a:hover {
   color: #000;
 }
 
+.intro-page .navbar {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .text-size-1 {
   font-size: 1.125rem;
 }
