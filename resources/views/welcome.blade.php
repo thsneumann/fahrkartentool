@@ -28,14 +28,14 @@
     </div>
 
     <div class="row align-items-end mt-auto">
-        <div class="col-sm-8">
-            <img src="img/raute_technikmuseum.png" alt="Logo Stiftung Deutsches Technikmuseum" class="mb-2">
-            <a href="{{ route('intro') }}" class="arrow-link mb-2 mb-sm-0">
+        <div class="col-md-7 col-lg-8 mb-3 mb-md-0">
+            <img src="img/raute_technikmuseum.png" alt="Logo Stiftung Deutsches Technikmuseum" class="mb-3">
+            <a href="{{ route('intro') }}" class="d-flex align-items-center font-weight-bold text-uppercase text-size-3 mb-2 mb-sm-0">
                 Los geht&apos;s!
-                <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts.">
+                <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts." class="ml-4">
             </a>
         </div>
-        <div class="col-sm-4">
+        <div class="col-md-5 col-lg-4">
             <a href="#intro-video" class="video-preview" data-fancybox data-small-btn="true">
                 <figure class="mb-0">
                     <img src="img/video-vorschau.jpg" alt="Vorschaubild Erklärvideo.">
