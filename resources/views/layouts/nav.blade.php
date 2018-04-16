@@ -64,16 +64,16 @@
 
     @if ($mode == 'edit')
       <li class="nav-item ml-auto">
-        <a class="btn btn-primary" href="{{ route('explore.index') }}">
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        <a class="nav-link text-uppercase" href="{{ route('explore.index') }}">
           Erkunden
+          <img src="img/pfeil_rechts.png" width="20px" alt="Pfeil nach rechts." class="ml-2">
         </a>
       </li>
     @else
       <li class="nav-item ml-auto">
-        <a class="btn btn-primary" href="{{ route('edit.index') }}">
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        <a class="nav-link text-uppercase" href="{{ route('edit.index') }}">
           Bearbeiten
+          <img src="img/pfeil_rechts.png" width="20px" alt="Pfeil nach rechts." class="ml-2">
         </a>
       </li>
     @endif
