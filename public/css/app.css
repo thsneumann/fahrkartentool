@@ -67,24 +67,6 @@ a:hover {
   color: #2973c5;
 }
 
-.arrow-link {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 340px;
-  max-width: 100%;
-  font-size: 2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.arrow-link img {
-  margin-left: auto;
-}
-
 .figure-medium {
   max-width: 600px;
 }
@@ -106,8 +88,21 @@ a:hover {
 }
 
 .video-preview {
-  display: block;
+  display: inline-block;
   position: relative;
+}
+
+.video-preview::before {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .video-preview .caption {
@@ -117,13 +112,7 @@ a:hover {
 }
 
 .video-preview:hover::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 1;
 }
 
 #intro-video {
