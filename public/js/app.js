@@ -36867,6 +36867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -36929,6 +36930,12 @@ var emptyLocation = {
   methods: {
     getId: function getId(i, name) {
       return 'location-' + i + '_' + name;
+    },
+    getInputPlaceholder: function getInputPlaceholder(i) {
+      if (i === 0) return 'Abfahrtsort';
+      if (i === this.locations.length - 1) return 'Zielort';
+
+      return 'Zwischenstation';
     },
     addLocation: function addLocation() {
       if (this.locations.length <= 1) {
@@ -37138,7 +37145,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control mr-2",
-                attrs: { id: _vm.getId(i, "name"), autocomplete: "off" },
+                attrs: {
+                  id: _vm.getId(i, "name"),
+                  autocomplete: "off",
+                  placeholder: _vm.getInputPlaceholder(i)
+                },
                 domProps: { value: location.name },
                 on: {
                   input: [

@@ -10,7 +10,8 @@
           <input :id="getId(i, 'name')" class="form-control mr-2"
               autocomplete="off"
               v-model.trim="location.name" 
-              @input="updateInput(location)">
+              @input="updateInput(location)"
+              :placeholder="getInputPlaceholder(i)">
           <a href="#" class="mr-2" @click.prevent="moveUp(i)">
             <i class="fa fa-angle-up"></i>
           </a>
@@ -101,6 +102,13 @@ export default {
   methods: {
     getId(i, name) {
       return 'location-' + i + '_' + name;
+    },
+
+    getInputPlaceholder(i) {
+      if (i === 0) return 'Abfahrtsort';
+      if (i === this.locations.length - 1) return 'Zielort';
+
+      return 'Zwischenstation';
     },
 
     addLocation() {
