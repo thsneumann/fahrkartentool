@@ -1,4 +1,4 @@
-@extends('layouts.master', ['mode' => 'game'])
+@extends('layouts.master', ['mode' => 'edit'])
 
 @section('content')
 

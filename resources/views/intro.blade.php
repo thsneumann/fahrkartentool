@@ -43,8 +43,8 @@
               <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts.">
           </a>
           <br>
-          <a href="{{ route('game.index') }}" class="arrow-link">
-              Spielen
+          <a href="{{ route('edit.index') }}" class="arrow-link">
+              Bearbeiten
               <img src="img/pfeil_rechts.png" alt="Pfeil nach rechts.">
           </a>
       </div>

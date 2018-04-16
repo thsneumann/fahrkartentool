@@ -30,11 +30,11 @@ Route::get('/about', function () {
 })->name('about');
 
 
-// GAME
+// EDIT
 
-Route::group(['prefix' => 'game'], function () {
-    Route::get('/', 'GameController@index')->name('game.index');
-    Route::get('highscore', 'GameController@highscore')->name('game.highscore');
+Route::group(['prefix' => 'edit'], function () {
+    Route::get('/', 'EditController@index')->name('edit.index');
+    Route::get('highscore', 'EditController@highscore')->name('edit.highscore');
 });
 
 // EXPLORE

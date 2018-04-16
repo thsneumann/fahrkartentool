@@ -9,7 +9,7 @@ use App\User;
 use App\Category;
 use App\VehicleClass;
 
-class GameController extends Controller
+class EditController extends Controller
 {
     private $playModes = ['add', 'check'];
 
@@ -33,7 +33,7 @@ class GameController extends Controller
         $points = session()->get('points', 0);
         if ($points == 0) $mode = 'add';
 
-        return view('game.index', [
+        return view('edit.index', [
             'mode' => $mode,
             'ticket' => $ticket,
             'locations' => Location::orderBy('name')->get(),
@@ -46,7 +46,7 @@ class GameController extends Controller
     public function highscore()
     {
         $users = User::where('points', '>', 0)->orderBy('points', 'desc')->get();
-        return view('game.highscore', ['users' => $users]);
+        return view('edit.highscore', ['users' => $users]);
     }
 
     private function getRandomPlayMode()

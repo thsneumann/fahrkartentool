@@ -17,8 +17,8 @@
 
                     Du bist jetzt eingeloggt.<br>
                     
-                    <a href="{{ route('game') }}">Zum Spiel</a><br>
-                    <a href="{{ route('map') }}">Zum Explorer</a>
+                    <a href="{{ route('edit.index') }}">Bearbeiten</a><br>
+                    <a href="{{ route('map') }}">Erkunden</a>
                     
                 </div>
             </div>

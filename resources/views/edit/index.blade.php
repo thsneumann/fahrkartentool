@@ -1,4 +1,4 @@
-@extends('layouts.master', ['mode' => 'game'])
+@extends('layouts.master', ['mode' => 'edit'])
 
 @section('content')
 
@@ -48,7 +48,7 @@
 
     <hr>
 
-    @include('partials.back-button', ['route' => route('game.index')])
+    @include('partials.back-button', ['route' => route('edit.index')])
 </div>
 
 

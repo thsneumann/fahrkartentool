@@ -6,9 +6,9 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
 
-    @if ($mode == 'game')
-      <li class="nav-item {{ Route::currentRouteNamed('game.highscore') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('game.highscore') }}">
+    @if ($mode == 'edit')
+      <li class="nav-item {{ Route::currentRouteNamed('edit.highscore') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('edit.highscore') }}">
           <i class="fa fa-trophy" aria-hidden="true"></i>
           Bestenliste
         </a>
@@ -62,7 +62,7 @@
       </li> 
     @endif
 
-    @if ($mode == 'game')
+    @if ($mode == 'edit')
       <li class="nav-item ml-auto">
         <a class="btn btn-primary" href="{{ route('explore.index') }}">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
@@ -71,9 +71,9 @@
       </li>
     @else
       <li class="nav-item ml-auto">
-        <a class="btn btn-primary" href="{{ route('game.index') }}">
+        <a class="btn btn-primary" href="{{ route('edit.index') }}">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          Spielen
+          Bearbeiten
         </a>
       </li>
     @endif
