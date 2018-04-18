@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-4 text-center">
-            <figure class="figure-medium d-inline-block">
+            <figure class="d-inline-block">
                 @include('partials.ticket-thumb', ['ticket' => $ticket])
                 <figcaption class="figure-caption text-left">{{ $ticket->signature }}</figcaption>
             </figure>
