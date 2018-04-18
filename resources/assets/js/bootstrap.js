@@ -1,3 +1,5 @@
+import 'core-js/fn/array/from'; // Array.from polyfill for IE11
+
 try {
   window.$ = window.jQuery = require('jquery');
 } catch (e) { }
