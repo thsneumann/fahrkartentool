@@ -12,7 +12,7 @@
       <div class="col-sm-6">
         <nav class="navbar navbar-light">
             <ul class="navbar-nav">
-              <li class="nav-item ml-sm-auto">
+              <li class="nav-item text-sm-right">
                 <a class="nav-link text-size-2" href="{{ route('about') }}">
                   <i class="fa fa-info-circle" aria-hidden="true"></i>
                   Info
