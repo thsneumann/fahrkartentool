@@ -40,7 +40,7 @@
                 <figure class="mb-0">
                     <img src="img/video-vorschau.jpg" alt="Vorschaubild Erklärvideo.">
                     <figcaption class="d-flex align-items-center caption text-size-1 text-uppercase">
-                        Erklärvideo
+                        Zum Video über Fritz
                         <img src="img/pfeil_rechts.png" width="30" alt="Pfeil nach rechts." class="ml-2">
                     </figcaption>
                 </figure>
