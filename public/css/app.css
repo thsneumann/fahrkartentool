@@ -31,6 +31,10 @@ button.btn:hover {
   max-width: 10rem;
 }
 
+.max-w-100p {
+  max-width: 100% !important;
+}
+
 .page-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
