@@ -6,28 +6,33 @@
     <div class="media mb-4">
         <div class="media-body">
             @if ($points == 0)
-                <h2>Auf geht die Reise!</h2>
-                <p>
-                    Hilf mir, das Bild mit Metadaten anzureichern.<br>
-                    Trage Abfahrts- und Zielort ein.<br>
-                    Ordne das Ticket einer Kategorie zu.<br>
-                    Falls du es erkennen kannst, gib Wagenklasse und Preis an.<br>
-                    Du weißt noch mehr? Notiere es unter "Zusatzinformationen". 
+                <h2>Die Reise beginnt!</h2>
+                <p>Bitte schreiben Sie alle Informationen der Fahrkarten ab.</p>
+                <p>Besonders interessieren uns die Abfahrts- und Zielort. Sind Zwischenstopps angegeben, notieren Sie diese auch!<br>
+                    Ordnen Sie die Tickets bitte auch den Kategorien zu.<br>
+                    Falls es erkennbar ist, geben Sie bitte Wagenklasse und Preis an.<br>
+                    Das Datum ist oftmals eingeprägt und in der Vergrößerung gut sichtbar. Bitte dafür auf´s Bild klicken.<br>
+                    Wissen Sie noch mehr? Notieren Sie es gern im Feld für Zusatzinformationen.
                 </p>
             @elseif ($points == 1)
                 <h2>Klasse!</h2>
-                <p>Du hast dein erstes Ticket bearbeitet.<br>
-                Für jedes Ticket erhältst du einen Punkt.<br>
-                Sammle viele Punkte und erobere die Bestenliste.</p>
+                <p>Sie haben Ihr erstes Ticket bearbeitet.<br>
+                Für jedes Ticket erhalten Sie einen Punkt.<br>
+                Sammeln Sie viele Punkte und erobern Sie die Bestenliste!</p>
             @else
                 <h2>Vielen Dank!</h2>
 
                 @if (Auth::check())
-                    <p>Du hast jetzt {{ session()->get('points') }} Punkte.</p>
+                    <p>Sie haben jetzt {{ session()->get('points') }} Punkte.</p>
                 @else
-                    <p>Du hast schon {{ $points }} Punkte.<br>
-                        <a href="{{ route('register') }}">Erstelle ein Profil, um deinen Punktestand zu speichern.</a><br>
-                        Du hast bereits ein Profil? <a href="{{ route('login') }}">Dann logge dich ein.</a>
+                    <p>
+                        Sie haben schon {{ $points }} Punkte.<br>
+                        <a href="{{ route('register') }}">
+                            Erstellen Sie ein Profil, um Ihren Punktestand zu speichern.
+                        </a>
+                        <br>
+                        Sie haben bereits ein Profil? 
+                        <a href="{{ route('login') }}">Dann loggen Sie sich ein.</a>
                     </p>
                 @endif
             @endif
