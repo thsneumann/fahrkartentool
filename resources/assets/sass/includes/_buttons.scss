@@ -1,3 +1,21 @@
 button.btn:hover {
   cursor: pointer;
 }
+
+.btn-primary {
+  background-color: $color-primary;
+  border-color: $color-primary;
+
+  &:hover {
+    background-color: $color-primary--hover;
+    border-color: $color-primary--hover;
+  }
+}
+
+.btn-link {
+  color: $color-primary;
+
+  &:hover {
+    color: $color-primary--hover;
+  }
+}

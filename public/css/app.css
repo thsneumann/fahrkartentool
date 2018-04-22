@@ -17,14 +17,32 @@ ul {
   padding: 0;
 }
 
+button.btn:hover {
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #3586de;
+  border-color: #3586de;
+}
+
+.btn-primary:hover {
+  background-color: #2973c5;
+  border-color: #2973c5;
+}
+
+.btn-link {
+  color: #3586de;
+}
+
+.btn-link:hover {
+  color: #2973c5;
+}
+
 .alert-info {
   color: #000;
   background-color: #b8ceeb;
   border-color: #b8ceeb;
-}
-
-button.btn:hover {
-  cursor: pointer;
 }
 
 .tickets-table .img-thumbnail {

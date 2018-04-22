@@ -15,7 +15,7 @@
                 <p>Die Historische Fahrkartensammlung<br>
                 des Deutschen Technikmuseums<br>
                 … gesammelt von Opernsänger Fritz Hellmuth,<br>
-                … abgeschrieben von der Crowd!<br>
+                … bearbeitet von der Crowd!<br>
                 </p>
                 <p>
                 Bergen Sie mit uns den Schatz von 120.000 internationalen Tickets aus der Zeit der Entstehung des Personenverkehrs Mitte des 19. Jahrhunderts bis 1925.

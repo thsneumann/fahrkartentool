@@ -1,7 +1,7 @@
 a {
-  color: #3586de;
+  color: $color-primary;
 
   &:hover {
-    color: #2973c5;
+    color: $color-primary--hover;
   }
 }
