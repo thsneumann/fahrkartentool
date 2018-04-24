@@ -75,6 +75,10 @@ a:hover {
   color: #2973c5;
 }
 
+ol {
+  padding-left: 1rem;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
