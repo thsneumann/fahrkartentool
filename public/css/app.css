@@ -212,6 +212,13 @@ img {
   padding-right: 0.5rem;
 }
 
+@media screen and (max-width: 991px) {
+  .nav-link .fa {
+    width: 1.25rem;
+    text-align: center;
+  }
+}
+
 .welcome-page,
 .intro-page {
   overflow-x: hidden;
