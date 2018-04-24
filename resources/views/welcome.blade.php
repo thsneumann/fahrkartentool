@@ -10,7 +10,7 @@
         <div class="col-lg-6 col-xl-5">
             <p class="text-size-3 text-uppercase font-weight-bold">Herzlich Willkommen!</p>
 
-            <h1 class="text-size-3 text-uppercase font-weight-bold mb-4">Fritz-Fahrkarten-Tool</h1>
+            <h1 class="text-size-3 text-uppercase font-weight-bold mb-4">Fahrkartentool</h1>
             <div class="text-size-1 font-weight-bold">
                 <p>Die Historische Fahrkartensammlung<br>
                 des Deutschen Technikmuseums<br>
