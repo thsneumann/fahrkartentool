@@ -39,8 +39,8 @@
 
             @if ($mode == 'check') 
                 <div class="alert alert-info mb-0">
-                    Hilf uns, die Eingaben anderer Benutzer zu kontrollieren.
-                    Ergänze fehlende oder korrigiere falsche Angaben.
+                    Helfen Sie uns bitte, die Eingaben anderer Benutzer zu kontrollieren.
+                    Ergänzen Sie bitte fehlende oder korrigieren Sie falsche Angaben.
                 </div>
             @endif
         </div>
