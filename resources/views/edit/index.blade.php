@@ -46,14 +46,7 @@
         </div>
     </div>
 
-
-    
-
     @include('tickets.edit-form', ['mode' => 'mode', 'redirect' => 'back'])
-
-    <hr>
-
-    @include('partials.back-button', ['route' => route('edit.index')])
 </div>
 
 
