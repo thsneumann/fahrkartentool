@@ -226,7 +226,7 @@ img {
 }
 
 .welcome-page {
-  background: url("/img/bg_intro.jpg") no-repeat center;
+  background: #5b5249 url("/img/bg_intro.jpg") no-repeat center;
   background-size: cover;
   color: #fff;
 }
