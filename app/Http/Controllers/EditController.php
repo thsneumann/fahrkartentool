@@ -17,6 +17,10 @@ class EditController extends Controller
     {
         $mode = $this->getRandomPlayMode();
 
+        // always start in add mode
+        $points = session()->get('points', 0);
+        if ($points == 0) $mode = 'add';
+
         if ($mode == 'check') {
             $edited_ticket_ids = session()->get('edited_ticket_ids', []);
             $ticket = Ticket::whereBetween('edit_count', [1, 2])
@@ -29,9 +33,6 @@ class EditController extends Controller
             $ticket = Ticket::where('edit_count', 0)
             ->first();
         }
-
-        $points = session()->get('points', 0);
-        if ($points == 0) $mode = 'add';
 
         return view('edit.index', [
             'mode' => $mode,
