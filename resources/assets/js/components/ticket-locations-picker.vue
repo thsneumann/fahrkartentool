@@ -145,6 +145,7 @@ export default {
     },
 
     select(locationData, location) {
+      location.id = null;
       location.longname = locationData.display_name;
       location.lat = +locationData.lat;
       location.lng = +locationData.lon;
