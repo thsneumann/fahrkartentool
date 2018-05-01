@@ -14,7 +14,7 @@
 <div class="row image-grid">
     @foreach ($ticketNames as $ticketName)
         <div class="col-4 col-sm-3">
-            <img src="img/ticket_0{{ $loop->iteration }}.jpg" alt="{{ $ticketName }}">
+            <img src="{{ asset('img/ticket_0' . $loop->iteration . '.jpg') }}" alt="{{ $ticketName }}">
         </div>
     @endforeach
 </div>

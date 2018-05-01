@@ -46,7 +46,7 @@
                 <p>Die Sammlung wurde vom Sammler Fritz Hellmuth zusammengetragen und umfasst ca. 2600 Fahrkarten-A3-Tableaus mit Tickets der verschiedensten Couleur: Von der Kinderkarte bis zur Kriegskarte, Fahrradkarten, aber auch Karten-Fehldrucke und andere Raritäten.</p>
                 <figure>
                     <a href="img/kaufurkunde.jpg" data-fancybox>
-                        <img src="img/kaufurkunde_klein.jpg" alt="Foto Kaufurkunde der Fahrkartensammlung.">
+                        <img src="{{ asset('img/kaufurkunde_klein.jpg') }}" alt="Foto Kaufurkunde der Fahrkartensammlung.">
                     </a>
                     <figcaption class="mt-1 text-small">
                         Dieses Schriftstück zum Ankauf der Sammlung verwahrt das Historische Archiv des Deutschen Technikmuseums.
@@ -54,8 +54,8 @@
                 </figure>
                 <p>Der Großteil der Karten hat das standardisierte Format der sogenannten Edmondschen Fahrkarten. Diese Fahrkarten konnte man in ebenfalls standardisierten Fahrkartenschränken verwahren. Die Karten weisen eine hohe Varianz in der farblichen Gestaltung auf und wurden mit ganz unterschiedlichen Lochzangen entwertet.</p>
                 <figure>
-                    <a href="img/fahrkarten-tableau.jpg" data-fancybox>
-                        <img src="img/fahrkarten-tableau_klein.jpg" alt="Foto eines Fahrkartentableaus.">
+                    <a href="{{ asset('img/fahrkarten-tableau.jpg') }}" data-fancybox>
+                        <img src="{{ asset('img/fahrkarten-tableau_klein.jpg') }}" alt="Foto eines Fahrkartentableaus.">
                     </a>
                     <figcaption class="mt-1 text-small">
                         Ein Fahrkartentableau der Sammlung.
@@ -64,8 +64,8 @@
                 <p>Die Sammlung umfasst auch ältere und noch nicht vereinheitlichte Formate, die z.T. handschriftlich ausgestellt wurden. Die Sammlung liegt noch in der ursprünglichen Ordnung und Kategorisierung vor, wie sie vom Sammler angelegt wurde.
                 </p>
                 <figure>
-                    <a href="img/fahrkartenschrank.jpg" data-fancybox>
-                        <img src="img/fahrkartenschrank_klein.jpg" alt="Foto des Fahrkartenschranks.">
+                    <a href="{{ asset('img/fahrkartenschrank.jpg') }}" data-fancybox>
+                        <img src="{{ asset('img/fahrkartenschrank_klein.jpg') }}" alt="Foto des Fahrkartenschranks.">
                     </a>
                     <figcaption class="mt-1 text-small">
                         Das Museum ließ 1926 eigens für die Sammlung einen hochwertigen Schrank anfertigen. Noch heute steht er in der Ausstellung im deutschen Technikmuseum.
@@ -137,7 +137,7 @@
                 </p>
                 <p>
                     <a href="https://codingdavinci.de/" target="_blank">
-                        <img src="img/logo_coding-da-vinci-2017.png" alt="Logo Coding Da Vinci 2017">
+                        <img src="{{ asset('img/logo_coding-da-vinci-2017.png') }}" alt="Logo Coding Da Vinci 2017">
                     </a>
                 </p>
             </div>
@@ -160,7 +160,7 @@
                 <p>
                     <a href="https://sharingheritage.de/" target="_blank">www.sharingheritage.de</a>
                 </p>
-                <img src="img/logo_sharing-heritage.png" alt="Logo Sharing Heritage.">
+                <img src="{{ asset('img/logo_sharing-heritage.png') }}" alt="Logo Sharing Heritage.">
             </div>
             </div>
         </div>
