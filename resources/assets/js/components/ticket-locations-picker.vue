@@ -11,6 +11,7 @@
               autocomplete="off"
               v-model.trim="location.name" 
               @input="updateInput(location)"
+              @keydown.enter.prevent
               :placeholder="getInputPlaceholder(i)">
           <a href="#" class="mr-2" @click.prevent="moveUp(i)">
             <i class="fa fa-angle-up"></i>

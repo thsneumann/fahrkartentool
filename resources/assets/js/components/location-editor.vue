@@ -8,7 +8,8 @@
             class="form-control mr-2"
             autocomplete="off"
             v-model.trim="location.name" 
-            @input="updateInput">
+            @input="updateInput"
+            @keydown.enter.prevent>
         </div>
 
         <ul class="geocoder-result-list">

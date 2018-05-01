@@ -800,7 +800,7 @@ module.exports = function normalizeComponent (
     lat: 52.52,
     lng: 13.4
   },
-  markerIcon: 'img/marker.png'
+  markerIcon: '/img/marker.png'
 });
 
 /***/ }),
@@ -37488,6 +37488,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -37639,6 +37640,15 @@ var render = function() {
                 },
                 _vm.updateInput
               ],
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key)
+                ) {
+                  return null
+                }
+                $event.preventDefault()
+              },
               blur: function($event) {
                 _vm.$forceUpdate()
               }
@@ -37762,6 +37772,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__gmaps_styles_json__);
+//
 //
 //
 //
@@ -38105,6 +38116,15 @@ var render = function() {
                       _vm.updateInput(location)
                     }
                   ],
+                  keydown: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key)
+                    ) {
+                      return null
+                    }
+                    $event.preventDefault()
+                  },
                   blur: function($event) {
                     _vm.$forceUpdate()
                   }
