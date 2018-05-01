@@ -160,7 +160,9 @@
                 <p>
                     <a href="https://sharingheritage.de/" target="_blank">www.sharingheritage.de</a>
                 </p>
-                <img src="{{ asset('img/logo_sharing-heritage.png') }}" alt="Logo Sharing Heritage.">
+                <a href="https://sharingheritage.de/" target="_blank">
+                    <img src="{{ asset('img/logo_sharing-heritage.png') }}" alt="Logo Sharing Heritage.">
+                </a>
             </div>
             </div>
         </div>

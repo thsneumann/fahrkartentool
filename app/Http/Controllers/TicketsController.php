@@ -145,7 +145,8 @@ class TicketsController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        $ticket->destination_id = null;
+        $ticket->locations()->detach();
+        $ticket->date = null;
         $ticket->description = null;
         $ticket->category_id = null;
         $ticket->vehicle_class_id = null;
