@@ -3,12 +3,14 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="form-group">
-        <a href="{{ route('locations.create') }}" role="button" class="btn btn-primary mb-3">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            Ort hinzufügen
-        </a>
-    </div>
+    @if (Auth::check() && Auth::user()->is_admin)
+        <div class="form-group">
+            <a href="{{ route('locations.create') }}" role="button" class="btn btn-primary mb-3">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Ort hinzufügen
+            </a>
+        </div>
+    @endif
 
     @if (count($locations) > 0)
         <table class="table">
@@ -36,13 +38,16 @@
                             <a href="{{ route('locations.edit', ['id' => $location->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
-                            <form method="POST" action="{{ route('locations.destroy', ['id' => $location->id]) }}">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </form>
+
+                            @if (Auth::check() && Auth::user()->is_admin)
+                                <form method="POST" action="{{ route('locations.destroy', ['id' => $location->id]) }}">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
