@@ -23,7 +23,7 @@ class EditController extends Controller
 
         if ($mode == 'check') {
             $edited_ticket_ids = session()->get('edited_ticket_ids', []);
-            $ticket = Ticket::whereBetween('edit_count', [1, 2])
+            $ticket = Ticket::whereBetween('edit_count', [1, 4])
                 ->whereNotIn('id', $edited_ticket_ids)
                 ->first();
             if ($ticket == null) $mode = 'add';
