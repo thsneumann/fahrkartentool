@@ -15,7 +15,7 @@ class TicketsTableSeeder extends Seeder
      */
     public function run()
     {
-        // Go through all the files in the image/seed folder and create database entries
+        // Go through all the files in the public/img/tickets folder and create database entries
         $basePath = 'public/img/tickets/';
         $dir = opendir($basePath);
         $files = [];

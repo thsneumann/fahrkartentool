@@ -69,7 +69,7 @@ class GenerateThumbnails extends Command
             } else {
                 $img = Image::make($basePath . '/' . $file)->heighten(300);
                 $img->save($thumb, 80);
-                $this->line('Created thumbnail for ' . $file . '.');
+                $this->info('Created thumbnail for ' . $file . '.');
             }
         }
         $this->info('All thumbnails created.');
