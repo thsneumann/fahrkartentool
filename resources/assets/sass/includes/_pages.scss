@@ -24,6 +24,13 @@
       height: 100%;
     }
   }
+
+  @media (min-width: $sm) {
+    .site-footer {
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
+  }
 }
 
 .intro-page {

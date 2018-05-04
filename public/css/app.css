@@ -250,6 +250,13 @@ img {
   height: 100%;
 }
 
+@media (min-width: 576px) {
+  .welcome-page .site-footer {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+}
+
 .intro-page a {
   color: #000;
 }
