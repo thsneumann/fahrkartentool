@@ -26,6 +26,10 @@
       <main class="site-content">
         @yield('content')
       </main>
+
+      @section('footer')
+        @include('layouts.footer')
+      @show
     </div>
 
     @yield('scripts_before_app')

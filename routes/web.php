@@ -29,6 +29,14 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/imprint', function () {
+    return view('imprint');
+})->name('imprint');
+
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
 
 // EDIT
 
