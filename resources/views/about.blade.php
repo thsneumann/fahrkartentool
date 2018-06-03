@@ -154,7 +154,7 @@
             </div>
             <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
             <div class="card-body">
-                <p>Die Historische Fahrkartensammlung und das Fahrkartentool sind ein Projekt des Europäischen Kulturerbejahres 2018 und werden bei <a href="https://sharingheritage.de/" target="_blank">SHARING HERITAGE</a> vorgestellt.</p>
+                <p>Die historische Fahrkartensammlung und das Fahrkartentool sind ein Projekt des Europäischen Kulturerbejahres 2018 und werden bei <a href="https://sharingheritage.de/" target="_blank">SHARING HERITAGE</a> vorgestellt.</p>
                 <p>Mit der Digitalisierung und Veröffentlichung der Historischen Fahrkartensammlung auf Wikipedia hat das Deutsche Technikmuseum einen ganz besonderen Schatz des Europäischen Kulturerbes wieder der Öffentlichkeit zugänglich gemacht.</p>
                 <p>Durch das Fahrkartentool kann die breite Öffentlichkeit an der Erschließung der Sammlung mitwirken. Alle digitalisierten Fahrkarten (CC BY SA) und dazugehörigen Metadaten (CC 0) werden unter freier Lizenz veröffentlicht und können von allen Interessierten weitergenutzt werden.</p>
                 <p>
