@@ -68,7 +68,7 @@
 
                 <div class="form-group">
                     <label for="description">Zusatzinformationen:</label>
-                    <textarea id="description" name="description" class="form-control"></textarea>
+                    <textarea id="description" name="description" class="form-control">{{ $ticket->description }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-lg btn-primary">Speichern</button>
