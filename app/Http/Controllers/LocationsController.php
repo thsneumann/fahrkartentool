@@ -43,11 +43,7 @@ class LocationsController extends Controller
         $location->lng = round($request['lng'], 5);
         $location->save();
 
-        if ($request['redirect']) {
-            return redirect(route($request['redirect']));
-        }
-
-        return redirect(route('locations.index'));
+        return back();
     }
 
     /**
