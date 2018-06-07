@@ -1,8 +1,5 @@
 @extends('layouts.master')
 
-@section('nav')
-@endsection
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -15,10 +12,11 @@
                         </div>
                     @endif
 
-                    Du bist jetzt eingeloggt.<br>
-                    
-                    <a href="{{ route('edit.index') }}">Bearbeiten</a><br>
-                    <a href="{{ route('map') }}">Erkunden</a>
+                    @if (Auth::check())
+                    Sie sind jetzt als Benutzer <strong>{{ auth()->user()->name }}</strong> angemeldet.<br>
+                    @else
+                    Sie wurden erfolgreich ausgeloggt.
+                    @endif
                     
                 </div>
             </div>
