@@ -10,7 +10,6 @@
     <hr>
 
     @include('partials.back-button')
-
 </div>
 
 

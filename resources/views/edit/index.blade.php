@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    @include('tickets.edit-form', ['mode' => 'mode', 'redirect' => 'back'])
+    @include('tickets.edit-form')
 </div>
 
 

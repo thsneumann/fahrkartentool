@@ -59,13 +59,15 @@ class TicketsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         return view('tickets.edit', [
         'ticket' => Ticket::findOrFail($id),
         'locations' => Location::orderBy('name')->get(),
         'categories' => Category::orderBy('name')->get(),
         'vehicleClasses' => VehicleClass::all(),
+        'from' => $request['from'],
+        'page' => $request['page'],
         ]);
     }
 
@@ -130,11 +132,11 @@ class TicketsController extends Controller
         // keep track of edited tickets in session
         session()->push('edited_ticket_ids', $ticket->id);
 
-        if ($request['redirect'] == 'back') {
+        if ($request['redirect_back']) {
             return back();
+        } else {
+            return redirect($request['previous_url']);
         }
-
-        return redirect(route('tickets.index'));
     }
 
     /**

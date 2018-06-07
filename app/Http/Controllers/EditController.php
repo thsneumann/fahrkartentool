@@ -40,7 +40,8 @@ class EditController extends Controller
             'locations' => Location::orderBy('name')->get(),
             'categories' => Category::orderBy('name')->get(),
             'vehicleClasses' => VehicleClass::all(),
-            'points' => $points
+            'points' => $points,
+            'redirect_back' => true
         ]);
     }
 

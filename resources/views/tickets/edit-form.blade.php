@@ -1,7 +1,6 @@
 
 
 <form method="POST" action="{{ route('tickets.update', ['id' => $ticket->id]) }}">
-
     <div class="row">
         <div class="col-md-4 text-center">
             <figure class="d-inline-block max-w-100p">
@@ -12,8 +11,9 @@
         <div class="col-md-8">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="PUT">
-                @if (isset($redirect))
-                    <input type="hidden" name="redirect" value="{{ $redirect }}">
+                <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
+                @if (isset($redirect_back))
+                    <input type="hidden" name="redirect_back" value="{{ $redirect_back }}">
                 @endif
                 @if (isset($points))
                     <input type="hidden" name="points" value="{{ $points }}">
