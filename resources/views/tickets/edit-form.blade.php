@@ -3,7 +3,7 @@
 <form method="POST" action="{{ route('tickets.update', ['id' => $ticket->id]) }}">
     <div class="row">
         <div class="col-md-4 text-center">
-            <figure class="d-inline-block max-w-100p">
+            <figure class="d-inline-block position-sticky max-w-100p" style="top: 0.5rem">
                 @include('partials.ticket-thumb', ['ticket' => $ticket])
                 <figcaption class="figure-caption text-left">{{ $ticket->signature }}</figcaption>
             </figure>
