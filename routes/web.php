@@ -70,3 +70,5 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function
 Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/delete-account', 'Auth\DeleteAccountController@index')->name('delete-account.index');
+Route::post('/delete-account', 'Auth\DeleteAccountController@delete')->name('delete-account.delete');

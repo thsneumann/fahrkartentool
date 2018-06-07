@@ -4,22 +4,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    @if (Auth::check())
-                    Sie sind jetzt als Benutzer <strong>{{ auth()->user()->name }}</strong> angemeldet.<br>
-                    @else
-                    Sie wurden erfolgreich ausgeloggt.
-                    @endif
-                    
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
                 </div>
-            </div>
+            @endif
+
+            @if (Auth::check())
+                <p class="mb-4">
+                    Sie sind jetzt als Benutzer <strong>{{ auth()->user()->name }}</strong> angemeldet.
+                </p>
+                <a href="{{ route('delete-account.index') }}" class="btn btn-danger">Account löschen</a>
+            @else
+            Sie wurden erfolgreich ausgeloggt.
+            @endif
         </div>
     </div>
 </div>
