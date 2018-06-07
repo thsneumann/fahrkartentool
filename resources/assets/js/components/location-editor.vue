@@ -13,10 +13,12 @@
         </div>
 
         <ul class="geocoder-result-list">
-            <li v-for="locationData in location.geocoderResults" @click="select(locationData)">
-              {{ locationData.display_name }}
-            </li>
-          </ul>
+          <li v-for="locationData in location.geocoderResults" @click="select(locationData)">
+            {{ locationData.display_name }}
+          </li>
+        </ul>
+
+        <p class="pl-1 mt-1 text-small">{{ location.longname }}</p>
       </div>
 
       <div id="vue-location-editor-map" class="map form-group"></div>
@@ -45,6 +47,7 @@ export default {
     return {
       location: {
         name: null,
+        longname: null,
         lat: null,
         lng: null,
         geocoderResults: []
@@ -122,6 +125,7 @@ export default {
   created() {
     if (this.defaultLocation) {
       this.location.name = this.defaultLocation.name;
+      this.location.longname = this.defaultLocation.longname;
       this.location.lat = this.defaultLocation.lat;
       this.location.lng = this.defaultLocation.lng;
     }

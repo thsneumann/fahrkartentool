@@ -1891,11 +1891,11 @@ Vue.component('location-editor', __webpack_require__(97));
 Vue.component('ticket-locations-picker', __webpack_require__(100));
 
 var app = new Vue({
-	el: '#app'
+  el: '#app'
 });
 
 window.initMap = function () {
-	EventBus.$emit('google-maps-loaded');
+  EventBus.$emit('google-maps-loaded');
 };
 
 __webpack_require__(103);
@@ -35998,7 +35998,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\explorer-map.vue"
+Component.options.__file = "resources/assets/js/components/explorer-map.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -37425,7 +37425,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\location-editor.vue"
+Component.options.__file = "resources/assets/js/components/location-editor.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -37489,6 +37489,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -37505,6 +37507,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       location: {
         name: null,
+        longname: null,
         lat: null,
         lng: null,
         geocoderResults: []
@@ -37586,6 +37589,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     if (this.defaultLocation) {
       this.location.name = this.defaultLocation.name;
+      this.location.longname = this.defaultLocation.longname;
       this.location.lat = this.defaultLocation.lat;
       this.location.lng = this.defaultLocation.lng;
     }
@@ -37671,14 +37675,18 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\r\n              " +
+                  "\n            " +
                     _vm._s(locationData.display_name) +
-                    "\r\n            "
+                    "\n          "
                 )
               ]
             )
           })
-        )
+        ),
+        _vm._v(" "),
+        _c("p", { staticClass: "pl-1 mt-1 text-small" }, [
+          _vm._v(_vm._s(_vm.location.longname))
+        ])
       ]),
       _vm._v(" "),
       _c("div", {
@@ -37739,7 +37747,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ticket-locations-picker.vue"
+Component.options.__file = "resources/assets/js/components/ticket-locations-picker.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -38192,9 +38200,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\r\n            " +
+                      "\n            " +
                         _vm._s(locationData.display_name) +
-                        "\r\n          "
+                        "\n          "
                     )
                   ]
                 )
@@ -38223,7 +38231,7 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "fa fa-plus-circle mr-2" }),
-            _vm._v("\r\n        Station hinzufügen\r\n      ")
+            _vm._v("\n        Station hinzufügen\n      ")
           ]
         )
       ]),
