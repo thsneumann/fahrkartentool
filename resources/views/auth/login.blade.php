@@ -1,8 +1,5 @@
 @extends('layouts.master')
 
-@section('nav')
-@endsection
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -56,7 +53,7 @@
             </form>
 
             <p>Noch kein Profil?<br>
-            <a href="{{ route('register') }}">Hier kannst du dich registrieren.</a>
+            <a href="{{ route('register') }}">Hier können Sie sich registrieren.</a>
         </div>
     </div>
 </div>
