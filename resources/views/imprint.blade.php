@@ -37,7 +37,8 @@
         <h2>Gestaltung / Umsetzung</h2>
 
         <p>
-            Thomas Neumann (Programmierung)
+            Thomas Neumann (Programmierung Fahrkartentool)
+            <br> Finn Pauls (Programmierung Ticketerkennung)
             <br> Nastasja Keller und Yvonne Götzl (Animation &amp; Grafik)
         </p>
 

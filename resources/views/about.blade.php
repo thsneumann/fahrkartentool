@@ -37,6 +37,8 @@
                             <a href="https://vuejs.org/" target="_blank">Vue.js</a> geschrieben, ist auf
                             <a href="https://github.com/thsneumann/fahrkartentool" target="_blank">Github</a> frei verfügbar und unter der
                             <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GPL3</a> lizensiert.</p>
+                        <p>Es baut auf einem ebenfalls im Rahmen von Coding da Vinci entwickelten Projekt zur automatisierten Ticketerkennung 
+                            von Finn Pauls auf (<a href="https://github.com/finnp/fahrkarten-technikmuseum" target="_blank">Github</a>).</p>
                         <p>Die selbst erstellten Grafiken und die Intro-Animation stehen unter der
                             <a href="https://creativecommons.org/licenses/by-sa/3.0/de/" target="_blank">CC-BY-SA3.0 DE Lizenz</a> zur Verfügung.</p>
                         <p>Wir danken dem Museum für Naturkunde Berlin für die Unterstützung bei der Digitalisierung der historischen
@@ -130,8 +132,10 @@
                 <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
                         <h5>Programmierung</h5>
-                        <p>Thomas Neumann (
-                            <a href="https://github.com/thsneumann" target="_blank">github</a>)</p>
+                        <p>
+                            Fahrkartentool: Thomas Neumann (<a href="https://github.com/thsneumann" target="_blank">github</a>)
+                            <br>Ticketerkennung: Finn Pauls (<a href="https://github.com/finnp" target="_blank">github</a>)
+                        </p>
                         <h5>Design und Intro-Animation</h5>
                         <ul class="mb-3">
                             <li>Yvonne Götzl</li>
