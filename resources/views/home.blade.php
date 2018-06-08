@@ -16,7 +16,7 @@
                 </p>
                 <a href="{{ route('delete-account.index') }}" class="btn btn-danger">Account löschen</a>
             @else
-            Sie wurden erfolgreich ausgeloggt.
+                Sie wurden erfolgreich ausgeloggt.
             @endif
         </div>
     </div>

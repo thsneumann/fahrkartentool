@@ -6,6 +6,6 @@
 
 @section('content')
 
-<explorer-map></explorer-map>
+    <explorer-map></explorer-map>
 
 @endsection
