@@ -4,50 +4,63 @@
 
 <div class="container">
 
-  <h1>Datenschutzerklärung / Disclaimer</h1>
+  <h1>Datenschutzerklärung</h1>
 
   <h2>1. Verantwortlicher für die Datenverarbeitung</h2>
 
-  <p>Der Verantwortliche im Sinne der Europäischen Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie sonstiger datenschutzrechtlicher Bestimmungen ist die:</p>
+  <p>Der Verantwortliche im Sinne der Europäischen Datenschutz-Grundverordnung (DSGVO) und anderer datenschutzrechtlicher Bestimmungen ist die:</p>
   <p class="ml-sm-5">
     Stiftung Deutsches Technikmuseum Berlin<br>
     Direktor Prof. Dr. Dirk Böndel<br>
     Trebbiner Straße 9<br>
     10963 Berlin<br>
     Telefon: 030/90254-0<br>
-    Mail: <a href="mailto:info@sdtb.de">info@sdtb.de</a><br>
+    E-Mail: <a href="mailto:info@sdtb.de">info@sdtb.de</a><br>
     <a href="http://www.sdtb.de" target="_blank">www.sdtb.de</a>
   </p>
+  <p class="ml-sm-5">
+    Kontaktdaten des Datenschutzbeauftragten<br>
+    Telefon: 030/90 254-0<br>
+    E-Mail: <a href="mailto:datenschutz@sdtb.de">datenschutz@sdtb.de</a>
+  </p>
 
-  <h2>2. Umfang, Rechtsgrundlagen der Datenverarbeitung</h2>
+  <h2>2. Umfang, Zwecke und Rechtsgrundlagen der Datenverarbeitung</h2>
 
-  <p>Die Verarbeitung von personenbezogenen Daten der Nutzer dieser Website erfolgt ausschließlich zur Bereitstellung der Webseite und der darauf befindlichen Inhalte. Soweit für die Verarbeitung der personenbezogenen Daten eine gesetzliche Grundlage besteht, ist eine Einwilligung der Nutzer nicht erforderlich. Im Übrigen erfolgt die Verarbeitung der personenbezogenen Daten der Nutzer dieser Website nur mit vorheriger Einwilligung gemäß Art. 6 Abs. 1 lit a DSGVO.</p>
-  <p>Die erforderliche Verarbeitung von personenbezogenen Daten zur Anbahnung oder Erfüllung eines Vertrags, dessen Vertragspartei die betroffene Person ist erfolgt gemäß Art. 6 Abs. 1 lit. b DSGVO. Ist die Verarbeitung zur Wahrung unseres berechtigten Interesses oder eines Dritten erforderlich und überwiegen die Interessen, Grundrechte und Grundfreiheiten des Betroffenen das erstgenannte Interesse nicht, so erfolgt die Verarbeitung gemäß Art. 6 Abs. 1 lit. f DSGVO.</p>
-  <p>Sobald der Zweck der Datenverarbeitung erfüllt ist, werden die personenbezogenen Daten gesperrt oder gelöscht.</p>
-  <p>Beim Besuch unserer Webseite erfasst unser Serversystem automatisiert Daten des Computersystems, von welchem der Seitenaufruf erfolgt, um eine Bereitstellung der Seiteninhalte im Browser des Nutzers zu ermöglichen und die Funktionsfähigkeit und Sicherheit unserer Systeme zu gewährleisten. Die Verarbeitung zu diesem Zweck darf durch uns oder von uns beauftragte Dienstleister im Rahmen der Auftragsverarbeitung gemäß Art. 28 DSGVO erfolgen. Diese Daten werden nicht mit anderen personenbezogenen Daten des jeweiligen Nutzers zusammengeführt und nicht zu Marketingzwecken ausgewertet. Rechtsgrundlage hierfür ist Art. 6 Abs. 1 lit. f DSGVO: Welche unserer Webseiten aufgerufen werden sowie die IP-Adresse des Nutzers.</p>
+  <p>Die Verarbeitung von personenbezogenen Daten der Nutzer dieser Website erfolgt ausschließlich zur Bereitstellung der Website und der darauf befindlichen Inhalte. Soweit für die Verarbeitung der personenbezogenen Daten eine gesetzliche Grundlage besteht, ist eine Einwilligung der Nutzer nicht erforderlich. Im Übrigen erfolgt die Verarbeitung der personenbezogenen Daten der Nutzer dieser Website nur mit vorheriger Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.</p>
+  <p>Die erforderliche Verarbeitung von personenbezogenen Daten zur Anbahnung oder Erfüllung eines Vertrags, dessen Vertragspartei die betroffene Person ist, erfolgt gemäß Art. 6 Abs. 1 lit. b DSGVO.</p>
+  <p>Ist die Verarbeitung zur Wahrnehmung unserer Aufgaben beziehungsweise unserer rechtlichen Verpflichtung  erforderlich, so erfolgt die Verarbeitung gemäß Art. 6 Abs. 1 lit. c, e DSGVO.</p>
+  <p>Sobald der Zweck der jeweiligen Datenverarbeitung erfüllt ist, werden die personenbezogenen Daten gesperrt oder gelöscht. Die Verarbeitung von personenbezogenen Daten darf durch uns selbst oder durch von uns beauftragte Dienstleister im Rahmen der Auftragsverarbeitung gemäß Art. 28 DSGVO erfolgen; dabei führen Dienstleister ausschließlich die von uns vorgegebenen Tätigkeiten aus, was keine Verarbeitung zu eigenen Geschäftszwecken der Dienstleister beinhaltet, die vertraglich untersagt ist.</p>
+  <p>Beim Besuch unserer Website erfasst unser Serversystem automatisiert Daten des Computersystems, von welchem der Seitenaufruf erfolgt, um eine Bereitstellung der Seiteninhalte im Browser des Nutzers zu ermöglichen und die Funktionsfähigkeit und Sicherheit unserer Systeme zu gewährleisten (Datum, Ziel, IP, Referrer (Herkunft) und Browser inkl. Betriebssystem). Diese Daten werden nicht mit anderen personenbezogenen Daten des jeweiligen Nutzers zusammengeführt und nicht zu Marketingzwecken ausgewertet. Nach einer Woche erfolgt eine Anonymisierung dieser Daten.</p>
+  <p>Eine Bereitstellung Ihrer personenbezogenen Daten ist gesetzlich oder vertraglich möglicherweise nicht vorgeschrieben. Allerdings kann die Inanspruchnahme unserer Leistungen oder Services möglicherweise nicht oder nicht korrekt ausgeführt werden, wenn keine Nutzerdaten zur Verfügung gestellt werden (siehe z.B. Fahrkartentool). Statistische Auswertungen dienen der Verbesserung der Nutzbarkeit beziehungsweise der Inhalte unserer Webseiten.</p>
 
-  <h2>3. Nutzerregistrierung und Dankeschön</h2>
+  <h2>3. Nutzerregistrierungen, Fahrkartentool und Dankeschön</h2>
 
-  <p>Die Nutzung bestimmter Angebote auf unserer Webseite kann eine vorherige Registrierung und eine weitergehende Verarbeitung personenbezogener Daten erfordern, beispielsweise eine längerfristige Speicherung von E-Mail-Adressen, Nutzerkennungen und Passwörtern. Die Verwendung solcher Daten erfolgt nur, wenn Sie uns diese mitgeteilt und ausdrücklich vorab in die Verarbeitung eingewilligt haben. </p>
-  <p>In den folgenden Fällen bitten wir Sie um Ihre Einwilligung: Registrierung zum Fahrkartentool und zum Sammeln von Erfolgspunkten im Rahmen einer Bestenliste sowie Benachrichtigung per Email bei einem möglichen Gewinn.</p>
-  <p>Wenn Sie sich als Benutzer registrieren möchten, erheben wir Ihren Namen und Ihre E-Mail-Adresse.  Die Registrierung hat den Zweck, Ihnen eine Bearbeitung der Fahrkarten zu ermöglichen, die Zahl der Bearbeitungen zu erfassen und die dafür vergebenen Punkte Ihrem Nutzernamen zuordnen zu können.</p>
-  <p>Ihren Nutzernamen können Sie selbst auswählen. Bitte berücksichtigen Sie, dass dieser Nutzername öffentlich sichtbar ist. Nutzernamen und Punktzahlen werden intern zu Reportingzwecken ausgewertet sowie zur Veröffentlichung einer Bestenliste verwendet.</p>
+  <p>Die Nutzung bestimmter Angebote auf unserer Website kann eine vorherige Registrierung und eine weitergehende Verarbeitung personenbezogener Daten erfordern, beispielsweise eine längerfristige Speicherung von E-Mail-Adressen, Registrierung zum Fahrkartentool, Nutzerkennungen und Passwörtern. Die Verwendung solcher Daten erfolgt nur, wenn Sie uns diese mitgeteilt und ausdrücklich vorab in die Verarbeitung eingewilligt haben.</p>
+  <p>In den folgenden Fällen bitten wir Sie um Ihre Einwilligung: Wenn Sie als Nutzer des Fahrkartentools (https://fahrkartentool.sdtb.de/) Erfolgspunkte sammeln und sich an der Bestenliste beteiligen möchten sowie zur Benachrichtigung per E-Mail bei einem möglichen Gewinn. Dabei erheben wir Ihren Namen und Ihre E-Mail-Adresse mit dem Zweck, Ihnen eine Bearbeitung der Fahrkarten zu ermöglichen, die Zahl der Bearbeitungen zu erfassen und die dafür vergebenen Punkte Ihrem Nutzernamen zuordnen zu können. Ihren Nutzernamen können Sie selbst auswählen. Bitte berücksichtigen Sie, dass dieser Nutzername öffentlich sichtbar ist. Nutzernamen und Punktzahlen werden intern zu Reportingzwecken ausgewertet sowie zur Veröffentlichung einer Bestenliste verwendet.</p> 
   <p>An die Nutzer mit den drei höchsten Punktzahlen wird ein kleines Dankeschön vergeben. In diesem Fall dürfen wir Ihre E-Mail-Adresse zur Benachrichtigung verwenden und gegebenenfalls Adressdaten für den Versand von Gewinnen von Ihnen erheben und verarbeiten.</p>
-  <p>Rechtsgrundlage hinsichtlich der Einwilligung zur Verwendung Ihrer personenbezogenen Daten für das Nutzerkonto ist Art. 6 Abs. 1 lit. a DSGVO, im Übrigen für die Erfüllung des jeweiligen Vertrags zur Nutzung beziehungsweise Versand des Dankeschöns mit Ihnen gemäß Art. 6 Abs. 1 lit. b DSGVO.</p>
+  <p>Rechtsgrundlage hinsichtlich der Einwilligung zur Verwendung Ihrer personenbezogenen Daten für das Nutzerkonto ist Art. 6 Abs. 1 lit. a DSGVO, im Übrigen gilt für die Erfüllung des jeweiligen Vertrags zur Nutzung mit Ihnen beziehungsweise für den Versand des Dankeschöns an Sie Art. 6 Abs. 1 lit. b DSGVO.</p>
 
-  <h2>4. Kommunikation per E-Mail</h2>
+  <h3>Weitere Möglichkeiten zur Anmeldung</h3>
+  
+  <p>Es besteht auf unseren Webseiten die Möglichkeit zur Anmeldung bei Veranstaltungen und für den Bezug von Informationsmaterial beziehungsweise zur Nutzung bestimmter Webseiten-Leistungen (Junior Campus oder Science Center Spectrum). Dabei erheben wir von Ihnen die zur Durchführung des jeweiligen Vorgangs erforderlichen personenbezogenen Daten, beispielsweise Ihre Kontaktdaten. Sie sind damit einverstanden, dass wir diese Daten an Dritte weitergeben, soweit dies im Rahmen der Leistungserbringung und damit verbundener Vorgänge, beispielsweise zur Zahlungsabwicklung, erforderlich ist. Ihre Daten werden beispielsweise dann weitergegeben, wenn eine Veranstaltung nicht von uns selbst, sondern von Dritten ausgerichtet wird.</p>
 
-  <p>Die Kommunikation per E-Mail kann Sicherheitslücken aufweisen. E-Mails können auf dem Weg an die MitarbeiterInnen der Stiftung Deutsches Technikmuseum Berlin von versierten Internet-Nutzern aufgehalten und eingesehen werden. Sollte die Stiftung DTMB eine E-Mail von Ihnen erhalten, so wird davon ausgegangen, dass unsere MitarbeiterInnen auch zu einer Beantwortung per E-Mail berechtigt sind. Ansonsten bitten wir Sie, eine andere Art der Kommunikation (z.B. über den Postweg) in Betracht zu ziehen.</p>
+  <h2>4. Kommunikation per E-Mail oder Kontaktformular</h2>
+
+  <p>Die Kommunikation per E-Mail kann Sicherheitslücken aufweisen. E-Mails können auf dem Weg zu uns von versierten Internet-Nutzern aufgehalten und eingesehen werden. Sollten wir eine E-Mail von Ihnen erhalten, so wird davon ausgegangen, dass unsere Beschäftigten auch zu einer Beantwortung per E-Mail berechtigt sind. Ansonsten bitten wir Sie, eine andere Art der Kommunikation (z. B. über den Postweg) in Betracht zu ziehen.</p>
+  <p>Es ist möglich, bei Ersuchen des Kontakts beispielsweise zur Abteilung Presse- und Öffentlichkeitsarbeit oder dem Historischen Archiv, Mitteilungen über ein vorgegebenes Kontaktformular zu versenden. Hierbei sind Vorname, Nachname und E-Mail Adresse sowie der Mitteilungsinhalt relevant.</p>
+  <p>Durch die Nutzung der Funktion „Seite weiterempfehlen“ können Sie Inhalte unserer Seite anderen Personen per E-Mail zukommen lassen. Bei dieser Funktion müssen Sie Ihren Vornamen, Nachnamen und Ihre E-Mail-Adresse sowie die E-Mail-Adresse des Empfängers angeben. Bitte beachten Sie, dass als Absenderadresse Ihre E-Mail-Adresse verwendet wird und Sie folglich als Absender der Empfehlungs-E-Mail identifizierbar sind. Verwenden Sie diese Weiterempfehlung ausschließlich dann, wenn Sie sicher davon ausgehen können, dass der Empfänger Interesse an Ihrer Empfehlung besitzt.</p>
+  <p>Die Rechtsgrundlage für diese Datenverarbeitungen ist Art. 6 Abs. 1 lit. e DSGVO.</p>
 
   <h2>5. Widerspruchsrecht, Widerruf der Einwilligung</h2>
 
-  <p>Hinsichtlich der Daten zur Auslieferung der Website und der Speicherung der Daten in Logfiles ist kein Widerspruch möglich, da diese für den Betrieb der Webseite unverzichtbar sind.</p>
-
-  <p>Wenn Sie Ihre Einwilligung zur Verarbeitung Ihrer Daten, beispielsweise für die Nutzerregistrierung, oder für die Teilnahme an einem Gewinnspiel gegeben haben, können Sie Ihre Einwilligung jederzeit und ohne Angabe von Gründen widerrufen. Bitte nutzen Sie dafür entweder die spezifischen Hyperlinks oder teilen Sie uns Ihren Widerruf mit.</p>
+  <p>Hinsichtlich der Daten zur Auslieferung der Website und der Speicherung der Daten in Logfiles ist kein Widerspruch möglich, da diese für den Betrieb der Website unverzichtbar sind.</p>
+  <p>Wenn Sie Ihre Einwilligung zur Verarbeitung Ihrer Daten, beispielsweise für die Nutzerregistrierung oder für die Teilnahme an einem Gewinnspiel gegeben haben, können Sie Ihre Einwilligung jederzeit und ohne Angabe von Gründen widerrufen. Bitte nutzen Sie dafür entweder die spezifischen Hyperlinks oder teilen Sie uns Ihren Widerruf per E-Mail mit.</p>
 
   <h2>6. Cookies, Web-Analyse, Drittanbieter-Plugins</h2>
 
-  <p>Derzeit setzen wir weder Cookies, noch gesonderte Tools zur Web-Analyse oder Plugins von Drittanbietern auf dieser Webseite ein.</p>
+  <p>Derzeit setzen wir keine gesonderten Tools zur Web-Analyse oder Plugins von Drittanbietern auf dieser Website ein. Um den Besuch unserer Website attraktiv zu gestalten und die Nutzung bestimmter Funktionen zu ermöglichen, verwenden wir auf verschiedenen Seiten so genannte Cookies. Dies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden. Die von uns verwendeten Cookies werden nach Ende der Browser-Sitzung, also nach dem Schließen Ihres Browsers, gelöscht (sog. Session-Cookies). Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und individuell über deren Annahme entscheiden oder die Annahme von Cookies für bestimmte Fälle oder generell ausschließen. Das Nichtakzeptieren von Cookies kann jedoch die Funktionalität unserer Webseite einschränken.</p>
+  <p>Technisch notwendige Cookies werden benötigt, damit Sie sich auf Webseiten mit Formularen bewegen und deren Funktionen nutzen können. Ohne diese Cookies kann die Funktionalität, wie z.B. Aktionen während eines Besuchs (z.B. Texteingabe), auch beim Navigieren zwischen den Seiten der Website nicht gewährleistet werden. Funktionale Cookies ermöglichen es einer Website, bereits bereitgestellte Informationen zu speichern (z.B. Benutzername, Sprachauswahl oder den Ort, an dem Sie sich befinden) und verbessern die Fähigkeit des Benutzers, persönliche Funktionen anzubieten. Diese Cookies sammeln anonymisierte Informationen und können Ihre Bewegungen auf anderen Websites nicht verfolgen. Mit Beendigung Ihrer Browser-Session werden die von unserer Website gegebenenfalls erstellten Cookies gelöscht.</p>
+  <p>Selbstverständlich können Sie der Verwendung von Cookies jederzeit widersprechen, indem Sie Ihren Internet-Browser so einstellen, dass er keine Cookies akzeptiert. Einzelheiten entnehmen Sie bitte der Hilfefunktion Ihres Internet-Browsers. Wir weisen jedoch darauf hin, dass wir nicht ausschließen können, dass dann einige Funktionen unserer Webseite nicht oder nicht vollständig nutzbar sind.</p>
 
   <h2>7. Betroffenenrechte</h2>
 
@@ -55,8 +68,8 @@
 
   <h3>Auskunftsrecht</h3>
 
-  <p>Sie können von dem Verantwortlichen eine Bestätigung darüber verlangen, ob personenbezogene Daten, die Sie betreffen, von uns verarbeitet werden.</p>
-  <p>Liegt eine solche Verarbeitung vor, können Sie von dem Verantwortlichen über folgende Informationen Auskunft verlangen:</p>
+  <p>Sie können von dem Verantwortlichen eine Bestätigung darüber verlangen, ob personenbezogene Daten, die Sie betreffen, von uns verarbeitet werden. 
+Liegt eine solche Verarbeitung vor, können Sie von dem Verantwortlichen über folgende Informationen Auskunft verlangen:</p>
 
   <ol>
     <li>die Zwecke, zu denen die personenbezogenen Daten verarbeitet werden;</li>
@@ -85,7 +98,7 @@
   </ol>
 
   <p>Wurde die Verarbeitung der Sie betreffenden personenbezogenen Daten eingeschränkt, dürfen diese Daten – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen natürlichen oder juristischen Person oder aus Gründen eines wichtigen öffentlichen Interesses der Union oder eines Mitgliedstaats verarbeitet werden.</p>
-  <p>Wurde die Einschränkung der Verarbeitung nach den o.g. Voraussetzungen eingeschränkt, werden Sie von dem Verantwortlichen unterrichtet bevor die Einschränkung aufgehoben wird.</p>
+  <p>Wurde die Einschränkung der Verarbeitung nach den o.g. Voraussetzungen eingeschränkt, werden Sie von dem Verantwortlichen unterrichtet, bevor die Einschränkung aufgehoben wird.</p>
 
   <h3>Recht auf Löschung</h3>
 
@@ -95,10 +108,10 @@
 
   <ol>
     <li>Die Sie betreffenden personenbezogenen Daten sind für die Zwecke, für die sie erhoben oder auf sonstige Weise verarbeitet wurden, nicht mehr notwendig.</li>
-    <li>Sie widerrufen Ihre Einwilligung, auf die sich die Verarbeitung gem. Art. 6 Abs. 1 lit. a oder Art. 9 Abs. 2 lit. a DSGVO stützte, und es fehlt an einer anderweitigen Rechtsgrundlage für die Verarbeitung. </li>
-    <li>Sie legen gem. Art. 21 Abs. 1 DSGVO Widerspruch gegen die Verarbeitung ein und es liegen keine vorrangigen berechtigten Gründe für die Verarbeitung vor, oder Sie legen gem. Art. 21 Abs. 2 DSGVO Widerspruch gegen die Verarbeitung ein. </li>
+    <li>Sie widerrufen Ihre Einwilligung, auf die sich die Verarbeitung gem. Art. 6 Abs. 1 lit. a oder Art. 9 Abs. 2 lit. a DSGVO stützte, und es fehlt an einer anderweitigen Rechtsgrundlage für die Verarbeitung.</li>
+    <li>Sie legen gem. Art. 21 Abs. 1 DSGVO Widerspruch gegen die Verarbeitung ein und es liegen keine vorrangigen berechtigten Gründe für die Verarbeitung vor, oder Sie legen gem. Art. 21 Abs. 2 DSGVO Widerspruch gegen die Verarbeitung ein.</li>
     <li>Die Sie betreffenden personenbezogenen Daten wurden unrechtmäßig verarbeitet.</li>
-    <li>Die Löschung der Sie betreffenden personenbezogenen Daten ist zur Erfüllung einer rechtlichen Verpflichtung nach dem Unionsrecht oder dem Recht der Mitgliedstaaten erforderlich, dem der Verantwortliche unterliegt. </li>
+    <li>Die Löschung der Sie betreffenden personenbezogenen Daten ist zur Erfüllung einer rechtlichen Verpflichtung nach dem Unionsrecht oder dem Recht der Mitgliedstaaten erforderlich, dem der Verantwortliche unterliegt.</li>
     <li>Die Sie betreffenden personenbezogenen Daten wurden in Bezug auf angebotene Dienste der Informationsgesellschaft gemäß Art. 8 Abs. 1 DSGVO erhoben.</li>
   </ol>
 
@@ -123,29 +136,16 @@
   <p>Haben Sie das Recht auf Berichtigung, Löschung oder Einschränkung der Verarbeitung gegenüber dem Verantwortlichen geltend gemacht, ist dieser verpflichtet, allen Empfängern, denen die Sie betreffenden personenbezogenen Daten offengelegt wurden, diese Berichtigung oder Löschung der Daten oder Einschränkung der Verarbeitung mitzuteilen, es sei denn, dies erweist sich als unmöglich oder ist mit einem unverhältnismäßigen Aufwand verbunden.</p>
   <p>Ihnen steht gegenüber dem Verantwortlichen das Recht zu, über diese Empfänger unterrichtet zu werden.</p>
 
-  <h3>Recht auf Datenübertragbarkeit</h3>
-
-  <p>Sie haben das Recht, die Sie betreffenden personenbezogenen Daten, die Sie dem Verantwortlichen bereitgestellt haben, in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten. Außerdem haben Sie das Recht diese Daten einem anderen Verantwortlichen ohne Behinderung durch den Verantwortlichen, dem die personenbezogenen Daten bereitgestellt wurden, zu übermitteln, sofern</p>
-
-  <ol>
-    <li>die Verarbeitung auf einer Einwilligung gem. Art. 6 Abs. 1 lit. a DSGVO oder Art. 9 Abs. 2 lit. a DSGVO oder auf einem Vertrag gem. Art. 6 Abs. 1 lit. b DSGVO beruht und</li>
-    <li>die Verarbeitung mithilfe automatisierter Verfahren erfolgt.</li>
-  </ol>
-
-  <p>In Ausübung dieses Rechts haben Sie ferner das Recht, zu erwirken, dass die Sie betreffenden personenbezogenen Daten direkt von einem Verantwortlichen einem anderen Verantwortlichen übermittelt werden, soweit dies technisch machbar ist. Freiheiten und Rechte anderer Personen dürfen hierdurch nicht beeinträchtigt werden.</p>
-  <p>Das Recht auf Datenübertragbarkeit gilt nicht für eine Verarbeitung personenbezogener Daten, die für die Wahrnehmung einer Aufgabe erforderlich ist, die im öffentlichen Interesse liegt oder in Ausübung öffentlicher Gewalt erfolgt, die dem Verantwortlichen übertragen wurde.</p>
-
   <h3>Widerspruchsrecht</h3>
 
-  <p>Sie haben das Recht, aus Gründen, die sich aus ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung der Sie betreffenden personenbezogenen Daten, die aufgrund von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmungen gestütztes Profiling. </p>
+  <p>Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung der Sie betreffenden personenbezogenen Daten, die aufgrund von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmungen gestütztes Profiling.</p>
   <p>Der Verantwortliche verarbeitet die Sie betreffenden personenbezogenen Daten nicht mehr, es sei denn, er kann zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</p>
   <p>Werden die Sie betreffenden personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, haben Sie das Recht, jederzeit Widerspruch gegen die Verarbeitung der Sie betreffenden personenbezogenen Daten zum Zwecke derartiger Werbung einzulegen; dies gilt auch für das Profiling, soweit es mit solcher Direktwerbung in Verbindung steht.</p>
   <p>Widersprechen Sie der Verarbeitung für Zwecke der Direktwerbung, so werden die Sie betreffenden personenbezogenen Daten nicht mehr für diese Zwecke verarbeitet.</p>
 
   <h3>Recht auf Beschwerde bei einer Aufsichtsbehörde</h3>
 
-  <p>Unbeschadet eines anderweitigen verwaltungsrechtlichen oder gerichtlichen Rechtsbehelfs steht Ihnen das Recht auf Beschwerde bei einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres Aufenthaltsorts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes, zu, wenn Sie der Ansicht sind, dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die DSGVO verstößt. </p>
-
+  <p>Unbeschadet eines anderweitigen verwaltungsrechtlichen oder gerichtlichen Rechtsbehelfs steht Ihnen das Recht auf Beschwerde bei einer Aufsichtsbehörde (beispielsweise der Berliner Beauftragten für Datenschutz und Informationsfreiheit), insbesondere in dem Mitgliedstaat ihres Aufenthaltsorts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes, zu, wenn Sie der Ansicht sind, dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die DSGVO verstößt.</p>
   <p>Die Aufsichtsbehörde, bei der die Beschwerde eingereicht wurde, unterrichtet den Beschwerdeführer über den Stand und die Ergebnisse der Beschwerde einschließlich der Möglichkeit eines gerichtlichen Rechtsbehelfs nach Art. 78 DSGVO.</p>
 
 </div>
