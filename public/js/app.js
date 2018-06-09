@@ -1875,7 +1875,7 @@ module.exports = debounce;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(41);
-module.exports = __webpack_require__(104);
+module.exports = __webpack_require__(105);
 
 
 /***/ }),
@@ -1899,6 +1899,7 @@ window.initMap = function () {
 };
 
 __webpack_require__(103);
+__webpack_require__(104);
 
 /***/ }),
 /* 42 */
@@ -38284,6 +38285,21 @@ dateInputEls.forEach(function (dateInputEl) {
 
 /***/ }),
 /* 104 */
+/***/ (function(module, exports) {
+
+$('[data-fancybox-video]').fancybox({
+  afterShow: function afterShow() {
+    var video = document.querySelector(this.src);
+    video.play();
+  },
+  beforeClose: function beforeClose() {
+    var video = document.querySelector(this.src);
+    video.pause();
+  }
+});
+
+/***/ }),
+/* 105 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

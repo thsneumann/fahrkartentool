@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-md-5 col-lg-4">
-                <a href="#intro-video" class="video-preview" data-fancybox data-small-btn="true">
+                <a href="#intro-video" class="video-preview" data-fancybox-video data-small-btn="true">
                     <figure class="mb-0">
                         <img src="{{ asset('img/video-vorschau.jpg') }}" alt="Vorschaubild Erklärvideo.">
                         <figcaption class="d-flex align-items-center caption text-size-1 text-uppercase">

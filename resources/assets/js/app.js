@@ -18,3 +18,4 @@ window.initMap = () => {
 };
 
 require('./modules/set-min-date');
+require('./modules/fancybox-video');
