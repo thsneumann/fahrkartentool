@@ -57,6 +57,7 @@ Route::resource('categories', 'CategoriesController');
 // ADMIN
 
 Route::get('/admin', 'AdminController@index')->name('admin');
+Route::post('/admin', 'AdminController@toggle')->name('admin.toggle');
 
 // API
 // TODO: move to api.php && require login

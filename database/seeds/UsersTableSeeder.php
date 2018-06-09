@@ -18,7 +18,8 @@ class UsersTableSeeder extends Seeder
                 [
                     'name' => config('admin.admin_name'), 
                     'password' => bcrypt(config('admin.admin_password')),
-                    'is_admin' => true
+                    'is_admin' => true,
+                    'is_super_admin' => true
                 ]
             );
         }

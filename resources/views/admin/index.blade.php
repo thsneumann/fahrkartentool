@@ -40,11 +40,20 @@
                 <td>{{ $user->points }}</td>
                 <td>{{ $user->created_at->format('d. m. Y') }}</td>
                 <td>
-                  @if ($user->is_admin)
-                    <i class="fa fa-check" aria-hidden="true"></i>
+                  <form action="{{ route('admin.toggle') }}" method="POST">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    @if ($user->is_admin)
+                      <button class="btn btn-sm btn-success" type="submit" {{ $user->id == auth()->user()->id || $user->is_super_admin ? 'disabled' : '' }}>
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      </button>
                     @else
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                  @endif
+                      <button class="btn btn-sm btn-danger" type="submit">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      </button>
+                    @endif
+                  </form>
+                </td>
               </tr>
             @endforeach
           </tbody>
