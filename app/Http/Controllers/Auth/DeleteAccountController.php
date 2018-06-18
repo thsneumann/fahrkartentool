@@ -22,6 +22,8 @@ class DeleteAccountController extends Controller
     public function delete()
     {
         $user = Auth::user();
+        if ($user->is_super_admin) abort(403);
+
         Auth::logout();
         $user->delete();
 
