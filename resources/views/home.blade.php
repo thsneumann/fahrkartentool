@@ -14,8 +14,15 @@
                 <p class="mb-4">
                     Sie sind jetzt als Benutzer <strong>{{ auth()->user()->name }}</strong> angemeldet.
                 </p>
+                @if (Auth()->user()->is_admin)
+                    <p>
+                        <a href="{{ route('admin') }}">Zur Admin-Seite</a>
+                    </p>
+                @endif
                 @if (!Auth()->user()->is_super_admin)
-                    <a href="{{ route('delete-account.index') }}" class="btn btn-danger">Account löschen</a>
+                    <p>
+                        <a href="{{ route('delete-account.index') }}" class="btn btn-danger">Account löschen</a>
+                    </p>
                 @endif
             @else
                 Sie wurden erfolgreich ausgeloggt.
