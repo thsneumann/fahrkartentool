@@ -34,6 +34,10 @@
 
     @yield('scripts_before_app')
 
+    <script>
+      window.opencageKey = '{{ $opencage_key }}';
+    </script>
+
     <script src="/js/app.js"></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoahc9ngn3N5a7OpKpW-t7Chx2j9eyymk&language=de&callback=initMap">
