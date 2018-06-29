@@ -59,17 +59,11 @@ Route::resource('categories', 'CategoriesController');
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::post('/admin', 'AdminController@toggle')->name('admin.toggle');
 
-// API
-// TODO: move to api.php && require login
-Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function () {
-    Route::resource('tickets', 'TicketsController');
-    Route::resource('locations', 'LocationsController');
-    Route::get('locations/{location}/outgoing', 'LocationsController@outgoing')->name('locations.outgoing');
-    Route::get('locations/{location}/incoming', 'LocationsController@incoming')->name('locations.incoming');
-});
+// AUTH
 
 Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/delete-account', 'Auth\DeleteAccountController@index')->name('delete-account.index');
 Route::post('/delete-account', 'Auth\DeleteAccountController@delete')->name('delete-account.delete');
+

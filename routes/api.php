@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['namespace' => 'Api', 'as' => 'api.'], function() {
+    Route::resource('tickets', 'TicketsController');
+    Route::resource('locations', 'LocationsController');
+    Route::get('locations/{location}/outgoing', 'LocationsController@outgoing')->name('locations.outgoing');
+    Route::get('locations/{location}/incoming', 'LocationsController@incoming')->name('locations.incoming');
+});
