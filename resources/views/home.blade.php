@@ -11,8 +11,11 @@
             @endif
 
             @if (Auth::check())
-                <p class="mb-4">
+                <p>
                     Sie sind jetzt als Benutzer <strong>{{ auth()->user()->name }}</strong> angemeldet.
+                </p>
+                <p class="mb-4">
+                    Ihr aktueller Punktestand beträgt <strong>{{ auth()->user()->points }} Punkt{{ auth()->user()->points != 1 ? 'e' : '' }}.</strong>
                 </p>
                 @if (Auth()->user()->is_admin)
                     <p>
