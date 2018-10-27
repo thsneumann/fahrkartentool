@@ -116,4 +116,13 @@ class TicketsController extends Controller
         $ticket = Ticket::findOrFail($id);
         $ticket->delete();
     }
+
+    /**
+     * Get a given amount of randomly chosen tickets
+     */
+    public function random($count = 10)
+    {
+        $tickets = Ticket::inRandomOrder()->limit($count)->get();
+        return $tickets;
+    }
 }

@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'Api', 'as' => 'api.'], function() {
     Route::resource('tickets', 'TicketsController');
+    Route::get('tickets/random/{count?}', 'TicketsController@random')->name('tickets.random');
     Route::resource('locations', 'LocationsController');
     Route::get('locations/{location}/outgoing', 'LocationsController@outgoing')->name('locations.outgoing');
     Route::get('locations/{location}/incoming', 'LocationsController@incoming')->name('locations.incoming');
