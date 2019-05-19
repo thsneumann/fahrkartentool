@@ -9,34 +9,39 @@ use App\Ticket;
 
 class TicketsController extends Controller
 {
-    private function toCSV($tickets)
+    private function toCSV()
     {
-        $headings = ['ID', 'Signatur', 'Abfahrtsort', 'Abfahrtsort (lang)', 'Zwischenhalte', 'Ziel', 'Ziel (lang)', 'Beschreibung', 'Kategorie', 'Klasse', 'Preis', 'Bearbeitungen', 'Änderungsdatum'];
-        $output = implode(',', $headings) . PHP_EOL;
-        foreach ($tickets as $ticket) {
-            $columns = [
-                $ticket->id,
-                $ticket->signature,
-                $ticket->origin() ? $ticket->origin()->name : '',
-                $ticket->origin() ? '"' . $ticket->origin()->longname . '"' : '',
-                $ticket->stopovers() ? '"' . $ticket->stopovers()->implode('name', ', ') . '"' : '',
-                $ticket->destination() ? $ticket->destination()->name : '',
-                $ticket->destination() ? '"' . $ticket->destination()->longname . '"' : '',
-                $ticket->description,
-                $ticket->category ? $ticket->category->name : '',
-                $ticket->vehicleClass ? $ticket->vehicleClass->name : '',
-                $ticket->price ? $ticket->price : '',
-                $ticket->edit_count,
-                $ticket->updated_at
-            ];
-            $output.=  implode(',', $columns) . PHP_EOL;
-        }
-        $headers = array(
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="all_tickets_export.csv"',
-        );
-          
-        return Response::make($output, 200, $headers);
+        $csvExporter = new \Laracsv\Export();
+        $tickets = Ticket::with(['locations'])->take(5000)->get();
+
+        $csvExporter->beforeEach(function ($ticket) {
+            if ($ticket->origin()) {
+                $ticket->origin_name = $ticket->origin()->name;
+                $ticket->origin_longname = $ticket->origin()->longname;
+            }
+            if ($ticket->stopovers()) $ticket->stopover_names = $ticket->stopovers()->implode('name', ', ');
+            if ($ticket->destination()) {
+                $ticket->destination_name = $ticket->destination()->name;
+                $ticket->destination_longname = $ticket->destination()->longname;
+            }
+            if ($ticket->category) $ticket->category_name = $ticket->category->name;
+            if ($ticket->vehicleClass) $ticket->vehicleClass_name = $ticket->vehicleClass->name;
+        });
+        $csvExporter->build($tickets, 
+            ['id' => 'ID', 
+             'signature' => 'Signatur', 
+             'origin_name' => 'Abfahrtsort',
+             'origin_longname' => 'Abfahrtsort (lang)',
+             'stopover_names' => 'Zwischenhalte',
+             'destination_name' => 'Ziel',
+             'destination_longname' => 'Ziel (lang)',
+             'description' => 'Beschreibung',
+             'category_name' => 'Kategorie',
+             'vehicleClass_name' => 'Klasse',
+             'price' => 'Preis',
+             'edit_count' => 'Anzahl Bearbeitungen',
+             'updated_at' => 'Änderungsdatum',
+            ])->download();
     }
 
     private function filter($request)
@@ -57,10 +62,8 @@ class TicketsController extends Controller
      */
     public function index(Request $request)
     {
-        $tickets = Ticket::all();
-
         if ($request['format'] == 'csv') {
-            return $this->toCSV($tickets);
+            return $this->toCSV();
         }
 
         if ($request->has('filter')) {
