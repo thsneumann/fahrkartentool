@@ -12,7 +12,7 @@ class TicketsController extends Controller
     private function toCSV()
     {
         $csvExporter = new \Laracsv\Export();
-        $tickets = Ticket::with(['locations'])->take(5000)->get();
+        $tickets = Ticket::where('edit_count', '>', 0)->with(['locations'])->take(5000)->get();
 
         $csvExporter->beforeEach(function ($ticket) {
             if ($ticket->origin()) {
