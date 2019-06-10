@@ -18,5 +18,5 @@ Installation instructions
 Artisan commands
 ----------------
 
-- Scan public/img/tickets folder for new tickets: php artisan tickets: scan
+- Scan public/img/tickets folder for new tickets: php artisan tickets:scan
 - Generate thumbnails: php artisan tickets:thumbs
