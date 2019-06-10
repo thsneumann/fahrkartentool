@@ -1,13 +1,13 @@
 require('./bootstrap');
+import ExplorerMap from './components/explorer-map.vue';
+import LocationEditor from './components/location-editor.vue';
+import TicketLocationsTicker from './components/ticket-locations-picker.vue';
 
 window.EventBus = new Vue();
 
-Vue.component('explorer-map', require('./components/explorer-map.vue'));
-Vue.component('location-editor', require('./components/location-editor.vue'));
-Vue.component(
-  'ticket-locations-picker',
-  require('./components/ticket-locations-picker.vue')
-);
+Vue.component('explorer-map', ExplorerMap);
+Vue.component('location-editor', LocationEditor);
+Vue.component('ticket-locations-picker', TicketLocationsTicker);
 
 const app = new Vue({
   el: '#app'
