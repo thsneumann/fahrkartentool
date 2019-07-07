@@ -10,7 +10,7 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
-    "@fancyapps/fancybox": "^3.2.5",
+    "@fancyapps/fancybox": "3.2.5",
     "axios": "^0.16.2",
     "core-js": "^2.5.5",
     "cross-env": "^5.0.1",

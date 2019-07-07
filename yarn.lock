@@ -570,9 +570,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@fancyapps/fancybox@^3.2.5":
-  version "3.5.7"
-  resolved "https://registry.yarnpkg.com/@fancyapps/fancybox/-/fancybox-3.5.7.tgz#12f8734663ec6eae7f9236b92ca236e6e07fdfd5"
+"@fancyapps/fancybox@3.2.5":
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/@fancyapps/fancybox/-/fancybox-3.2.5.tgz#c866f399bf3d2ef61d4103dfe9f297e74d3c3ff3"
+  integrity sha512-1LHcYj96LnmNML4cZndQA+4vuQrtI1E4wi9vpP7B8Y60ieALIUMDZE0J4VMMMJ/xW0XFMpof8RTng3Qy3u3XkQ==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
