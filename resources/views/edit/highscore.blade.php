@@ -21,7 +21,7 @@
                         <i class="fa fa-lg fa-trophy"></i>
                     @endif --}}
                 </td>
-                <td>{{ $user->points or 0 }}</td>
+                <td>{{ $user->points }}</td>
             </tr>
             @endforeach
         </tbody>
