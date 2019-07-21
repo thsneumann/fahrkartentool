@@ -32,7 +32,7 @@
           Sie bitte die Informationen von den Karten in die passenden Felder. Im zweiten Modus überprüfen Sie die Einträge,
           die bereits gemacht wurden.</p>
         <p class="mb-2">
-          <strong>Und für alle Ihre Aktionen sammeln Sie PUNKTE!</strong> Schaffen Sie es bis zum 31. Dezember 2018 ganz nach oben
+          <strong>Und für alle Ihre Aktionen sammeln Sie PUNKTE!</strong> Schaffen Sie es bis zum 31. Dezember 2019 ganz nach oben
           in der Bestenliste? Die ersten Drei nach Punkten dürfen sich auf ein Dankeschön von der Stiftung Deutsches Technikmuseum
           Berlin freuen!</p>
         <p class="mb-2">
