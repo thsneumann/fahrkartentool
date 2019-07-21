@@ -5,11 +5,6 @@
 <div class="container-fluid">
     <h2>Bestenliste</h2>
 
-    <div class="alert alert-success" role="alert">
-        <p>Danke für alle Unterstützer im Jahr 2018. Durch Ihre Hilfe konnten in nur wenigen Monaten beachtlich viele Karten verschlagwortet werden.</p>
-        <p>Unser besonderer Dank geht an Schwarze Jule Frost, snoor 33 und Max!</p>
-    </div>
-
     <table class="table">
         <thead>
             <th scope="col">#</th>
