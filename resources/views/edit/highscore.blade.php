@@ -17,9 +17,9 @@
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>
                     {{ $user->name }}
-                    @if ($loop->iteration <= 3)
+                    {{-- @if ($loop->iteration <= 3)
                         <i class="fa fa-lg fa-trophy"></i>
-                    @endif
+                    @endif --}}
                 </td>
                 <td>{{ $user->points or 0 }}</td>
             </tr>
