@@ -10,3 +10,11 @@
   }
 }
 
+.csv-link + .csv-warning {
+  display: none;
+}
+
+.csv-link:hover + .csv-warning {
+  display: block;
+}
+

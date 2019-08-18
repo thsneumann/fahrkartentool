@@ -3,10 +3,13 @@
 @section('content')
 
 <div class="container-fluid">
-    <a target="_blank" href="{{ route('api.tickets.index', ['format' => 'csv']) }}" class="btn btn-primary mb-3">
+    <a target="_blank" href="{{ route('api.tickets.index', ['format' => 'csv']) }}" class="btn btn-primary mb-3 csv-link">
         <i class="fa fa-download" aria-hidden="true"></i>
         CSV-Export
     </a>
+    <div class="alert alert-warning csv-warning">
+        Aufgrund technischer Einschränkungen können zur Zeit nur maximal 5000 Datensätze zur Verfügung gestellt werden.
+    </div>
 
     <table class="table tickets-table">
         <thead>
