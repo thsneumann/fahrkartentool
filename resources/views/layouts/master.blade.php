@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/app.css">
   </head>
 
-  <body class="{{ $body_class or '' }}">
+  <body class="{{ $body_class ?? '' }}">
     <div id="app" class="page-wrap">
       <header class="site-header">
         @section('nav')
