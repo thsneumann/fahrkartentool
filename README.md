@@ -11,7 +11,9 @@ Installation instructions
 - Clone repository
 - Install dependencies: composer install
 - Create local environment file: cp ./.env.example ./.env
-- Update .env with your local configuration. A default admin user can be seeded by filling in the fields prefixed with ADMIN_
+- Update .env with your local configuration. 
+  - A default admin user can be seeded by filling in the fields prefixed with ADMIN_
+  - Set the key for the OpenCage Geocoding API: OPENCAGE_KEY=<YOUR_KEY>
 - Create app encryption key: php artisan key:generate
 - Run migrations and seeders: 
   - php artisan migrate
