@@ -13,7 +13,9 @@ Installation instructions
 - Create local environment file: cp ./.env.example ./.env
 - Update .env with your local configuration. A default admin user can be seeded by filling in the fields prefixed with ADMIN_
 - Create app encryption key: php artisan key:generate
-- Run migrations and seeders: php artisan migrate --seed
+- Run migrations and seeders: 
+  - php artisan migrate
+  - php artisan migrate --seed
 
 Artisan commands
 ----------------
