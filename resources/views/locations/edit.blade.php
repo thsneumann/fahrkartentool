@@ -7,7 +7,7 @@
 
     <div class="row">
     <div class="col-md-4">
-        <form method="POST" action="{{ route('locations.update', ['id' => $location->id]) }}">
+        <form method="POST" action="{{ route('locations.update', $location->id) }}">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="PUT">
 

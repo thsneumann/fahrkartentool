@@ -26,12 +26,12 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ count($category->tickets) }}</td>
                     <td class="d-flex">
-                        <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
+                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-primary mr-2" role="button">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
                         
                         @if (Auth::check() && Auth::user()->is_admin)
-                            <form method="POST" action="{{ route('categories.destroy', ['id' => $category->id]) }}">
+                            <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-sm btn-danger">

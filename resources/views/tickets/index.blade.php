@@ -44,19 +44,19 @@
                     </td>
                     <td>
                         @if ($ticket->origin())
-                            <a href="{{ route('locations.edit', ['id' => $ticket->origin()->id]) }}">{{ $ticket->origin()->name }}</a>
+                            <a href="{{ route('locations.edit', $ticket->origin()->id) }}">{{ $ticket->origin()->name }}</a>
                         @endif
                     </td>
                     <td>
                         @if ($ticket->stopovers())
                             @foreach ($ticket->stopovers() as $stopover)
-                                <a href="{{ route('locations.edit', ['id' => $stopover->id]) }}">{{ $stopover->name }}</a><br>
+                                <a href="{{ route('locations.edit', $stopover->id) }}">{{ $stopover->name }}</a><br>
                             @endforeach
                         @endif
                     </td>
                     <td>
                         @if ($ticket->destination())
-                            <a href="{{ route('locations.edit', ['id' => $ticket->destination()->id]) }}">{{ $ticket->destination()->name }}</a>
+                            <a href="{{ route('locations.edit', $ticket->destination()->id) }}">{{ $ticket->destination()->name }}</a>
                         @endif        
                     </td>
                     <td>
@@ -84,11 +84,11 @@
                     </td>
 
                     <td class="d-flex">
-                        <a href="{{ route('tickets.edit', ['id' => $ticket->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
+                        <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-sm btn-primary mr-2" role="button">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
                         @if (Auth::check() && Auth::user()->is_admin)
-                            <form method="POST" action="{{ route('tickets.destroy', ['id' => $ticket->id]) }}">
+                            <form method="POST" action="{{ route('tickets.destroy', $ticket->id) }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-sm btn-danger">

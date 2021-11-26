@@ -7,7 +7,7 @@
         @foreach ($ticketsWithOrigin as $ticket)
             <li>
                 @include('partials.ticket-thumb', ['ticket' => $ticket])
-                <a href="{{ route('tickets.edit', ['id' => $ticket->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
+                <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-sm btn-primary mr-2" role="button">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
             </li>
@@ -21,7 +21,7 @@
         @foreach ($ticketsWithDestination as $ticket)
             <li>
                 @include('partials.ticket-thumb', ['ticket' => $ticket])
-                <a href="{{ route('tickets.edit', ['id' => $ticket->id]) }}" class="btn btn-sm btn-primary mr-2" role="button">
+                <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-sm btn-primary mr-2" role="button">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
             </li>

@@ -12,8 +12,6 @@ class LocationsTableSeeder extends Seeder
      */
     public function run(Faker\Generator $faker)
     {
-        return;
-
         $faker = Faker\Factory::create();
 
         $max = 100;

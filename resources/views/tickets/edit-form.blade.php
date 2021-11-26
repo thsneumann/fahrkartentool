@@ -1,6 +1,6 @@
 
 
-<form method="POST" action="{{ route('tickets.update', ['id' => $ticket->id]) }}">
+<form method="POST" action="{{ route('tickets.update', $ticket->id) }}">
     <div class="row">
         <div class="col-md-4 text-center">
             <figure class="d-inline-block position-sticky max-w-100p" style="top: 0.5rem">
