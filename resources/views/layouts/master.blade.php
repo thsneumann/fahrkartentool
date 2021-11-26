@@ -40,7 +40,7 @@
 
     <script src="/js/app.js"></script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoahc9ngn3N5a7OpKpW-t7Chx2j9eyymk&language=de&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key={{ $googlemaps_key }}&language=de&callback=initMap">
     </script>
 
     @yield('scripts_after_app')

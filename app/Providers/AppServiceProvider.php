@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        View::share('googlemaps_key', env('GOOGLEMAPS_KEY'));
         View::share('opencage_key', env('OPENCAGE_KEY'));
     }
 

@@ -13,6 +13,7 @@ Installation instructions
 - Create local environment file: cp ./.env.example ./.env
 - Update .env with your local configuration. 
   - A default admin user can be seeded by filling in the fields prefixed with ADMIN_
+  - Set the GoogleMaps API key: GOOGLEMAPS_KEY=<YOUR_KEY>
   - Set the key for the OpenCage Geocoding API: OPENCAGE_KEY=<YOUR_KEY>
 - Create app encryption key: php artisan key:generate
 - Run migrations and seeders: 
